@@ -1,5 +1,5 @@
 //
-//  ExentsionEpisodeOfCare.swift
+//  ExtentionClinicalVisit.swift
 //  KarlaMay
 //
 //  Created by quarticAIMBP2018 on 2020-05-11.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension EpisodeOfCare : Dated {
-    var episodeLabel: String {
-        return "code a viable representation"
+extension ClinicalVisit: Dated {
+    var clinicalVisitLabel: String {
+        return "code a decent label"
     }
 }

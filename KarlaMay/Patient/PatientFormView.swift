@@ -20,7 +20,19 @@ struct PatientFormView: View {
     var body: some View {
         NavigationView{
             Form{
-                Section(header: Text("Identification")){
+//                HStack{
+//                    Spacer()
+//                    Button(action: {}){
+//                        Image(systemName: "doc.text.viewfinder").font(.title)
+//                    }
+//                }
+                Section(header: HStack {
+                    Text("Identification")
+                    Spacer()
+                    Button(action: {}){
+                        Image(systemName: "doc.text.viewfinder").font(.title)
+                    }
+                }){
                     TextField("Name", text: $name)
                     TextField("RAMQ", text: $ramq)
                     TextField("Postal Code", text: $postalCode)
@@ -35,12 +47,25 @@ struct PatientFormView: View {
                         Text(dx.title ?? "No dx title")
                     }
                 }
-                Section(header: Text("Episodes Of Work")){
-                    Text("test")
+                Section(header:
+                    HStack {
+                        Text(patient.hasNoEOC() ? "No Episodes Of Care" : "Episodes Of Care")
+                        Spacer()
+                        Button(action: {}){Text("Add")}
+                }){
+                    ForEach(patient.chronologicEpisodesOfCare, id:\.self) { eoc in
+                        Text( eoc.episodeLabel)
+                    }
                 }
-                
-                Section(header: Text("Clinical Visits")){
-                    Text("test")
+                Section(header:
+                    HStack {
+                        Text(patient.hasNoVisits() ? "No Visits" : "Visits")
+                        Spacer()
+                        Button(action: {}){Text("Add")}
+                }){
+                    ForEach(patient.chronologicClinicalVisits, id:\.self) { visit in
+                        Text(visit.clinicalVisitLabel)
+                    }
                 }
                 
             }
@@ -68,11 +93,21 @@ struct PatientFormView: View {
     }
 }
 
+#if DEBUG
 struct PatientFormView_Previews: PreviewProvider {
     static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     static var previews: some View {
         let dummyPatient = Patient(context: moc)
+        let visit = ClinicalVisit(context: moc)
+        visit.startDate = Date()
+        visit.actType = "VP 9160"
         dummyPatient.name = "bob"
-        return PatientFormView(patient: dummyPatient)
+        dummyPatient.addToClinicalVisits(visit)
+        return
+            Group{
+                PatientFormView(patient: dummyPatient).environment(\.colorScheme, .dark)
+                PatientFormView(patient: dummyPatient).environment(\.colorScheme, .light)
+        }
     }
 }
+#endif

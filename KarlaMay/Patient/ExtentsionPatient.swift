@@ -12,14 +12,25 @@ extension Patient {
     func hasNoDx() -> Bool {
         return self.diagnoses?.count == 0 ? true:false
     }
+    func hasNoEOC() -> Bool {
+        return self.episodesOfCare?.count == 0 ? true:false
+    }
+    func hasNoVisits() -> Bool {
+        return self.clinicalVisits?.count == 0 ? true:false
+    }
     var chronologicDiagnoses: [Diagnosis] {
         if let diagnoses = self.diagnoses as? Set<Diagnosis> {
             return diagnoses.sorted()
         } else { return []}
     }
     var chronologicEpisodesOfCare: [EpisodeOfCare] {
-        if let diagnoses = self.diagnoses as? Set<EpisodeOfCare> {
-            return diagnoses.sorted()
+        if let eocs = self.episodesOfCare as? Set<EpisodeOfCare> {
+            return eocs.sorted()
+        } else { return []}
+    }
+    var chronologicClinicalVisits: [ClinicalVisit] {
+        if let visits = self.clinicalVisits as? Set<ClinicalVisit> {
+            return visits.sorted()
         } else { return []}
     }
 }

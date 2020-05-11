@@ -3,9 +3,9 @@
     <entity name="ClinicalVisit" representedClassName="ClinicalVisit" syncable="YES" codeGenerationType="class">
         <attribute name="actType" optional="YES" attributeType="String"/>
         <attribute name="bedsideLocation" optional="YES" attributeType="String"/>
-        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="installation" optional="YES" attributeType="String"/>
-        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="episodeOfCare" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="clinicalVisits" inverseEntity="EpisodeOfCare"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="clinicalVisits" inverseEntity="Patient"/>
     </entity>
@@ -46,10 +46,10 @@
         <relationship name="episodesOfCare" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="patient" inverseEntity="EpisodeOfCare"/>
     </entity>
     <elements>
-        <element name="Diagnosis" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="ClinicalWork" positionX="-63" positionY="9" width="128" height="118"/>
-        <element name="Patient" positionX="-54" positionY="36" width="128" height="193"/>
-        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="133"/>
         <element name="ClinicalVisit" positionX="-18" positionY="108" width="128" height="148"/>
+        <element name="ClinicalWork" positionX="-63" positionY="9" width="128" height="118"/>
+        <element name="Diagnosis" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="133"/>
+        <element name="Patient" positionX="-54" positionY="36" width="128" height="193"/>
     </elements>
 </model>
