@@ -25,7 +25,12 @@ struct PatientFormView: View {
                     TextField("RAMQ", text: $ramq)
                     TextField("Postal Code", text: $postalCode)
                 }
-                Section(header: Text(patient.hasNoDx() ? "No Diagnoses" : "Diagnoses")){
+                Section(header:
+                    HStack {
+                        Text(patient.hasNoDx() ? "No Diagnoses" : "Diagnoses")
+                        Spacer()
+                        Button(action:{}){Text("Add")}
+                }){
                     ForEach(patient.chronologicDiagnoses, id:\.self) { dx in
                         Text(dx.title ?? "No dx title")
                     }
@@ -33,6 +38,11 @@ struct PatientFormView: View {
                 Section(header: Text("Episodes Of Work")){
                     Text("test")
                 }
+                
+                Section(header: Text("Clinical Visits")){
+                    Text("test")
+                }
+                
             }
             .navigationBarTitle(Text("Patient"))
         .navigationBarItems(

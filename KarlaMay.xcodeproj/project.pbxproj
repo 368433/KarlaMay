@@ -124,6 +124,13 @@
 			path = Diagnosis;
 			sourceTree = "<group>";
 		};
+		6AA470132469AE5B0023A7B0 /* Clinical Visit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Clinical Visit";
+			sourceTree = "<group>";
+		};
 		6AD7A23624689548004BCAE8 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +156,7 @@
 				6A258DFB2469869900F689BF /* Patient */,
 				6A258DFF246989A800F689BF /* Clinical Work */,
 				6A258DFE2469899F00F689BF /* Episode Of Care */,
+				6AA470132469AE5B0023A7B0 /* Clinical Visit */,
 				6A65F8AA2469A65C00AC43B7 /* Diagnosis */,
 				6A258DF824697E6600F689BF /* DiagnosesListView */,
 				6A258DEA24689CB900F689BF /* ICD Search */,
