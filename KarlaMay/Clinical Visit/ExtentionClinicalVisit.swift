@@ -9,7 +9,15 @@
 import Foundation
 
 extension ClinicalVisit: Dated {
-    var clinicalVisitLabel: String {
-        return "code a decent label"
+    var dateLabel: String {
+        guard let startDate = self.startDate else { return "Missing start date"}
+        let formater = DateFormatter()
+        formater.dateStyle = .full
+        return formater.string(from: startDate)
+    }
+    
+    var actLabel: String {
+        guard let act = self.actType else { return "Missing act information"}
+        return act
     }
 }

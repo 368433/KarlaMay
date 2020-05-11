@@ -20,12 +20,6 @@ struct PatientFormView: View {
     var body: some View {
         NavigationView{
             Form{
-//                HStack{
-//                    Spacer()
-//                    Button(action: {}){
-//                        Image(systemName: "doc.text.viewfinder").font(.title)
-//                    }
-//                }
                 Section(header: HStack {
                     Text("Identification")
                     Spacer()
@@ -64,19 +58,18 @@ struct PatientFormView: View {
                         Button(action: {}){Text("Add")}
                 }){
                     ForEach(patient.chronologicClinicalVisits, id:\.self) { visit in
-                        Text(visit.clinicalVisitLabel)
+                        ClinicalVisitRowView(clinicalVisit: visit)
                     }
                 }
-                
             }
             .navigationBarTitle(Text("Patient"))
-        .navigationBarItems(
-            leading: Button("Cancel"){
-                self.dismissView()
-            }, trailing: Button("Done"){
-                self.saveValues()
-                self.dismissView()
-        })
+            .navigationBarItems(
+                leading: Button("Cancel"){
+                    self.dismissView()
+                }, trailing: Button("Done"){
+                    self.saveValues()
+                    self.dismissView()
+            })
         }
         .onAppear(perform: fillWithPatientDetails )
     }
