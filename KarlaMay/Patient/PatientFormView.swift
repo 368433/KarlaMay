@@ -29,7 +29,7 @@ struct PatientFormView: View {
                     HStack {
                         Text(patient.hasNoDx() ? "No Diagnoses" : "Diagnoses")
                         Spacer()
-                        Button(action:{}){Text("Add")}
+                        Button(action: {}){Text("Add")}
                 }){
                     ForEach(patient.chronologicDiagnoses, id:\.self) { dx in
                         Text(dx.title ?? "No dx title")
