@@ -9,5 +9,11 @@
 import Foundation
 
 extension Diagnosis: Dated {
+    var titleLabel: String {
+        guard let title = self.title else { return "Missing title"}
+        return title
+    }
+    
+    
     
 }

@@ -10,6 +10,11 @@ import Foundation
 
 extension EpisodeOfCare : Dated {
     var episodeLabel: String {
-        return "code a viable representation"
+        guard let diagnosis = self.diagnosis else { return "Missing associated diagnosis"}
+        return diagnosis.title ?? "Diagnosis missing a title"
+    }
+    var dateLabel: String {
+        guard let date = self.startDate else { return "Missing start date"}
+        return date.toString
     }
 }

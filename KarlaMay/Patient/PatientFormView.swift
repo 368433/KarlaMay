@@ -17,6 +17,10 @@ struct PatientFormView: View {
     @State private var postalCode = ""
     @State private var ramq = ""
     
+    @State private var showAddDiagnosisForm = false
+    @State private var showAddEpisodeOfCareForm = false
+    @State private var showAddClinicalVisitForm = false
+    
     var body: some View {
         NavigationView{
             Form{
@@ -35,27 +39,27 @@ struct PatientFormView: View {
                     HStack {
                         Text(patient.hasNoDx() ? "No Diagnoses" : "Diagnoses")
                         Spacer()
-                        Button(action: {}){Text("Add")}
+                        Button(action: {self.showAddDiagnosisForm.toggle()}){Text("Add")}
                 }){
                     ForEach(patient.chronologicDiagnoses, id:\.self) { dx in
-                        Text(dx.title ?? "No dx title")
+                        DiagnosisRowView(diagnosis: dx)
                     }
                 }
                 Section(header:
                     HStack {
                         Text(patient.hasNoEOC() ? "No Episodes Of Care" : "Episodes Of Care")
                         Spacer()
-                        Button(action: {}){Text("Add")}
+                        Button(action: {self.showAddEpisodeOfCareForm.toggle()}){Text("Add")}
                 }){
                     ForEach(patient.chronologicEpisodesOfCare, id:\.self) { eoc in
-                        Text( eoc.episodeLabel)
+                        EpisodeOfCareRowView(episodeOfCare: eoc)
                     }
                 }
                 Section(header:
                     HStack {
                         Text(patient.hasNoVisits() ? "No Visits" : "Visits")
                         Spacer()
-                        Button(action: {}){Text("Add")}
+                        Button(action: {self.showAddClinicalVisitForm.toggle()}){Text("Add")}
                 }){
                     ForEach(patient.chronologicClinicalVisits, id:\.self) { visit in
                         ClinicalVisitRowView(clinicalVisit: visit)
