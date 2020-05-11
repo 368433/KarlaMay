@@ -12,8 +12,9 @@ import CoreData
 struct DiagnosisRowView: View {
     var diagnosis: Diagnosis
     var body: some View {
-        VStack{
-            Text(diagnosis.titleLabel)
+        VStack(alignment: .leading){
+            Text(diagnosis.icdCodeLabel).foregroundColor(.secondary)
+            Text(diagnosis.titleLabel).foregroundColor(.primary)
         }
     }
 }

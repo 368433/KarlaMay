@@ -14,6 +14,9 @@ extension Diagnosis: Dated {
         return title
     }
     
-    
+    var icdCodeLabel: String {
+        guard let icdCode = self.icdCode else {return "missing ICD Code"}
+        return icdCode
+    }
     
 }
