@@ -12,6 +12,7 @@ import CoreData
 struct PatientFormView: View {
     var patient: Patient
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
     @State private var name = ""
     @State private var postalCode = ""
     @State private var ramq = ""
@@ -23,7 +24,6 @@ struct PatientFormView: View {
                     TextField("Name", text: $name)
                     TextField("RAMQ", text: $ramq)
                     TextField("Postal Code", text: $postalCode)
-                    
                 }
                 Section(header: Text(patient.hasNoDx() ? "No Diagnoses" : "Diagnoses")){
                     ForEach(patient.chronologicDiagnoses, id:\.self) { dx in
@@ -35,6 +35,13 @@ struct PatientFormView: View {
                 }
             }
             .navigationBarTitle(Text("Patient"))
+        .navigationBarItems(
+            leading: Button("Cancel"){
+                self.dismissView()
+            }, trailing: Button("Done"){
+                self.saveValues()
+                self.dismissView()
+        })
         }
         .onAppear(perform: fillWithPatientDetails )
     }
@@ -42,6 +49,12 @@ struct PatientFormView: View {
         self.name = patient.name ?? ""
         self.postalCode = patient.zip ?? ""
         self.ramq = patient.ramqNumber ?? ""
+    }
+    private func dismissView(){
+        self.presentationMode.wrappedValue.dismiss()
+    }
+    private func saveValues(){
+        
     }
 }
 
