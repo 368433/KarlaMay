@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ClinicalVisit" representedClassName="ClinicalVisit" syncable="YES" codeGenerationType="class">
+        <attribute name="actType" optional="YES" attributeType="String"/>
+        <attribute name="bedsideLocation" optional="YES" attributeType="String"/>
+        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="installation" optional="YES" attributeType="String"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="episodeOfCare" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="clinicalVisits" inverseEntity="EpisodeOfCare"/>
+        <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="clinicalVisits" inverseEntity="Patient"/>
+    </entity>
+    <entity name="ClinicalWork" representedClassName="ClinicalWork" syncable="YES" codeGenerationType="class">
+        <attribute name="dateArchived" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isMainList" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="episodesOfCare" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="clinicalWork" inverseEntity="EpisodeOfCare"/>
+    </entity>
+    <entity name="Diagnosis" representedClassName="Diagnosis" syncable="YES" codeGenerationType="class">
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="icdCode" optional="YES" attributeType="String"/>
+        <attribute name="icdEndpoint" optional="YES" attributeType="String"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="episodesOfCare" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="diagnosis" inverseEntity="EpisodeOfCare"/>
+        <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="diagnoses" inverseEntity="Patient"/>
+    </entity>
+    <entity name="EpisodeOfCare" representedClassName="EpisodeOfCare" syncable="YES" codeGenerationType="class">
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="clinicalVisits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ClinicalVisit" inverseName="episodeOfCare" inverseEntity="ClinicalVisit"/>
+        <relationship name="clinicalWork" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ClinicalWork" inverseName="episodesOfCare" inverseEntity="ClinicalWork"/>
+        <relationship name="diagnosis" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Diagnosis" inverseName="episodesOfCare" inverseEntity="Diagnosis"/>
+        <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="episodesOfCare" inverseEntity="Patient"/>
+    </entity>
+    <entity name="Patient" representedClassName="Patient" syncable="YES" codeGenerationType="class">
+        <attribute name="chartNumber" optional="YES" attributeType="String"/>
+        <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="ramqNumber" optional="YES" attributeType="String"/>
+        <attribute name="sex" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="zip" optional="YES" attributeType="String"/>
+        <relationship name="clinicalVisits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ClinicalVisit" inverseName="patient" inverseEntity="ClinicalVisit"/>
+        <relationship name="diagnoses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Diagnosis" inverseName="patient" inverseEntity="Diagnosis"/>
+        <relationship name="episodesOfCare" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="patient" inverseEntity="EpisodeOfCare"/>
+    </entity>
+    <elements>
+        <element name="Diagnosis" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="ClinicalWork" positionX="-63" positionY="9" width="128" height="118"/>
+        <element name="Patient" positionX="-54" positionY="36" width="128" height="193"/>
+        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="133"/>
+        <element name="ClinicalVisit" positionX="-18" positionY="108" width="128" height="148"/>
+    </elements>
+</model>

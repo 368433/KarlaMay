@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A258DEF24689CCA00F689BF /* StripHTMLTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DEB24689CCA00F689BF /* StripHTMLTags.swift */; };
+		6A258DF024689CCA00F689BF /* getICDAPIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DEC24689CCA00F689BF /* getICDAPIToken.swift */; };
+		6A258DF124689CCA00F689BF /* ICDSearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DED24689CCA00F689BF /* ICDSearchResultsView.swift */; };
+		6A258DF224689CCA00F689BF /* ICDData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DEE24689CCA00F689BF /* ICDData.swift */; };
+		6A258DF42468A1D400F689BF /* ICDDiagnosisRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DF32468A1D400F689BF /* ICDDiagnosisRow.swift */; };
+		6A258DF724697A8800F689BF /* DismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DF624697A8800F689BF /* DismissKeyboard.swift */; };
+		6A258DFA24697E8300F689BF /* DiagnosesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DF924697E8300F689BF /* DiagnosesListView.swift */; };
+		6A258DFD246986BC00F689BF /* PatientFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DFC246986BC00F689BF /* PatientFormView.swift */; };
+		6A258E012469916100F689BF /* ExtentsionPatient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258E002469916100F689BF /* ExtentsionPatient.swift */; };
+		6AD7A24324689548004BCAE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7A24224689548004BCAE8 /* AppDelegate.swift */; };
+		6AD7A24524689548004BCAE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7A24424689548004BCAE8 /* SceneDelegate.swift */; };
+		6AD7A24824689548004BCAE8 /* KarlaMay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7A24624689548004BCAE8 /* KarlaMay.xcdatamodeld */; };
+		6AD7A24A24689548004BCAE8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7A24924689548004BCAE8 /* ContentView.swift */; };
+		6AD7A24C2468954B004BCAE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A24B2468954B004BCAE8 /* Assets.xcassets */; };
+		6AD7A24F2468954B004BCAE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A24E2468954B004BCAE8 /* Preview Assets.xcassets */; };
+		6AD7A2522468954B004BCAE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A2502468954B004BCAE8 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6A258DEB24689CCA00F689BF /* StripHTMLTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripHTMLTags.swift; sourceTree = "<group>"; };
+		6A258DEC24689CCA00F689BF /* getICDAPIToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getICDAPIToken.swift; sourceTree = "<group>"; };
+		6A258DED24689CCA00F689BF /* ICDSearchResultsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICDSearchResultsView.swift; sourceTree = "<group>"; };
+		6A258DEE24689CCA00F689BF /* ICDData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICDData.swift; sourceTree = "<group>"; };
+		6A258DF32468A1D400F689BF /* ICDDiagnosisRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICDDiagnosisRow.swift; sourceTree = "<group>"; };
+		6A258DF624697A8800F689BF /* DismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboard.swift; sourceTree = "<group>"; };
+		6A258DF924697E8300F689BF /* DiagnosesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosesListView.swift; sourceTree = "<group>"; };
+		6A258DFC246986BC00F689BF /* PatientFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientFormView.swift; sourceTree = "<group>"; };
+		6A258E002469916100F689BF /* ExtentsionPatient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentsionPatient.swift; sourceTree = "<group>"; };
+		6AD7A23F24689548004BCAE8 /* KarlaMay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KarlaMay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AD7A24224689548004BCAE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6AD7A24424689548004BCAE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6AD7A24724689548004BCAE8 /* KarlaMay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KarlaMay.xcdatamodel; sourceTree = "<group>"; };
+		6AD7A24924689548004BCAE8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6AD7A24B2468954B004BCAE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6AD7A24E2468954B004BCAE8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6AD7A2512468954B004BCAE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6AD7A2532468954B004BCAE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6AD7A23C24689548004BCAE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A258DEA24689CB900F689BF /* ICD Search */ = {
+			isa = PBXGroup;
+			children = (
+				6A258DEC24689CCA00F689BF /* getICDAPIToken.swift */,
+				6A258DEE24689CCA00F689BF /* ICDData.swift */,
+				6A258DED24689CCA00F689BF /* ICDSearchResultsView.swift */,
+				6A258DF32468A1D400F689BF /* ICDDiagnosisRow.swift */,
+			);
+			path = "ICD Search";
+			sourceTree = "<group>";
+		};
+		6A258DF524697A6D00F689BF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6A258DEB24689CCA00F689BF /* StripHTMLTags.swift */,
+				6A258DF624697A8800F689BF /* DismissKeyboard.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6A258DF824697E6600F689BF /* DiagnosesListView */ = {
+			isa = PBXGroup;
+			children = (
+				6A258DF924697E8300F689BF /* DiagnosesListView.swift */,
+			);
+			path = DiagnosesListView;
+			sourceTree = "<group>";
+		};
+		6A258DFB2469869900F689BF /* Patient */ = {
+			isa = PBXGroup;
+			children = (
+				6A258DFC246986BC00F689BF /* PatientFormView.swift */,
+				6A258E002469916100F689BF /* ExtentsionPatient.swift */,
+			);
+			path = Patient;
+			sourceTree = "<group>";
+		};
+		6A258DFE2469899F00F689BF /* Episode Of Care */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Episode Of Care";
+			sourceTree = "<group>";
+		};
+		6A258DFF246989A800F689BF /* Clinical Work */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Clinical Work";
+			sourceTree = "<group>";
+		};
+		6AD7A23624689548004BCAE8 = {
+			isa = PBXGroup;
+			children = (
+				6AD7A24124689548004BCAE8 /* KarlaMay */,
+				6AD7A24024689548004BCAE8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6AD7A24024689548004BCAE8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6AD7A23F24689548004BCAE8 /* KarlaMay.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6AD7A24124689548004BCAE8 /* KarlaMay */ = {
+			isa = PBXGroup;
+			children = (
+				6AD7A24224689548004BCAE8 /* AppDelegate.swift */,
+				6AD7A24424689548004BCAE8 /* SceneDelegate.swift */,
+				6AD7A24924689548004BCAE8 /* ContentView.swift */,
+				6A258DFB2469869900F689BF /* Patient */,
+				6A258DFF246989A800F689BF /* Clinical Work */,
+				6A258DFE2469899F00F689BF /* Episode Of Care */,
+				6A258DF824697E6600F689BF /* DiagnosesListView */,
+				6A258DEA24689CB900F689BF /* ICD Search */,
+				6A258DF524697A6D00F689BF /* Helpers */,
+				6AD7A24B2468954B004BCAE8 /* Assets.xcassets */,
+				6AD7A2502468954B004BCAE8 /* LaunchScreen.storyboard */,
+				6AD7A2532468954B004BCAE8 /* Info.plist */,
+				6AD7A24624689548004BCAE8 /* KarlaMay.xcdatamodeld */,
+				6AD7A24D2468954B004BCAE8 /* Preview Content */,
+			);
+			path = KarlaMay;
+			sourceTree = "<group>";
+		};
+		6AD7A24D2468954B004BCAE8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6AD7A24E2468954B004BCAE8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6AD7A23E24689548004BCAE8 /* KarlaMay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AD7A2562468954B004BCAE8 /* Build configuration list for PBXNativeTarget "KarlaMay" */;
+			buildPhases = (
+				6AD7A23B24689548004BCAE8 /* Sources */,
+				6AD7A23C24689548004BCAE8 /* Frameworks */,
+				6AD7A23D24689548004BCAE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KarlaMay;
+			productName = KarlaMay;
+			productReference = 6AD7A23F24689548004BCAE8 /* KarlaMay.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6AD7A23724689548004BCAE8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = quarticAIMBP2018;
+				TargetAttributes = {
+					6AD7A23E24689548004BCAE8 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 6AD7A23A24689548004BCAE8 /* Build configuration list for PBXProject "KarlaMay" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6AD7A23624689548004BCAE8;
+			productRefGroup = 6AD7A24024689548004BCAE8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6AD7A23E24689548004BCAE8 /* KarlaMay */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6AD7A23D24689548004BCAE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AD7A2522468954B004BCAE8 /* LaunchScreen.storyboard in Resources */,
+				6AD7A24F2468954B004BCAE8 /* Preview Assets.xcassets in Resources */,
+				6AD7A24C2468954B004BCAE8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6AD7A23B24689548004BCAE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A258DF42468A1D400F689BF /* ICDDiagnosisRow.swift in Sources */,
+				6A258DF024689CCA00F689BF /* getICDAPIToken.swift in Sources */,
+				6AD7A24324689548004BCAE8 /* AppDelegate.swift in Sources */,
+				6A258DF224689CCA00F689BF /* ICDData.swift in Sources */,
+				6AD7A24524689548004BCAE8 /* SceneDelegate.swift in Sources */,
+				6A258DFA24697E8300F689BF /* DiagnosesListView.swift in Sources */,
+				6A258E012469916100F689BF /* ExtentsionPatient.swift in Sources */,
+				6A258DEF24689CCA00F689BF /* StripHTMLTags.swift in Sources */,
+				6AD7A24A24689548004BCAE8 /* ContentView.swift in Sources */,
+				6A258DFD246986BC00F689BF /* PatientFormView.swift in Sources */,
+				6A258DF124689CCA00F689BF /* ICDSearchResultsView.swift in Sources */,
+				6AD7A24824689548004BCAE8 /* KarlaMay.xcdatamodeld in Sources */,
+				6A258DF724697A8800F689BF /* DismissKeyboard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6AD7A2502468954B004BCAE8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AD7A2512468954B004BCAE8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6AD7A2542468954B004BCAE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6AD7A2552468954B004BCAE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6AD7A2572468954B004BCAE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"KarlaMay/Preview Content\"";
+				DEVELOPMENT_TEAM = 6365P5X875;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = KarlaMay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = amirprime.KarlaMay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6AD7A2582468954B004BCAE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"KarlaMay/Preview Content\"";
+				DEVELOPMENT_TEAM = 6365P5X875;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = KarlaMay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = amirprime.KarlaMay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6AD7A23A24689548004BCAE8 /* Build configuration list for PBXProject "KarlaMay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AD7A2542468954B004BCAE8 /* Debug */,
+				6AD7A2552468954B004BCAE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AD7A2562468954B004BCAE8 /* Build configuration list for PBXNativeTarget "KarlaMay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AD7A2572468954B004BCAE8 /* Debug */,
+				6AD7A2582468954B004BCAE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6AD7A24624689548004BCAE8 /* KarlaMay.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6AD7A24724689548004BCAE8 /* KarlaMay.xcdatamodel */,
+			);
+			currentVersion = 6AD7A24724689548004BCAE8 /* KarlaMay.xcdatamodel */;
+			path = KarlaMay.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6AD7A23724689548004BCAE8 /* Project object */;
+}
