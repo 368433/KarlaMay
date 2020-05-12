@@ -11,6 +11,7 @@
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="clinicalVisits" inverseEntity="Patient"/>
     </entity>
     <entity name="ClinicalWork" representedClassName="ClinicalWork" syncable="YES" codeGenerationType="class">
+        <attribute name="comments" optional="YES" attributeType="String"/>
         <attribute name="dateArchived" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -48,7 +49,7 @@
     </entity>
     <elements>
         <element name="ClinicalVisit" positionX="-18" positionY="108" width="128" height="163"/>
-        <element name="ClinicalWork" positionX="-63" positionY="9" width="128" height="118"/>
+        <element name="ClinicalWork" positionX="-63" positionY="9" width="128" height="133"/>
         <element name="Diagnosis" positionX="-63" positionY="-18" width="128" height="148"/>
         <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="133"/>
         <element name="Patient" positionX="-54" positionY="36" width="128" height="193"/>

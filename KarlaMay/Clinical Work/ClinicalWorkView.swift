@@ -14,19 +14,14 @@ struct ClinicalWorkView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @State private var showAddEpisodeOfCareForm = false
-    @State private var showDeleteAlert = false
+    
     
     var body: some View {
         NavigationView{
             VStack(alignment:.leading, spacing: 0){
                 ClinicalWorkBanderoleView(clinicalWork: self.clinicalWork)
-                List{
-                    ForEach(self.clinicalWork.chronologicEpisodesOfCare) { eoc in
-                        NavigationLink(destination: Text("test")) {
-                            EpisodeOfCareRowView(episodeOfCare: eoc)
-                        }
-                    }.onDelete(perform: deleteRow)
-                }
+                ClinicalWorkListView(clinicalWork: self.clinicalWork).environment(\.managedObjectContext, moc)
+                
                 .navigationBarTitle(Text("Work List"))
                 .navigationBarItems(
                     leading: Button(action:{self.showAddEpisodeOfCareForm.toggle()}){
@@ -40,16 +35,8 @@ struct ClinicalWorkView: View {
                         }
                         self.presentationMode.wrappedValue.dismiss()
                 })
-                    .alert(isPresented: $showDeleteAlert) { () -> Alert in
-                        Alert(title: Text("Deleting row"), message: Text("This will permanently remove this element from the record"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Delete"), action: {
-                            //remove from database
-                        }))
-                }
             }
         }
-    }
-    private func deleteRow(at index: IndexSet) {
-        self.showDeleteAlert.toggle()
     }
 }
 

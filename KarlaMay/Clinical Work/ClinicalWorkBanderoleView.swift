@@ -12,13 +12,14 @@ struct ClinicalWorkBanderoleView: View {
     var clinicalWork: ClinicalWork
     
     var body: some View {
-        HStack(alignment: .center){
+        HStack(alignment: .center, spacing: 0){
             VStack(alignment: .leading){
                 Text("Start date")
                 Text("End date")
+                Text(clinicalWork.comments ?? "").foregroundColor(.secondary).lineLimit(2)
             }.font(.caption).padding()
             Spacer()
-            HStack(spacing: 15){
+            HStack(spacing: 18){
                 Button(action: {
                     self.clinicalWork.isMainList.toggle()
                 }) {
@@ -34,7 +35,7 @@ struct ClinicalWorkBanderoleView: View {
                 }) {
                     Image(systemName: "gear")
                 }
-                }.padding().font(.system(size: 20))
+            }.padding(.trailing).font(.system(size: 20))
         }.background(Color(UIColor.systemGray6)).shadow(radius: 8).padding()
     }
 }

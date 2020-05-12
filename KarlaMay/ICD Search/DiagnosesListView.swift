@@ -11,8 +11,8 @@ import SwiftUI
 struct DiagnosesListView: View {
     
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: Diagnosis.entity(), sortDescriptors: []) var diagnoses: FetchedResults<Diagnosis>
     @State private var showSearch = false
+    @FetchRequest(entity: Diagnosis.entity(), sortDescriptors: []) var diagnoses: FetchedResults<Diagnosis>
     
     var body: some View {
         NavigationView{
