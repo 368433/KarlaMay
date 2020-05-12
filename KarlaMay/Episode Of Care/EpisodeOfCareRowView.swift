@@ -14,7 +14,7 @@ struct EpisodeOfCareRowView: View {
     var episodeOfCare: EpisodeOfCare
     
     var body: some View {
-        VStack{
+        VStack(alignment: .leading){
             Text(episodeOfCare.episodeLabel).foregroundColor(.primary)
             Text(episodeOfCare.dateLabel).foregroundColor(.secondary)
         }

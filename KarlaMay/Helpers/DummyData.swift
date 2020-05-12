@@ -24,6 +24,9 @@ struct DummyData {
     static var dummyEpisodeOfCare: EpisodeOfCare {
         let eoc = EpisodeOfCare(context: moc)
         eoc.startDate = Date()
+//        eoc.patient = DummyData.dummyPatient
+//        eoc.diagnosis = DummyData.dummyDiagnosis
+//        eoc.addToClinicalVisits(DummyData.dummyClinicalVisit)
         return eoc
     }
     
@@ -32,5 +35,25 @@ struct DummyData {
         visit.startDate = Date()
         visit.actType = "VP 916034343"
         return visit
+    }
+    
+    static var dummyPatient: Patient {
+        let pt = Patient(context: moc)
+        let visit = DummyData.dummyClinicalVisit
+        let eoc = DummyData.dummyEpisodeOfCare
+        pt.name = "bob"
+        pt.addToEpisodesOfCare(eoc)
+        pt.addToClinicalVisits(visit)
+        pt.addToDiagnoses(DummyData.dummyDiagnosis)
+        return pt
+    }
+    
+    static var dummyClinicalWork: ClinicalWork {
+        let wrk = ClinicalWork(context: moc)
+        wrk.isActive = true
+        wrk.isMainList = true
+        wrk.dateCreated = Date()
+        wrk.addToEpisodesOfCare(DummyData.dummyEpisodeOfCare)
+        return wrk
     }
 }

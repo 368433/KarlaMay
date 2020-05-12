@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension EpisodeOfCare : Dated {
+extension EpisodeOfCare : Dated, Identifiable {
     var episodeLabel: String {
         guard let diagnosis = self.diagnosis else { return "Missing associated diagnosis"}
         return diagnosis.title ?? "Diagnosis missing a title"

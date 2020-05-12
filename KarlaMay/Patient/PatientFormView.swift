@@ -92,18 +92,10 @@ struct PatientFormView: View {
 
 #if DEBUG
 struct PatientFormView_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     static var previews: some View {
-        let dummyPatient = Patient(context: moc)
-        let visit = ClinicalVisit(context: moc)
-        visit.startDate = Date()
-        visit.actType = "VP 9160"
-        dummyPatient.name = "bob"
-        dummyPatient.addToClinicalVisits(visit)
-        return
-            Group{
-                PatientFormView(patient: dummyPatient).environment(\.colorScheme, .dark)
-                PatientFormView(patient: dummyPatient).environment(\.colorScheme, .light)
+        Group{
+            PatientFormView(patient: DummyData.dummyPatient).environment(\.colorScheme, .dark)
+            PatientFormView(patient: DummyData.dummyPatient).environment(\.colorScheme, .light)
         }
     }
 }
