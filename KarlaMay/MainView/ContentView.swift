@@ -15,21 +15,36 @@ struct ContentView: View {
         NavigationView{
             Form{
                 Section(header: Text("Clinical")){
-                    Text("Main clinical work list")
-                    Text("All clinical work list")
-                    Text("Patients")
-                    Text("Tags")
+                    ForEach(ClinicalWorkCategory.allCases, id:\.self){ clinCat in
+                        HStack(spacing: 20){
+                            clinCat.image.foregroundColor(Color.blue).frame(width:20, height: 20)
+                            Text(clinCat.rawValue)
+                        }
+                    }
                 }
                 Section(header: Text("Laboratory")){
-                    Text("Protocols & meetings")
+                    ForEach(LaboratoryWorkCategory.allCases, id:\.self){ lab in
+                        HStack(spacing: 20){
+                            lab.image.foregroundColor(Color.green).frame(width:20, height: 20)
+                            Text(lab.rawValue)
+                        }
+                    }
                 }
                 Section(header: Text("Administrative")){
-                    Text("PCI")
-                    Text("Antimicrobial Stewardship")
-                    Text("Teaching")
-                    Text("Other meetings")
-                    Text("Maintenance Of Certification")
-                    Text("Billing")
+                    ForEach(AdministrativeWorkCategory.allCases, id:\.self){ admin in
+                        HStack(spacing: 20){
+                            admin.image.foregroundColor(Color.gray).frame(width:20, height: 20)
+                            Text(admin.rawValue)
+                        }
+                    }
+                }
+                Section(header: Text("Academic")){
+                    ForEach(AcademicCategory.allCases, id:\.self){ acad in
+                        HStack(spacing: 20){
+                            acad.image.foregroundColor(Color.gray).frame(width:20, height: 20)
+                            Text(acad.rawValue)
+                        }
+                    }
                 }
                 Section(header: Text("Analytics")){
                     Text("Data analysis")
@@ -54,6 +69,9 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group{
+            ContentView().environment(\.colorScheme, .dark)
+            ContentView().environment(\.colorScheme, .light)
+        }
     }
 }
