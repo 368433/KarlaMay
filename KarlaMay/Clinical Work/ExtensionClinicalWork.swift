@@ -9,9 +9,11 @@
 import Foundation
 
 extension ClinicalWork: Identifiable {
+    
     var chronologicEpisodesOfCare: [EpisodeOfCare] {
         if let eocs = self.episodesOfCare as? Set<EpisodeOfCare> {
             return eocs.sorted()
         } else { return []}
     }
+    
 }

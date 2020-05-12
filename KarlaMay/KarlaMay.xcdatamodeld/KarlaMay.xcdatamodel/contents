@@ -12,11 +12,11 @@
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="clinicalVisits" inverseEntity="Tag"/>
     </entity>
     <entity name="ClinicalWork" representedClassName="ClinicalWork" syncable="YES" codeGenerationType="class">
+        <attribute name="archivedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="comments" optional="YES" attributeType="String"/>
-        <attribute name="dateArchived" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isMainList" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="episodesOfCare" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="clinicalWork" inverseEntity="EpisodeOfCare"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="clinicalWorks" inverseEntity="Tag"/>
         <relationship name="uniqueTag" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UniqueTag" inverseName="clinicalWork" inverseEntity="UniqueTag"/>

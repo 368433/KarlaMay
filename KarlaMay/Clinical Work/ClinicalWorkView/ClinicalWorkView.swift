@@ -15,26 +15,25 @@ struct ClinicalWorkView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showAddEpisodeOfCareForm = false
     
-    
     var body: some View {
         NavigationView{
             VStack(alignment:.leading, spacing: 0){
                 ClinicalWorkBanderoleView(clinicalWork: self.clinicalWork)
                 ClinicalWorkListView(clinicalWork: self.clinicalWork).environment(\.managedObjectContext, moc)
-                
-                .navigationBarTitle(Text("Work List"))
-                .navigationBarItems(
-                    leading: Button(action:{self.showAddEpisodeOfCareForm.toggle()}){
-                    Image(systemName: "plus").font(.title)
-                },
-                    trailing: Button("Done"){
-                        do{
-                            try self.moc.save()
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                        self.presentationMode.wrappedValue.dismiss()
-                })
+                    
+                    .navigationBarTitle(Text("Work List"))
+                    .navigationBarItems(
+                        leading: Button(action:{self.showAddEpisodeOfCareForm.toggle()}){
+                            Image(systemName: "plus").font(.title)
+                        },
+                        trailing: Button("Done"){
+                            do{
+                                try self.moc.save()
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                            self.presentationMode.wrappedValue.dismiss()
+                    })
             }
         }
     }

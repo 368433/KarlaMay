@@ -12,7 +12,13 @@ struct ClinicalWorkRowView: View {
     
     var clinicalWork: ClinicalWork
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Text("Start date")
+            Spacer()
+            Button(action: {}){
+                Image(systemName: "star")
+            }
+        }
     }
 }
 

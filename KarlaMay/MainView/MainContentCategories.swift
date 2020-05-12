@@ -20,7 +20,7 @@ enum MainViewSections: String, CaseIterable {
         case .clinical:
             return [.mainClincalWorkList, .allClinicalWorkLists, .patients, .tags]
         case .laboratory:
-            return [.standardOperatingProcedures, .meeting]
+            return [.standardOperatingProcedures, .labMeeting]
         case .administrative:
             return [.PCI, .antimicrobialStewardship, .billing, .otherMeetings]
         case .academic:
@@ -51,13 +51,13 @@ enum MainViewSections: String, CaseIterable {
         case patients = "Patients"
         case tags = "Tags"
         case standardOperatingProcedures = "Protocols"
-        case meeting = "Meetings"
+        case labMeeting = "Laboratory meetings"
         case teaching = "Teaching"
         case maintenanceOfCertification = "Maintenance of certification"
         case PCI = "PCI"
         case antimicrobialStewardship = "Stewardship"
         case billing = "Billing"
-        case otherMeetings = "Other meetings"
+        case otherMeetings = "Administrative meetings"
         case clinicalAnalysis = "Data analysis"
         case financialAnalysis = "Billing analysis"
         
@@ -73,7 +73,7 @@ enum MainViewSections: String, CaseIterable {
                 return Image(systemName: "doc.plaintext")
             case .standardOperatingProcedures:
                 return Image(systemName: "eyedropper")
-            case .meeting:
+            case .labMeeting:
                 return Image(systemName: "person.3")
             case .teaching:
                 return Image(systemName: "book")
@@ -96,8 +96,10 @@ enum MainViewSections: String, CaseIterable {
         
         var destinationView: some View {
             switch self {
+            case .mainClincalWorkList:
+                return AnyView(MainClinicalWorkView())
             case .allClinicalWorkLists:
-                return AnyView(Text("test"))
+                return AnyView(AllClinicalWorkView())
             case .patients:
                 return AnyView(PatientFormView(patient: DummyData.dummyPatient))
             default:

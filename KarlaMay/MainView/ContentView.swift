@@ -13,7 +13,7 @@ struct ContentView: View {
         
     var body: some View {
         NavigationView{
-            Form{
+            List{
                 ForEach(MainViewSections.allCases, id: \.self){ msSection in
                     Section(header: Text(msSection.rawValue)){
                         ForEach(msSection.subcategories, id:\.self) { categ in
@@ -26,7 +26,8 @@ struct ContentView: View {
                         }
                     }
                 }
-            }
+                }.listStyle(GroupedListStyle())
+                
             .navigationBarTitle("Main view")
             .navigationBarItems(trailing:
                 HStack{

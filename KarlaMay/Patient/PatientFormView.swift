@@ -22,7 +22,7 @@ struct PatientFormView: View {
     @State private var showAddClinicalVisitForm = false
     
     var body: some View {
-        NavigationView{
+//        NavigationView{
             Form{
                 Section(header: HStack {
                     Text("Identification")
@@ -74,7 +74,7 @@ struct PatientFormView: View {
                     self.saveValues()
                     self.dismissView()
             })
-        }
+//        }
         .onAppear(perform: fillWithPatientDetails )
     }
     private func fillWithPatientDetails(){
