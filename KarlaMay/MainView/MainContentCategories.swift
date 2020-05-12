@@ -94,5 +94,14 @@ enum MainViewSections: String, CaseIterable {
                 return Image(systemName: "function")
             }
         }
+        
+        var destinationView: some View {
+            switch self {
+            case .allClinicalWorkLists:
+                return Text("test")
+            default:
+                return Text("Under construction")
+            }
+        }
     }
 }
