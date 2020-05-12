@@ -10,16 +10,18 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
-    
+        
     var body: some View {
         NavigationView{
             Form{
                 ForEach(MainViewSections.allCases, id: \.self){ msSection in
                     Section(header: Text(msSection.rawValue)){
                         ForEach(msSection.subcategories, id:\.self) { categ in
-                            HStack(spacing: 20){
-                                categ.image.foregroundColor(msSection.color).frame(width:20, height: 20)
-                                Text(categ.rawValue)
+                            NavigationLink(destination: categ.destinationView.environment(\.managedObjectContext, self.moc)) {
+                                HStack(spacing: 20){
+                                    categ.image.foregroundColor(msSection.color).frame(width:20, height: 20)
+                                    Text(categ.rawValue)
+                                }
                             }
                         }
                     }

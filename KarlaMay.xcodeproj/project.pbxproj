@@ -135,10 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				6AD0CEF5246A3C5D00EF3ED7 /* ExtensionClinicalWork.swift */,
-				6AD0CEF9246A3CA900EF3ED7 /* ClinicalWorkView.swift */,
-				6A6D7BFA246A528A004C18AA /* ClinicalWorkListView.swift */,
-				6AD0CEFB246A48E200EF3ED7 /* ClinicalWorkBanderoleView.swift */,
-				6AD0CEF3246A3C4E00EF3ED7 /* ClinicalWorkRowView.swift */,
+				6ADC79AB246B0F3000096CC2 /* ClinicalWorkView */,
 			);
 			path = "Clinical Work";
 			sourceTree = "<group>";
@@ -215,6 +212,17 @@
 				6AD7A24E2468954B004BCAE8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6ADC79AB246B0F3000096CC2 /* ClinicalWorkView */ = {
+			isa = PBXGroup;
+			children = (
+				6AD0CEF9246A3CA900EF3ED7 /* ClinicalWorkView.swift */,
+				6A6D7BFA246A528A004C18AA /* ClinicalWorkListView.swift */,
+				6AD0CEFB246A48E200EF3ED7 /* ClinicalWorkBanderoleView.swift */,
+				6AD0CEF3246A3C4E00EF3ED7 /* ClinicalWorkRowView.swift */,
+			);
+			path = ClinicalWorkView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

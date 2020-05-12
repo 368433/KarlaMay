@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 enum MainViewSections: String, CaseIterable {
     case clinical = "Clinical"
     case laboratory = "Laboratory"
@@ -98,9 +97,11 @@ enum MainViewSections: String, CaseIterable {
         var destinationView: some View {
             switch self {
             case .allClinicalWorkLists:
-                return Text("test")
+                return AnyView(Text("test"))
+            case .patients:
+                return AnyView(PatientFormView(patient: DummyData.dummyPatient))
             default:
-                return Text("Under construction")
+                return AnyView(Text("Under construction"))
             }
         }
     }
