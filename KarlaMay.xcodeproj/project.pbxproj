@@ -153,6 +153,7 @@
 		6A6D7BF7246A4E39004C18AA /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				6AD7A24924689548004BCAE8 /* ContentView.swift */,
 				6A6D7BF8246A4E4B004C18AA /* MainView.swift */,
 			);
 			path = MainView;
@@ -188,7 +189,6 @@
 			children = (
 				6AD7A24224689548004BCAE8 /* AppDelegate.swift */,
 				6AD7A24424689548004BCAE8 /* SceneDelegate.swift */,
-				6AD7A24924689548004BCAE8 /* ContentView.swift */,
 				6A6D7BF7246A4E39004C18AA /* MainView */,
 				6A258DFB2469869900F689BF /* Patient */,
 				6A258DFF246989A800F689BF /* Clinical Work */,

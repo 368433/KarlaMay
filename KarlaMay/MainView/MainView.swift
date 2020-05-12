@@ -11,13 +11,20 @@ import SwiftUI
 struct MainView: View {
     
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: ClinicalWork.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K == %@", "isMainList", true)) var mainClinicalWork: FetchedResults<ClinicalWork>
     
     var body: some View {
-        List{
-            ForEach(self.mainClinicalWork, id:\.self){ clinicalWork in
-                Text("test")
+        NavigationView{
+            Form{
+                Section(header: Text("Clinical")){
+                    Text("Main clinical work list")
+                    Text("All clinical work list")
+                }
+                Section(header: Text("Laboratory")){
+                    Text("Patients")
+                    Text("Tags")
+                }
             }
+        .navigationBarTitle("Main view")
         }
     }
 }
