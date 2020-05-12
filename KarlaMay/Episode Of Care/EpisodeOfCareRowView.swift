@@ -22,11 +22,7 @@ struct EpisodeOfCareRowView: View {
 }
 
 struct EpisodeOfCareRowView_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    
     static var previews: some View {
-        let eoc = EpisodeOfCare(context: moc)
-        eoc.startDate = Date()
-        return EpisodeOfCareRowView(episodeOfCare: eoc)
+        return EpisodeOfCareRowView(episodeOfCare: DummyData.dummyEpisodeOfCare)
     }
 }

@@ -10,20 +10,27 @@ import Foundation
 import CoreData
 
 struct DummyData {
-    var moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     
-    var dummyDiagnosis: Diagnosis {
+    static var dummyDiagnosis: Diagnosis {
         let dx = Diagnosis(context: moc)
         dx.title = "Pneumonia"
-        dx.icdCode = "A23.2"
+        dx.icdCode = "B23.2"
         dx.startDate = Date(timeIntervalSinceNow: TimeInterval(Int.random(in: 340000...2020000)))
         dx.endDate = Date(timeIntervalSinceNow: 3600)
         return dx
     }
     
-    var dummyEpisodeOfCare: EpisodeOfCare {
+    static var dummyEpisodeOfCare: EpisodeOfCare {
         let eoc = EpisodeOfCare(context: moc)
         eoc.startDate = Date()
         return eoc
+    }
+    
+    static var dummyClinicalVisit: ClinicalVisit {
+        let visit = ClinicalVisit(context: moc)
+        visit.startDate = Date()
+        visit.actType = "VP 916034343"
+        return visit
     }
 }

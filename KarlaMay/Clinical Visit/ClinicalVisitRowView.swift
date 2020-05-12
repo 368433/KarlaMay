@@ -21,11 +21,7 @@ struct ClinicalVisitRowView: View {
 }
 
 struct ClinicalVisitRowView_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     static var previews: some View {
-        let visit = ClinicalVisit(context: moc)
-        visit.startDate = Date()
-        visit.actType = "VP 9160"
-        return ClinicalVisitRowView(clinicalVisit: visit)
+        return ClinicalVisitRowView(clinicalVisit: DummyData.dummyClinicalVisit)
     }
 }

@@ -20,14 +20,7 @@ struct DiagnosisRowView: View {
 }
 
 struct DiagnosisRowView_Previews: PreviewProvider {
-    static var moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    
     static var previews: some View {
-        let dx = Diagnosis(context: moc)
-        dx.title = "Pneumonia"
-        dx.icdCode = "A23.2"
-        dx.startDate = Date(timeIntervalSinceNow: TimeInterval(Int.random(in: 340000...2020000)))
-        dx.endDate = Date(timeIntervalSinceNow: 3600)
-        return DiagnosisRowView(diagnosis: dx)
+        return DiagnosisRowView(diagnosis: DummyData.dummyDiagnosis)
     }
 }
