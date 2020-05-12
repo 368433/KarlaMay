@@ -14,40 +14,15 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             Form{
-                Section(header: Text("Clinical")){
-                    ForEach(ClinicalWorkCategory.allCases, id:\.self){ clinCat in
-                        HStack(spacing: 20){
-                            clinCat.image.foregroundColor(Color.blue).frame(width:20, height: 20)
-                            Text(clinCat.rawValue)
+                ForEach(MainViewSections.allCases, id: \.self){ msSection in
+                    Section(header: Text(msSection.rawValue)){
+                        ForEach(msSection.subcategories, id:\.self) { categ in
+                            HStack(spacing: 20){
+                                categ.image.foregroundColor(msSection.color).frame(width:20, height: 20)
+                                Text(categ.rawValue)
+                            }
                         }
                     }
-                }
-                Section(header: Text("Laboratory")){
-                    ForEach(LaboratoryWorkCategory.allCases, id:\.self){ lab in
-                        HStack(spacing: 20){
-                            lab.image.foregroundColor(Color.green).frame(width:20, height: 20)
-                            Text(lab.rawValue)
-                        }
-                    }
-                }
-                Section(header: Text("Administrative")){
-                    ForEach(AdministrativeWorkCategory.allCases, id:\.self){ admin in
-                        HStack(spacing: 20){
-                            admin.image.foregroundColor(Color.gray).frame(width:20, height: 20)
-                            Text(admin.rawValue)
-                        }
-                    }
-                }
-                Section(header: Text("Academic")){
-                    ForEach(AcademicCategory.allCases, id:\.self){ acad in
-                        HStack(spacing: 20){
-                            acad.image.foregroundColor(Color.gray).frame(width:20, height: 20)
-                            Text(acad.rawValue)
-                        }
-                    }
-                }
-                Section(header: Text("Analytics")){
-                    Text("Data analysis")
                 }
             }
             .navigationBarTitle("Main view")
