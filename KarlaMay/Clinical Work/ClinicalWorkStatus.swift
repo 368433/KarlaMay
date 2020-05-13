@@ -9,7 +9,7 @@
 import Foundation
 
 enum ClinicalWorkStatus: CaseIterable {
-    case active, archived, starred, main
+    case main, active, starred, archived 
     
     var label: String {
         switch self {

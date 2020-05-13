@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MainClinicalWorkView: View {
     
-    @FetchRequest(entity: Tag.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K == %@", "title", ClinicalWorkHiddenTag.main.associatedTag )) var mainCWTag: FetchedResults<Tag>
+    @FetchRequest(entity: Tag.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K == %@", "title", UniqueTagsOptions.mainClinicalList.associatedLabel )) var mainCWTag: FetchedResults<Tag>
     
     var body: some View {
 //        NavigationView{
@@ -30,19 +30,6 @@ struct MainClinicalWorkView: View {
                 Image(systemName: "plus").padding()
         })
 //        }
-    }
-}
-
-enum ClinicalWorkHiddenTag {
-    case main, flagged, archived
-    
-    var associatedTag: String {
-        switch self {
-        case .main:
-            return "mainClinicalWorkList"
-        default:
-            return ""
-        }
     }
 }
 
