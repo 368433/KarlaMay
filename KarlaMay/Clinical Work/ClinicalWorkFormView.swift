@@ -22,13 +22,17 @@ struct ClinicalWorkFormView: View {
     var body: some View {
         NavigationView {
             Form{
-                Section(header: Text(""), footer: AutofillWordsSuggestionsView()){
-                    TextField("Title", text: $title)
+                Section(header: Text(""),
+                        footer: AutofillWordsSuggestionsView(action:{word in self.title += word + " "}))
+                {
+                    TextField("Title", text: $title, onEditingChanged: {_ in print("change")})
                 }
-                Section(header: Text("Other")){
+                Section(){
                     DatePicker(selection: $startDate, displayedComponents: .date) {
                         Text("Start date")
                     }
+                }
+                Section{
                     Toggle(isOn: $isActive, label: {Text("Active list: ")})
                     Toggle(isOn: $isMainList, label: {Text("Main list:  ")})
                 }

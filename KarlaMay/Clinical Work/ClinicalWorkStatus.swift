@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftUI
+import CoreData
 
 enum ClinicalWorkStatus: CaseIterable {
     case main, active, starred, archived 
@@ -22,5 +24,11 @@ enum ClinicalWorkStatus: CaseIterable {
         case .main:
             return "Main"
         }
+    }
+    
+    var request: FetchedResults<ClinicalWork> {
+        let request = FetchRequest<ClinicalWork>(entity: ClinicalWork.entity(), sortDescriptors: [], predicate: nil, animation: nil)
+        return request.wrappedValue
+        //return @FetchRequest(entity: ClinicalWork.entity(), sortDescriptors: [], predicate: nil, animation: nil) var clinicalWork: FetchedResults<ClinicalWork>
     }
 }

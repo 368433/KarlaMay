@@ -19,6 +19,7 @@
 		6A65F8A92469A5F500AC43B7 /* ExentsionEpisodeOfCare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A65F8A82469A5F500AC43B7 /* ExentsionEpisodeOfCare.swift */; };
 		6A65F8AE2469A94900AC43B7 /* Dated Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A65F8AD2469A94900AC43B7 /* Dated Protocol.swift */; };
 		6A65F8B02469A9BC00AC43B7 /* Extension Diagnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A65F8AF2469A9BC00AC43B7 /* Extension Diagnosis.swift */; };
+		6A6794EF246CB40300FF6C4B /* DynamicallyFilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6794EE246CB40300FF6C4B /* DynamicallyFilteredList.swift */; };
 		6A6D7BF9246A4E4B004C18AA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D7BF8246A4E4B004C18AA /* MainView.swift */; };
 		6A6D7BFB246A528A004C18AA /* ClinicalWorkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D7BFA246A528A004C18AA /* ClinicalWorkListView.swift */; };
 		6A6D7BFD246A6255004C18AA /* MainContentCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D7BFC246A6255004C18AA /* MainContentCategories.swift */; };
@@ -60,6 +61,7 @@
 		6A65F8A82469A5F500AC43B7 /* ExentsionEpisodeOfCare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExentsionEpisodeOfCare.swift; sourceTree = "<group>"; };
 		6A65F8AD2469A94900AC43B7 /* Dated Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dated Protocol.swift"; sourceTree = "<group>"; };
 		6A65F8AF2469A9BC00AC43B7 /* Extension Diagnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension Diagnosis.swift"; sourceTree = "<group>"; };
+		6A6794EE246CB40300FF6C4B /* DynamicallyFilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicallyFilteredList.swift; sourceTree = "<group>"; };
 		6A6D7BF8246A4E4B004C18AA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6A6D7BFA246A528A004C18AA /* ClinicalWorkListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalWorkListView.swift; sourceTree = "<group>"; };
 		6A6D7BFC246A6255004C18AA /* MainContentCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentCategories.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				6AFFA15B246CA7AF00F69784 /* AutofillWordsSuggestionsView.swift */,
+				6A6794EE246CB40300FF6C4B /* DynamicallyFilteredList.swift */,
 				6AD0CEF12469FA8500EF3ED7 /* DummyData.swift */,
 				6A65F8AD2469A94900AC43B7 /* Dated Protocol.swift */,
 				6AD0CEEF2469EE2800EF3ED7 /* DateToString.swift */,
@@ -344,6 +347,7 @@
 				6AFE51D6246B7A4B00D5A333 /* ClinicalWorkStatus.swift in Sources */,
 				6AD7A24824689548004BCAE8 /* KarlaMay.xcdatamodeld in Sources */,
 				6AD0CEF02469EE2800EF3ED7 /* DateToString.swift in Sources */,
+				6A6794EF246CB40300FF6C4B /* DynamicallyFilteredList.swift in Sources */,
 				6AD0CEF22469FA8500EF3ED7 /* DummyData.swift in Sources */,
 				6AFE51D8246B7B1500D5A333 /* ClinicalWorkFormView.swift in Sources */,
 				6A6D7BFB246A528A004C18AA /* ClinicalWorkListView.swift in Sources */,

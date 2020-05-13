@@ -12,9 +12,14 @@ import SwiftUI
 struct AllClinicalWorkView: View {
     
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: ClinicalWork.entity(), sortDescriptors: [], predicate: nil, animation: nil) var clinicalWork: FetchedResults<ClinicalWork>
+    //@FetchRequest(entity: ClinicalWork.entity(), sortDescriptors: [], predicate: nil, animation: nil) var clinicalWork: FetchedResults<ClinicalWork>
     @State private var listType = ClinicalWorkStatus.active
     @State private var showClinicalWorkForm = false
+    var clinicalWork: FetchedResults<ClinicalWork>
+    
+    init(){
+        self.clinicalWork = FetchRequest<ClinicalWork>(entity: ClinicalWork.entity(), sortDescriptors: [], predicate: nil, animation: nil).wrappedValue
+    }
     
     var body: some View {
         VStack{
