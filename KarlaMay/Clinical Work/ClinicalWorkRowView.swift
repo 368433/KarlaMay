@@ -13,7 +13,10 @@ struct ClinicalWorkRowView: View {
     var clinicalWork: ClinicalWork
     var body: some View {
         HStack{
-            Text("Start date")
+            VStack(alignment: .leading){
+                Text(self.clinicalWork.title ?? "No title").font(.headline)
+                Text("Created on: " + (self.clinicalWork.startDate?.toString ?? "No date set")).font(.caption).foregroundColor(.secondary)
+            }
             Spacer()
             Button(action: {}){
                 Image(systemName: "star")

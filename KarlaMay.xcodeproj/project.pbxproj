@@ -41,6 +41,8 @@
 		6AD7A24C2468954B004BCAE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A24B2468954B004BCAE8 /* Assets.xcassets */; };
 		6AD7A24F2468954B004BCAE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A24E2468954B004BCAE8 /* Preview Assets.xcassets */; };
 		6AD7A2522468954B004BCAE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A2502468954B004BCAE8 /* LaunchScreen.storyboard */; };
+		6AFE51D6246B7A4B00D5A333 /* ClinicalWorkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE51D5246B7A4B00D5A333 /* ClinicalWorkStatus.swift */; };
+		6AFE51D8246B7B1500D5A333 /* ClinicalWorkFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE51D7246B7B1500D5A333 /* ClinicalWorkFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,8 @@
 		6AD7A24E2468954B004BCAE8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6AD7A2512468954B004BCAE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AD7A2532468954B004BCAE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6AFE51D5246B7A4B00D5A333 /* ClinicalWorkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalWorkStatus.swift; sourceTree = "<group>"; };
+		6AFE51D7246B7B1500D5A333 /* ClinicalWorkFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalWorkFormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,8 @@
 			children = (
 				6AD0CEF5246A3C5D00EF3ED7 /* ExtensionClinicalWork.swift */,
 				6ACC9D6B246B4D9B0034C7FD /* AllClinicalWorkView.swift */,
+				6AFE51D7246B7B1500D5A333 /* ClinicalWorkFormView.swift */,
+				6AFE51D5246B7A4B00D5A333 /* ClinicalWorkStatus.swift */,
 				6AD0CEF3246A3C4E00EF3ED7 /* ClinicalWorkRowView.swift */,
 				6ACC9D69246B49350034C7FD /* MainClinicalWorkView.swift */,
 				6ADC79AB246B0F3000096CC2 /* ClinicalWorkView */,
@@ -327,9 +333,11 @@
 				6A258DFD246986BC00F689BF /* PatientFormView.swift in Sources */,
 				6A258DF124689CCA00F689BF /* ICDSearchResultsView.swift in Sources */,
 				6AD0CEEE2469ED0800EF3ED7 /* EpisodeOfCareRowView.swift in Sources */,
+				6AFE51D6246B7A4B00D5A333 /* ClinicalWorkStatus.swift in Sources */,
 				6AD7A24824689548004BCAE8 /* KarlaMay.xcdatamodeld in Sources */,
 				6AD0CEF02469EE2800EF3ED7 /* DateToString.swift in Sources */,
 				6AD0CEF22469FA8500EF3ED7 /* DummyData.swift in Sources */,
+				6AFE51D8246B7B1500D5A333 /* ClinicalWorkFormView.swift in Sources */,
 				6A6D7BFB246A528A004C18AA /* ClinicalWorkListView.swift in Sources */,
 				6ACC9D6C246B4D9B0034C7FD /* AllClinicalWorkView.swift in Sources */,
 				6A258DF724697A8800F689BF /* DismissKeyboard.swift in Sources */,
