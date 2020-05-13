@@ -7,23 +7,21 @@
 //
 //  Copied from Hackingwithswift Rights to Paul Hudson and adapted
 
-import Foundation
 import SwiftUI
+import Foundation
 import CoreData
 
-struct DynamicallyFilteredList: View {
+struct DynamicallyFilteredList<T: NSManagedObject, Content: View>: View {
     @Environment(\.managedObjectContext) var moc
     var fetchRequest: FetchRequest<T>
-
+    
     // this is our content closure; we'll call this once for each item in the list
     let content: (T) -> Content
     
     var body: some View {
-        //List{
-            ForEach(fetchRequest.wrappedValue, id: \.self) { filteredObject in
-                self.content(filteredObject)
-            }.onDelete(perform: deleteItem)
-        //}
+        ForEach(fetchRequest.wrappedValue, id: \.self) { filteredObject in
+            self.content(filteredObject)
+        }.onDelete(perform: deleteItem)
     }
     
     init(sortingCriteria: [NSSortDescriptor], predicate: NSPredicate?, @ViewBuilder content: @escaping (T) -> Content) {
