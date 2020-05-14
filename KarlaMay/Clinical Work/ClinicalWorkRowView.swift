@@ -27,6 +27,7 @@ struct ClinicalWorkRowView: View {
             Button(action: {
                 self.clinicalWork.isMainList.toggle()
                 self.isMainList.toggle()
+                if self.clinicalWork.isMainList {self.clinicalWork.isActive = true}
                 try? self.moc.save()
             }){ Image(systemName: isMainList ? "star.fill" : "star") }
             

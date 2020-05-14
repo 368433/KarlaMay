@@ -22,38 +22,13 @@ struct AllClinicalWorkView: View {
                     Text(list.label).tag(list)
                 }
             }.pickerStyle(SegmentedPickerStyle())
-//            ScrollView(.vertical){
+            ScrollView(.vertical){
                 VStack{
                     DynamicFilteredList(sorting: listType.descriptors, predicate: listType.predicate) { (list: ClinicalWork) in
                         ClinicalWorkRowView(clinicalWork: list, isMainList: list.isMainList, isActive: list.isActive)
-                        
-//                        HStack{
-//                            VStack(alignment: .leading){
-//                                Text(list.title ?? "No title").font(.headline)
-//                                Text("Created on: " + (list.startDate?.toString ?? "No date set")).font(.caption).foregroundColor(.secondary)
-//                            }
-//                            Spacer()
-//                            HStack(spacing: 20){
-//                                Button(action: {list.toggleMainListStatus(); try? self.moc.save()}){
-//                                    if list.isMainList {
-//                                        Image(systemName: "star.fill")
-//                                    } else {
-//                                        Image(systemName: "star").foregroundColor(.secondary)
-//                                    }
-//                                }.padding(5)
-//                                Button(action: {list.toggleActiveStatus(); try? self.moc.save()}){
-//                                    if list.isActive {
-//                                        Image(systemName: "archivebox")
-//                                    } else {
-//                                        Image(systemName: "archivebox.fill").foregroundColor(.secondary)
-//                                    }
-//                                }.padding(5)
-//                            }
-//                        }
                     }
-                    Spacer()
                 }.padding([.leading, .trailing])
-//            }
+            }
         }
             
         .sheet(isPresented: $showClinicalWorkForm, content: { ClinicalWorkFormView().environment(\.managedObjectContext, self.moc)})
