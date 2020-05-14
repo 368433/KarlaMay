@@ -17,6 +17,27 @@ extension ClinicalWork: Identifiable {
         } else { return []}
     }
     
+    func toggleMainListStatus(){
+        if isMainList {
+            isMainList = false
+            isActive = true
+        } else {
+            isMainList = true
+            isActive = true
+        }
+    }
+    
+    func toggleActiveStatus(){
+        if isActive {
+            isActive = false
+            isMainList = false
+        } else {
+            isActive = true
+            isMainList = false
+        }
+    }
+    
+    /// TESTING CODE TO LINK TAG BEHAVIOUR TO MAIN LIST FLAGGING  - NOT IN USE
     func setAsMainList(confirm: Bool){
         
         //check if UniqueTag "mainList" exists

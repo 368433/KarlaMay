@@ -11,7 +11,7 @@ import SwiftUI
 import Foundation
 import CoreData
 
-struct DynamicallyFilteredList<T: NSManagedObject, Content: View>: View {
+struct DynamicFilteredList<T: NSManagedObject, Content: View>: View {
     @Environment(\.managedObjectContext) var moc
     var fetchRequest: FetchRequest<T>
     
@@ -24,8 +24,8 @@ struct DynamicallyFilteredList<T: NSManagedObject, Content: View>: View {
         }.onDelete(perform: deleteItem)
     }
     
-    init(sortingCriteria: [NSSortDescriptor], predicate: NSPredicate?, @ViewBuilder content: @escaping (T) -> Content) {
-        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortingCriteria, predicate: predicate)
+    init(sorting: [NSSortDescriptor], predicate: NSPredicate?, @ViewBuilder content: @escaping (T) -> Content) {
+        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sorting, predicate: predicate)
         self.content = content
     }
     

@@ -26,7 +26,7 @@ struct AutofillWordsSuggestionsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4){
             Text("Words suggestions").foregroundColor(.secondary).font(.footnote)
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
                     ForEach(0..<wordsSuggestion.count) { index in
                         Button(self.wordsSuggestion[index]){

@@ -11,7 +11,7 @@ import SwiftUI
 import CoreData
 
 enum ClinicalWorkStatus: CaseIterable {
-    case main, active, starred, archived 
+    case main, active, archived
     
     var label: String {
         switch self {
@@ -19,16 +19,44 @@ enum ClinicalWorkStatus: CaseIterable {
             return "Active"
         case .archived:
             return "Archived"
-        case .starred:
-            return "Starred"
         case .main:
             return "Main"
         }
     }
     
-    var request: FetchedResults<ClinicalWork> {
-        let request = FetchRequest<ClinicalWork>(entity: ClinicalWork.entity(), sortDescriptors: [], predicate: nil, animation: nil)
-        return request.wrappedValue
-        //return @FetchRequest(entity: ClinicalWork.entity(), sortDescriptors: [], predicate: nil, animation: nil) var clinicalWork: FetchedResults<ClinicalWork>
+    var image: Image {
+        switch self {
+        case .active:
+            return Image(systemName: "timelapse")
+        case .archived:
+            return Image(systemName: "archivebox")
+        case .main:
+            return Image(systemName: "list.dash")
+        }
     }
+    
+    var predicate: NSPredicate? {
+        switch self {
+        
+        // Demonstrates usage of predicates construction from parts
+        case .main:
+            let exp1 = NSExpression(forKeyPath: \ClinicalWork.isMainList)
+            let exp2 = NSExpression(forConstantValue: true)
+            return NSComparisonPredicate(leftExpression: exp1, rightExpression: exp2, modifier: .direct, type: .equalTo, options: .init())
+        
+        // Demonstrates simpler syntax for predicate buidling
+        case .active:
+            return NSPredicate(format: "%K == true", "isActive")
+        case .archived:
+            return NSPredicate(format: "%K == false", "isActive")
+        }
+    }
+    
+    var descriptors: [NSSortDescriptor] {
+        switch self {
+        default:
+            return [NSSortDescriptor(keyPath: \ClinicalWork.startDate, ascending: true)]
+        }
+    }
+    
 }
