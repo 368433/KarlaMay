@@ -101,7 +101,7 @@ enum MainViewSections: String, CaseIterable {
             case .allClinicalWorkLists:
                 return AnyView(AllClinicalWorkView())
             case .patients:
-                return AnyView(PatientFormView(patient: DummyData.dummyPatient))
+                return AnyView(AllPatientsView())
             default:
                 return AnyView(Text("Under construction"))
             }

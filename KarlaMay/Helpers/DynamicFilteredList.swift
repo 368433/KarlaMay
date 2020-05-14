@@ -12,6 +12,7 @@ import Foundation
 import CoreData
 
 struct DynamicFilteredList<T: NSManagedObject, Content: View>: View {
+    
     @Environment(\.managedObjectContext) var moc
     var fetchRequest: FetchRequest<T>
     

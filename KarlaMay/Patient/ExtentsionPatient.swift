@@ -33,4 +33,8 @@ extension Patient {
             return visits.sorted()
         } else { return []}
     }
+    
+    var nameLabel: String { return self.name ?? "No name" }
+    var ageSex: String { return self.dateOfBirth?.toString ?? "no date of birth" }
+    var location: String { return "Milburn"}
 }

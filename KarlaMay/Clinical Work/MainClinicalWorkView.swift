@@ -10,31 +10,28 @@ import SwiftUI
 
 struct MainClinicalWorkView: View {
     
+    @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: UniqueTag.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K == %@", "title", UniqueTagsOptions.mainClinicalList.associatedLabel )) var mainCWTag: FetchedResults<UniqueTag>
+    @State private var showAddEpocForm = false
     
     var body: some View {
-//        NavigationView{
-            Group{
-                if mainCWTag.count == 0 {
-                    Text("no list")
-                } else {
-                    Text("list found")
-                }
-            }.onAppear(perform: test)
-        .navigationBarTitle("Current Clinical Work")
-        .navigationBarItems(trailing:
-            Button(action: {
-                //add form, for now adding dummy lists
-                
-            }){
-                Image(systemName: "plus").padding()
+        List{
+            ForEach(mainCWTag.first?.clinicalWork?.chronologicEpisodesOfCare ?? [], id: \.self){list in
+                Text("hello")
+            }
+        }
+        .sheet(isPresented: $showAddEpocForm, content: {
+            EpisodeOfCareForm(parentList: self.mainCWTag.first?.clinicalWork).environment(\.managedObjectContext, self.moc)
         })
-//        }
+            .navigationBarTitle("Current Clinical Work")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showAddEpocForm.toggle()
+                }){
+                    Image(systemName: "plus").padding()
+            })
     }
-    
-    private func test(){
-        print(mainCWTag.count)
-    }
+
 }
 
 

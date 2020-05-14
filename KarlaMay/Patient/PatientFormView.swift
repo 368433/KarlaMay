@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 struct PatientFormView: View {
-    var patient: Patient
+    var patient: Patient?
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @State private var name = ""
@@ -23,7 +23,7 @@ struct PatientFormView: View {
     @State private var hideDiagnosesList = false
     
     var body: some View {
-//        NavigationView{
+        NavigationView{
             Form{
                 Section(header: HStack {
                     Text("Identification")
@@ -38,34 +38,34 @@ struct PatientFormView: View {
                 }
                 Section(header:
                     HStack {
-                        Text(patient.hasNoDx() ? "No Diagnoses" : "Diagnoses")
+                        Text("Diagnoses")
                         Button(action:{self.hideDiagnosesList.toggle()}){Text(self.hideDiagnosesList ? "Show":"Hide")}
                         Spacer()
                         Button(action: {self.showAddDiagnosisForm.toggle()}){Text("Add")}
                 }){
                     if !self.hideDiagnosesList {
-                        ForEach(patient.chronologicDiagnoses, id:\.self) { dx in
+                        ForEach(patient?.chronologicDiagnoses ?? [], id:\.self) { dx in
                             DiagnosisRowView(diagnosis: dx)
                         }
                     }
                 }
                 Section(header:
                     HStack {
-                        Text(patient.hasNoEOC() ? "No Episodes Of Care" : "Episodes Of Care")
+                        Text("Episodes Of Care")
                         Spacer()
                         Button(action: {self.showAddEpisodeOfCareForm.toggle()}){Text("Add")}
                 }){
-                    ForEach(patient.chronologicEpisodesOfCare, id:\.self) { eoc in
+                    ForEach(patient?.chronologicEpisodesOfCare ?? [], id:\.self) { eoc in
                         EpisodeOfCareRowView(episodeOfCare: eoc)
                     }
                 }
                 Section(header:
                     HStack {
-                        Text(patient.hasNoVisits() ? "No Visits" : "Visits")
+                        Text("Visits")
                         Spacer()
                         Button(action: {self.showAddClinicalVisitForm.toggle()}){Text("Add")}
                 }){
-                    ForEach(patient.chronologicClinicalVisits, id:\.self) { visit in
+                    ForEach(patient?.chronologicClinicalVisits ?? [], id:\.self) { visit in
                         ClinicalVisitRowView(clinicalVisit: visit)
                     }
                 }
@@ -78,19 +78,30 @@ struct PatientFormView: View {
                     self.saveValues()
                     self.dismissView()
             })
-//        }
+        }
         .onAppear(perform: fillWithPatientDetails )
     }
     private func fillWithPatientDetails(){
-        self.name = patient.name ?? ""
-        self.postalCode = patient.zip ?? ""
-        self.ramq = patient.ramqNumber ?? ""
+        if let patient = patient {
+            self.name = patient.name ?? ""
+            self.postalCode = patient.zip ?? ""
+            self.ramq = patient.ramqNumber ?? ""
+        }
     }
     private func dismissView(){
         self.presentationMode.wrappedValue.dismiss()
     }
     private func saveValues(){
-        
+        if let patient = patient {
+            patient.name = self.name
+            patient.ramqNumber = self.ramq
+            try? self.moc.save()
+        } else {
+            let patient = Patient(context: moc)
+            patient.name = self.name
+            patient.ramqNumber = self.ramq
+            try? self.moc.save()
+        }
     }
 }
 
