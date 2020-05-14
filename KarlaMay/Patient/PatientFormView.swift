@@ -20,6 +20,7 @@ struct PatientFormView: View {
     @State private var showAddDiagnosisForm = false
     @State private var showAddEpisodeOfCareForm = false
     @State private var showAddClinicalVisitForm = false
+    @State private var hideDiagnosesList = false
     
     var body: some View {
 //        NavigationView{
@@ -38,11 +39,14 @@ struct PatientFormView: View {
                 Section(header:
                     HStack {
                         Text(patient.hasNoDx() ? "No Diagnoses" : "Diagnoses")
+                        Button(action:{self.hideDiagnosesList.toggle()}){Text(self.hideDiagnosesList ? "Show":"Hide")}
                         Spacer()
                         Button(action: {self.showAddDiagnosisForm.toggle()}){Text("Add")}
                 }){
-                    ForEach(patient.chronologicDiagnoses, id:\.self) { dx in
-                        DiagnosisRowView(diagnosis: dx)
+                    if !self.hideDiagnosesList {
+                        ForEach(patient.chronologicDiagnoses, id:\.self) { dx in
+                            DiagnosisRowView(diagnosis: dx)
+                        }
                     }
                 }
                 Section(header:

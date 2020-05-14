@@ -25,20 +25,23 @@ struct AllClinicalWorkView: View {
             ScrollView(.vertical){
                 VStack{
                     DynamicFilteredList(sorting: listType.descriptors, predicate: listType.predicate) { (list: ClinicalWork) in
-                        ClinicalWorkRowView(clinicalWork: list, isMainList: list.isMainList, isActive: list.isActive)
+                        NavigationLink(destination: ClinicalWorkView(clinicalWork: list)) {
+                            ClinicalWorkRowView(clinicalWork: list, isMainList: list.isMainList, isActive: list.isActive)
+                        }
                     }
                 }.padding([.leading, .trailing])
             }
         }
-            
+        
         .sheet(isPresented: $showClinicalWorkForm, content: { ClinicalWorkFormView().environment(\.managedObjectContext, self.moc)})
-        .navigationBarTitle("All lists")
+        .navigationBarTitle("Listes clinique")
         .navigationBarItems(trailing: Button(action:{
             self.showClinicalWorkForm.toggle()
         }){
             Image(systemName: "plus").padding()
         })
     }
+
 }
 
 struct AllClinicalWorkView_Previews: PreviewProvider {

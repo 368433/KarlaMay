@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MainClinicalWorkView: View {
     
-    @FetchRequest(entity: Tag.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K == %@", "title", UniqueTagsOptions.mainClinicalList.associatedLabel )) var mainCWTag: FetchedResults<Tag>
+    @FetchRequest(entity: UniqueTag.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K == %@", "title", UniqueTagsOptions.mainClinicalList.associatedLabel )) var mainCWTag: FetchedResults<UniqueTag>
     
     var body: some View {
 //        NavigationView{
@@ -20,7 +20,7 @@ struct MainClinicalWorkView: View {
                 } else {
                     Text("list found")
                 }
-            }
+            }.onAppear(perform: test)
         .navigationBarTitle("Current Clinical Work")
         .navigationBarItems(trailing:
             Button(action: {
@@ -30,6 +30,10 @@ struct MainClinicalWorkView: View {
                 Image(systemName: "plus").padding()
         })
 //        }
+    }
+    
+    private func test(){
+        print(mainCWTag.count)
     }
 }
 

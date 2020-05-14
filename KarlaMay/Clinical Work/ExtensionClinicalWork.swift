@@ -17,44 +17,35 @@ extension ClinicalWork: Identifiable {
         } else { return []}
     }
     
-    func toggleMainListStatus(){
-        if isMainList {
-            isMainList = false
-            isActive = true
-        } else {
-            isMainList = true
-            isActive = true
-        }
-    }
-    
-    func toggleActiveStatus(){
-        if isActive {
-            isActive = false
-            isMainList = false
-        } else {
-            isActive = true
-            isMainList = false
-        }
-    }
-    
     /// TESTING CODE TO LINK TAG BEHAVIOUR TO MAIN LIST FLAGGING  - NOT IN USE
     func setAsMainList(confirm: Bool){
         
         //check if UniqueTag "mainList" exists
-        let fetchRequest = FetchRequest<UniqueTag>(entity: UniqueTag.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K == %@", "title", UniqueTagsOptions.mainClinicalList.associatedLabel))
+//        let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let kp = NSExpression(forKeyPath: \UniqueTag.title)
+        let val = NSExpression(forConstantValue: UniqueTagsOptions.mainClinicalList.associatedLabel)
+        let predicate = NSComparisonPredicate(leftExpression: kp, rightExpression: val, modifier: .direct, type: .equalTo, options: .init())
+        let fetchRequest = FetchRequest<UniqueTag>(entity: UniqueTag.entity(), sortDescriptors: [], predicate: predicate)
+        
+        print(fetchRequest)
         
         //if exists, assign its clin work attribute to this list
-        if let mainTag = fetchRequest.wrappedValue.first {
-            mainTag.clinicalWork = self
-            try? self.managedObjectContext?.save()
-        } else {
-            //if does not exist, create it and assign its clin work to this list
-            let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            let uTag = UniqueTag(context: moc)
-            uTag.title = UniqueTagsOptions.mainClinicalList.associatedLabel
-            uTag.clinicalWork = self
-            try? moc.save()
-        }
+//        if !fetchRequest.wrappedValue.isEmpty {
+//            print("there is a unique tag")
+//            if confirm {
+//                mainTag.clinicalWork = self
+//            } else {
+//                mainTag.clinicalWork = nil
+//            }
+//        } else {
+//            //UniqueTag does not exist, create it and assign its clin work to this list
+//            let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//            let uTag = UniqueTag(context: moc)
+//            uTag.title = UniqueTagsOptions.mainClinicalList.associatedLabel
+//            uTag.clinicalWork = self
+//            try? moc.save()
+//        }
         
     }
     

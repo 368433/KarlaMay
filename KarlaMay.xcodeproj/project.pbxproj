@@ -118,6 +118,7 @@
 		6A258DF524697A6D00F689BF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6AFE51D9246BA17100D5A333 /* UniqueTag-enum.swift */,
 				6AFFA15B246CA7AF00F69784 /* AutofillWordsSuggestionsView.swift */,
 				6A6794EE246CB40300FF6C4B /* DynamicFilteredList.swift */,
 				6AD0CEF12469FA8500EF3ED7 /* DummyData.swift */,
@@ -155,7 +156,6 @@
 				6AFE51D7246B7B1500D5A333 /* ClinicalWorkFormView.swift */,
 				6AFE51D5246B7A4B00D5A333 /* ClinicalWorkStatus.swift */,
 				6AD0CEF3246A3C4E00EF3ED7 /* ClinicalWorkRowView.swift */,
-				6AFE51D9246BA17100D5A333 /* UniqueTag-enum.swift */,
 				6ACC9D69246B49350034C7FD /* MainClinicalWorkView.swift */,
 				6ADC79AB246B0F3000096CC2 /* ClinicalWorkView */,
 			);
