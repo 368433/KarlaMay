@@ -12,7 +12,21 @@ enum EpocStatus: String, CaseIterable, RawRepresentable, Hashable {
     case inpatient, outpatient, archived, transferred
     
     var label: String{
-        return "test"
+        switch self {
+        case .inpatient:
+            return "Inpatient"
+        case .outpatient:
+            return "Outpatient"
+        case .transferred:
+            return "Transferred"
+        case .archived:
+            return "Archived"
+        }
+        
+    }
+    
+    var descriptor: [NSSortDescriptor] {
+        return []
     }
     
     var predicate: NSPredicate {
