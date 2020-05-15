@@ -18,7 +18,7 @@ struct EpisodeOfCareForm: View {
     @State private var patientName: String = ""
     @State private var startDate: Date = Date()
     @State private var numberOfDx: Int = 1
-    @State private var epocStatus: EpocStatus = .active
+    @State private var epocStatus: EpocStatus = .inpatient
     @State private var nbOfDx = 1
     @State private var diagnoses: [Diagnosis] = []
     @State private var newDxName = ""

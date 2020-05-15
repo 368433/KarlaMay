@@ -14,6 +14,7 @@ enum ClinicalWorkStatus: CaseIterable {
     case main, active, archived
     
     var label: String {
+        // create inpatient, outpatient, completed, transfered
         switch self {
         case .active:
             return "Active"

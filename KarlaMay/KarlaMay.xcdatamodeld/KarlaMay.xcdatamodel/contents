@@ -33,6 +33,9 @@
     </entity>
     <entity name="EpisodeOfCare" representedClassName="EpisodeOfCare" syncable="YES" codeGenerationType="class">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isInpatient" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isMine" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="clinicalVisits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ClinicalVisit" inverseName="episodeOfCare" inverseEntity="ClinicalVisit"/>
         <relationship name="clinicalWork" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ClinicalWork" inverseName="episodesOfCare" inverseEntity="ClinicalWork"/>
@@ -68,7 +71,7 @@
         <element name="ClinicalVisit" positionX="-18" positionY="108" width="128" height="178"/>
         <element name="ClinicalWork" positionX="-63" positionY="9" width="128" height="178"/>
         <element name="Diagnosis" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="148"/>
+        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="193"/>
         <element name="Patient" positionX="-54" positionY="36" width="128" height="208"/>
         <element name="Tag" positionX="-45" positionY="117" width="128" height="118"/>
         <element name="UniqueTag" positionX="-36" positionY="126" width="128" height="73"/>
