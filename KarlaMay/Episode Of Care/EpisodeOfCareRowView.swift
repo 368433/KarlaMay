@@ -15,8 +15,17 @@ struct EpisodeOfCareRowView: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            Text(episodeOfCare.episodeLabel).foregroundColor(.primary)
-            Text(episodeOfCare.dateLabel).foregroundColor(.secondary)
+            Group{
+                Text(episodeOfCare.patient?.name ?? "No patient Name").font(.headline)
+                Text(episodeOfCare.episodeLabel).foregroundColor(.secondary)
+            }.lineLimit(1)
+            ScrollView(.horizontal){
+                HStack{
+                    ForEach(episodeOfCare.sortedVisits, id: \.self){ visit in
+                        ClinicalVisitDotView(visit: visit)
+                    }
+                }
+            }
         }
     }
 }

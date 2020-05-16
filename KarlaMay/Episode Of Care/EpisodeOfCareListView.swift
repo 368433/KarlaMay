@@ -22,7 +22,7 @@ struct EpisodeOfCareListView: View {
                 }
             }.pickerStyle(SegmentedPickerStyle())
             List{
-                DynamicFilteredList(sorting: epocStatus.descriptor, predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
+                DynamicFilteredList(sorting: [], predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
                     EpisodeOfCareRowView(episodeOfCare: epoc)
                         .contextMenu {
                             VStack{

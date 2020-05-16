@@ -17,4 +17,9 @@ extension EpisodeOfCare : Dated, Identifiable {
         guard let date = self.startDate else { return "Missing start date"}
         return date.toString
     }
+    
+    var sortedVisits: [ClinicalVisit] {
+        guard let visits = self.clinicalVisits as? Set<ClinicalVisit> else { return []}
+        return visits.sorted()
+    }
 }

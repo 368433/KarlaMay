@@ -33,7 +33,7 @@ struct DummyData {
     static var dummyClinicalVisit: ClinicalVisit {
         let visit = ClinicalVisit(context: moc)
         visit.startDate = Date()
-        visit.actType = "VP 916034343"
+        visit.actType = "VP"
         return visit
     }
     

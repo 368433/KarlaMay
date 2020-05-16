@@ -14,6 +14,13 @@ extension ClinicalVisit: Dated {
         return startDate.toString
     }
     
+    var shortDate: String{
+        guard let startDate = self.startDate else { return "n/a"}
+        let day = Calendar.current.component(.day, from: startDate)
+        let month = Calendar.current.component(.month, from: startDate)
+        return "\(day)/\(month)"
+    }
+    
     var actLabel: String {
         guard let act = self.actType else { return "Missing act information"}
         return act
