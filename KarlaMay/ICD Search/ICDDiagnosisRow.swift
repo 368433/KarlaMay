@@ -18,9 +18,7 @@ struct ICDDiagnosisRow: View {
                 Text(diagnosis.matchingPVsJoined).foregroundColor(.secondary).font(.footnote)
             }.padding()
             Spacer()
-            NavigationLink(destination: Text("test")) {
-                Image(systemName: "info.circle").font(.system(size: 20)).padding()
-            }
+            Image(systemName: "info.circle").font(.system(size: 20)).padding()
         }.background(Color(UIColor.systemGray6))
         .cornerRadius(5)
         .shadow(radius: 3)

@@ -27,6 +27,7 @@ struct EpisodeOfCareListView: View {
                 }
             }.listStyle(PlainListStyle())
         }
+        .navigationBarTitle("Work cards")
         .navigationBarItems(trailing: Button("Add"){self.showEpocForm.toggle()})
         .sheet(isPresented: $showEpocForm) {
             EpisodeOfCareForm().environment(\.managedObjectContext, self.moc)

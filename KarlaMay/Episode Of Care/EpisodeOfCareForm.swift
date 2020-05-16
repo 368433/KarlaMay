@@ -9,103 +9,116 @@
 import SwiftUI
 
 struct EpisodeOfCareForm: View {
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.presentationMode) var presenting
     
-    @State private var diagnosis: String = ""
-    @State var parentList: ClinicalWork?
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var dxResult = ICDresult()
+    
     @State var patient: Patient?
-    @State private var patientName: String = ""
+    @State private var name = ""
+    @State private var postalCode = ""
+    @State private var ramq = ""
     @State private var startDate: Date = Date()
-    @State private var numberOfDx: Int = 1
     @State private var epocStatus: EpocStatus = .inpatient
-    @State private var nbOfDx = 1
     @State private var diagnoses: [Diagnosis] = []
-    @State private var newDxName = ""
-
-    @State private var showSearch = false
+    @State private var visits: [ClinicalVisit] = []
+    
+    @State private var showICDSearch = false
+    @State private var showAddClinicalVisitForm = false
+    @State private var hideDiagnosesList = false
+   
+    var parentList: ClinicalWork?
+    private var addIcon: some View {
+        Image(systemName: "plus.rectangle.fill").font(.system(size: 24))
+    }
     
     var body: some View {
         NavigationView{
-            Form {
-                Section(header: Text("Patient")){
-                    HStack{
-                        Text(patient?.name ?? "None")
-                        Spacer()
-                        Button(action: {self.showSearch.toggle()}){Image(systemName: "plus.rectangle.fill").font(.system(size: 28))}
-                    }
+            Form{
+                Section(header: HStack { Text("Identification");Spacer();Button(action: {}){ Image(systemName: "doc.text.viewfinder").font(.title) }})
+                {
+                    TextField("Name", text: $name)
+                    TextField("RAMQ", text: $ramq)
+                    TextField("Postal Code", text: $postalCode)
                 }
-                Section(header: Text("Liste")){
-                    HStack{
-                        Text(parentList?.title ?? "List has no title")
-                        Spacer()
-                        Button(action: {self.showSearch.toggle()}){Image(systemName: "plus.rectangle.fill").font(.system(size: 28))}
-                    }
-                }
-                Section(header: Text("Status")){
+                
+                Section(header: Text("Episodes Of Care"))
+                {
                     Picker(selection: $epocStatus, label: Text("Status")){
                         ForEach(EpocStatus.allCases, id: \.self){ status in
                             Text(status.rawValue).tag(status)
                         }
                     }.pickerStyle(SegmentedPickerStyle())
+                    DatePicker(selection: $startDate, in:...Date(), displayedComponents: .date){Text("Start Date")}
                 }
                 
-                DatePicker(selection: $startDate, in:...Date(), displayedComponents: .date){Text("Start Date")}
+                Section(header: HStack{ Text("Consulting Physician");Spacer();Button(action: {}){self.addIcon}}){
+                    Text("test")
+                }
                 
-                Section(header: Text("Diagnosis")) {
-                    HStack{
-                        TextField("Enter diagnosis", text: $newDxName)
-                        Button("Add"){
-                            let newDx = Diagnosis(context: self.moc)
-                            newDx.title = self.newDxName
-                            newDx.startDate = self.startDate
-                            self.newDxName = ""
-                        }
+                Section(header: HStack { Text("Diagnosis");Spacer();Button(action: {self.showICDSearch.toggle()}){self.addIcon}})
+                {
+                    ForEach(self.dxResult.results, id: \.self){ dx in
+                        DiagnosisRowView(diagnosis: dx)
+                    }
+                }
+                
+                Section(header:
+                    HStack {Text("Visits");Spacer();Button(action: {self.showAddClinicalVisitForm.toggle()}){self.addIcon}
+                }){
+                    ForEach(visits, id: \.self){ visit in
+                        Text(visit.actType ?? "No act type")
                     }
                 }
             }
-            .navigationBarTitle("Work card", displayMode: .automatic)
+            .sheet(isPresented: $showICDSearch){ICDSearchResultsView(searchResult: self.dxResult).environment(\.managedObjectContext, self.moc)}
+            .navigationBarTitle(Text("Patient"))
             .navigationBarItems(
-                leading: Button("Cancel") {self.presenting.wrappedValue.dismiss()},
-                trailing: Button("Done") {self.saveAndDismiss()}.disabled(self.patientName == "" && self.diagnosis == ""))
-                .sheet(isPresented: $showSearch){SearchView().environment(\.managedObjectContext, self.moc)}
+                leading: Button("Cancel"){
+                    self.dismissView()
+                }, trailing: Button("Done"){
+                    self.saveValues()
+                    self.dismissView()
+                }.disabled(self.name == "" && self.dxResult.results.isEmpty))
+        }
+        .onAppear(perform: fillWithPatientDetails )
+    }
+    
+    private func fillWithPatientDetails(){
+        if let patient = patient {
+            self.name = patient.name ?? ""
+            self.postalCode = patient.zip ?? ""
+            self.ramq = patient.ramqNumber ?? ""
         }
     }
-    
-    private func removeDiagnosis(at offSets: IndexSet){
-        if !self.diagnoses.isEmpty {
-            for index in offSets {
-                self.diagnoses.remove(at: index)
-            }
-        }
+    private func dismissView(){
+        self.presentationMode.wrappedValue.dismiss()
     }
-    
-    private func saveAndDismiss(){
-        self.assignValues()
-        try? self.moc.save()
-        self.presenting.wrappedValue.dismiss()
-    }
-    
-    private func assignValues(){
-        let send = EpisodeOfCare(context: moc)
-        let newDx = Diagnosis(context: moc)
-        newDx.title = self.diagnosis
-        send.diagnosis = newDx
-        send.clinicalWork = self.parentList
-        send.startDate = self.startDate
+    private func saveValues(){
+        let newEpoc = EpisodeOfCare(context: moc)
+        newEpoc.diagnosis = self.dxResult.results.first ?? nil
+        newEpoc.clinicalWork = self.parentList
+        newEpoc.startDate = self.startDate
+        newEpoc.addToClinicalVisits(NSSet(array: visits))
+        newEpoc.isActive = self.epocStatus != EpocStatus.archived
+        newEpoc.isInpatient = self.epocStatus == EpocStatus.inpatient
+        newEpoc.isMine = self.epocStatus != EpocStatus.transferred
         
-        if let _ = patient {
-            self.patient!.name = self.patientName
-            send.patient = patient
+        if let patient = patient {
+            patient.name = self.name
+            patient.ramqNumber = self.ramq
+            newEpoc.patient = patient
         } else {
-            //no patient was included, need to create a new one
-            let newPt = Patient(context: moc)
-            newPt.name = self.patientName
-            send.patient = newPt
+            let patient = Patient(context: moc)
+            patient.name = self.name
+            patient.ramqNumber = self.ramq
+            newEpoc.patient = patient
         }
+        
         try? self.moc.save()
     }
 }
+
 
 struct EpisodeOfCareForm_Previews: PreviewProvider {
     static var previews: some View {

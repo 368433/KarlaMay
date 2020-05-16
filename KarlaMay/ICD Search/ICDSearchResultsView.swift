@@ -9,11 +9,13 @@
 import SwiftUI
 
 struct ICDSearchResultsView: View {
+    var searchResult: ICDresult
     var icdSearch = ICDLinearizationSearch()
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @State private var searchTerm: String = ""
     @State private var searchResults: [ICDDestinationEntity] = []
+
     
     var body: some View {
         NavigationView {
@@ -31,20 +33,20 @@ struct ICDSearchResultsView: View {
                         }
                     }.padding([.leading, .trailing, .top])
                     Text(searchResults.count >= 1 ? "\(searchResults.count) results found" : "No results").font(.caption)
-                
                     ForEach(searchResults){ result in
                         ICDDiagnosisRow(diagnosis: result)
                             .onTapGesture {
                                 let dx = Diagnosis(context: self.moc)
                                 dx.title = result.titleStripped
                                 dx.icdCode = result.theCode
-                                try? self.moc.save()
+                                self.searchResult.add(dx)
+//                                try? self.moc.save()
                                 self.presentationMode.wrappedValue.dismiss()
                         }
                     }
                 }
             }
-            .navigationBarTitle("Search", displayMode: .inline)
+            .navigationBarTitle("Search", displayMode:.inline)
             .navigationBarItems(trailing:
                 Button(action: {self.presentationMode.wrappedValue.dismiss()}) {
                     Image(systemName: "xmark.circle").padding()
@@ -64,6 +66,6 @@ struct ICDSearchResultsView: View {
 
 struct ICDSearchResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        ICDSearchResultsView()
+        ICDSearchResultsView(searchResult: ICDresult())
     }
 }

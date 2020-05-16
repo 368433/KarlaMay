@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class APIToken {
     let ClientId = "dabb9f14-20a4-4b3e-b721-bdf138c12a82_8322f7f3-3fa6-4c1f-9734-3affe74a53de"
     let ClientSecret = "0qlkl00Ymzg2m62UNILynwZfuafYBWBXbQrNj65h4bw="
@@ -40,34 +39,16 @@ class APIToken {
     }
     
     func setTokenValue() throws {
-        guard let data = UserDefaults.standard.data(forKey: userDefaultsTokenKey) else {throw TokenFetching.noneInUserDefaults}
-        guard let tokenValue = try? JSONDecoder().decode(TokenValue.self, from: data) else {throw TokenFetching.unableToDecode}
-        guard tokenValue.isValid() else {throw TokenFetching.invalidToken(comment: "in setTokenValue func")}
+        guard let data = UserDefaults.standard.data(forKey: userDefaultsTokenKey) else {throw TokenFetchingError.noneInUserDefaults}
+        guard let tokenValue = try? JSONDecoder().decode(TokenValue.self, from: data) else {throw TokenFetchingError.unableToDecode}
+        guard tokenValue.isValid() else {throw TokenFetchingError.invalidToken(comment: "in setTokenValue func")}
         self.tokenValue = tokenValue
         self.value = tokenValue.icdAPIToken.accessToken
     }
 }
 
-enum TokenFetching: Error, LocalizedError{
-    case noneInUserDefaults
-    case unableToDecode
-    case invalidToken(comment: String)
-}
 
-struct TokenValue: Codable {
-    var dateCreated = Date()
-    var icdAPIToken: ICDAPIToken
-    func isValid() -> Bool{
-        return Date().timeIntervalSince(dateCreated) < Double(icdAPIToken.expiresIn)
-    }
-}
 
-// Encodes the server response when asking for token
-struct ICDAPIToken: Codable {
-    var accessToken: String
-    var expiresIn: Int
-    var tokenType: String
-}
 
 extension APIToken {
     func getICDAPIToken(){
