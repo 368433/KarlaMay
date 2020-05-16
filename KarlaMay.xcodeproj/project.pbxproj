@@ -167,9 +167,6 @@
 				6A0F5E6B246F9CC800C28125 /* ICDResults.swift */,
 				6A258DF32468A1D400F689BF /* ICDDiagnosisRow.swift */,
 				6A0F5E7324701B0100C28125 /* Network Requests */,
-				6A258DEE24689CCA00F689BF /* ICDData.swift */,
-				6A258DEC24689CCA00F689BF /* getICDAPIToken.swift */,
-				6A0F5E7424701B7E00C28125 /* Codable objects - WHOICDAPI.swift */,
 			);
 			path = "ICD Search";
 			sourceTree = "<group>";
@@ -229,6 +226,16 @@
 			path = "Clinical Work";
 			sourceTree = "<group>";
 		};
+		6A5EE729247088C9003B1E58 /* Old versions of WHO ICD calls */ = {
+			isa = PBXGroup;
+			children = (
+				6A258DEE24689CCA00F689BF /* ICDData.swift */,
+				6A258DEC24689CCA00F689BF /* getICDAPIToken.swift */,
+				6A0F5E7424701B7E00C28125 /* Codable objects - WHOICDAPI.swift */,
+			);
+			path = "Old versions of WHO ICD calls";
+			sourceTree = "<group>";
+		};
 		6A65F8AA2469A65C00AC43B7 /* Diagnosis */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +273,7 @@
 				6A0F5E6D2470187100C28125 /* auth0TokenRequest.swift */,
 				6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */,
 				6AD21354247035A500936099 /* auth0APICall.swift */,
+				6A5EE729247088C9003B1E58 /* Old versions of WHO ICD calls */,
 			);
 			path = "Auth0 Calls";
 			sourceTree = "<group>";
