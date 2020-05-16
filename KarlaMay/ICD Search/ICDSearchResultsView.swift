@@ -9,6 +9,11 @@
 import SwiftUI
 
 struct ICDSearchResultsView: View {
+    /*
+     intantiate a whoicdtoken, observed object
+     feed it to a list view as a parameter
+     the list view will make the call to the server or display no result if token is not valid
+     **/
     var searchResult: ICDresult
     var icdSearch = ICDLinearizationSearch()
     @Environment(\.managedObjectContext) var moc
