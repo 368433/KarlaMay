@@ -10,7 +10,7 @@ import Foundation
 
 struct TokenValue: Codable {
     var dateCreated = Date()
-    var icdAPIToken: ICDAPIToken
+    var icdAPIToken: AuthOTokenResponsePayload
     func isValid() -> Bool{
         return Date().timeIntervalSince(dateCreated) < Double(icdAPIToken.expiresIn)
     }

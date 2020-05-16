@@ -68,7 +68,7 @@ extension APIToken {
             if HTTPresponse.statusCode == 200, let data = data {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                if let token = try? decoder.decode(ICDAPIToken.self, from: data) {
+                if let token = try? decoder.decode(AuthOTokenResponsePayload.self, from: data) {
                     let value = TokenValue(icdAPIToken: token)
                     if let jsonData = try? JSONEncoder().encode(value){
                         UserDefaults.standard.set(jsonData, forKey: self.userDefaultsTokenKey)

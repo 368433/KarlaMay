@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6A0F5E6C246F9CC800C28125 /* ICDResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F5E6B246F9CC800C28125 /* ICDResults.swift */; };
 		6A0F5E6E2470187100C28125 /* RequestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F5E6D2470187100C28125 /* RequestToken.swift */; };
-		6A0F5E702470195F00C28125 /* CallWHOICDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F5E6F2470195F00C28125 /* CallWHOICDAPI.swift */; };
 		6A0F5E7224701A0500C28125 /* RefreshTokenWHOICDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F5E7124701A0500C28125 /* RefreshTokenWHOICDAPI.swift */; };
 		6A0F5E7524701B7E00C28125 /* Codable objects - WHOICDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F5E7424701B7E00C28125 /* Codable objects - WHOICDAPI.swift */; };
 		6A258DEF24689CCA00F689BF /* StripHTMLTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A258DEB24689CCA00F689BF /* StripHTMLTags.swift */; };
@@ -39,7 +38,7 @@
 		6A7838F32470253800B8666A /* TokenFetchingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F22470253800B8666A /* TokenFetchingError.swift */; };
 		6A7838F52470257E00B8666A /* LoginDataForWHOICDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F42470257E00B8666A /* LoginDataForWHOICDAPI.swift */; };
 		6A7838F7247025C300B8666A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F6247025C300B8666A /* TestView.swift */; };
-		6A7838F9247028C800B8666A /* ICDAPIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F8247028C800B8666A /* ICDAPIToken.swift */; };
+		6A7838F9247028C800B8666A /* AuthOTokenResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */; };
 		6ACC9D6A246B49350034C7FD /* MainClinicalWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC9D69246B49350034C7FD /* MainClinicalWorkView.swift */; };
 		6ACC9D6C246B4D9B0034C7FD /* AllClinicalWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC9D6B246B4D9B0034C7FD /* AllClinicalWorkView.swift */; };
 		6AD0CEE82469CD0000EF3ED7 /* ExtentionClinicalVisit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CEE72469CD0000EF3ED7 /* ExtentionClinicalVisit.swift */; };
@@ -52,6 +51,7 @@
 		6AD0CEF6246A3C5D00EF3ED7 /* ExtensionClinicalWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CEF5246A3C5D00EF3ED7 /* ExtensionClinicalWork.swift */; };
 		6AD0CEFA246A3CA900EF3ED7 /* ClinicalWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CEF9246A3CA900EF3ED7 /* ClinicalWorkView.swift */; };
 		6AD0CEFC246A48E200EF3ED7 /* ClinicalWorkBanderoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CEFB246A48E200EF3ED7 /* ClinicalWorkBanderoleView.swift */; };
+		6AD21355247035A500936099 /* auth0APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD21354247035A500936099 /* auth0APICall.swift */; };
 		6AD7A24324689548004BCAE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7A24224689548004BCAE8 /* AppDelegate.swift */; };
 		6AD7A24524689548004BCAE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7A24424689548004BCAE8 /* SceneDelegate.swift */; };
 		6AD7A24824689548004BCAE8 /* KarlaMay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7A24624689548004BCAE8 /* KarlaMay.xcdatamodeld */; };
@@ -68,7 +68,6 @@
 /* Begin PBXFileReference section */
 		6A0F5E6B246F9CC800C28125 /* ICDResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICDResults.swift; sourceTree = "<group>"; };
 		6A0F5E6D2470187100C28125 /* RequestToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToken.swift; sourceTree = "<group>"; };
-		6A0F5E6F2470195F00C28125 /* CallWHOICDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallWHOICDAPI.swift; sourceTree = "<group>"; };
 		6A0F5E7124701A0500C28125 /* RefreshTokenWHOICDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenWHOICDAPI.swift; sourceTree = "<group>"; };
 		6A0F5E7424701B7E00C28125 /* Codable objects - WHOICDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable objects - WHOICDAPI.swift"; sourceTree = "<group>"; };
 		6A258DEB24689CCA00F689BF /* StripHTMLTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripHTMLTags.swift; sourceTree = "<group>"; };
@@ -98,7 +97,7 @@
 		6A7838F22470253800B8666A /* TokenFetchingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenFetchingError.swift; sourceTree = "<group>"; };
 		6A7838F42470257E00B8666A /* LoginDataForWHOICDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataForWHOICDAPI.swift; sourceTree = "<group>"; };
 		6A7838F6247025C300B8666A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
-		6A7838F8247028C800B8666A /* ICDAPIToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICDAPIToken.swift; sourceTree = "<group>"; };
+		6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthOTokenResponsePayload.swift; sourceTree = "<group>"; };
 		6ACC9D69246B49350034C7FD /* MainClinicalWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainClinicalWorkView.swift; sourceTree = "<group>"; };
 		6ACC9D6B246B4D9B0034C7FD /* AllClinicalWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllClinicalWorkView.swift; sourceTree = "<group>"; };
 		6AD0CEE72469CD0000EF3ED7 /* ExtentionClinicalVisit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionClinicalVisit.swift; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		6AD0CEF5246A3C5D00EF3ED7 /* ExtensionClinicalWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionClinicalWork.swift; sourceTree = "<group>"; };
 		6AD0CEF9246A3CA900EF3ED7 /* ClinicalWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalWorkView.swift; sourceTree = "<group>"; };
 		6AD0CEFB246A48E200EF3ED7 /* ClinicalWorkBanderoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalWorkBanderoleView.swift; sourceTree = "<group>"; };
+		6AD21354247035A500936099 /* auth0APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = auth0APICall.swift; sourceTree = "<group>"; };
 		6AD7A23F24689548004BCAE8 /* KarlaMay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KarlaMay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD7A24224689548004BCAE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AD7A24424689548004BCAE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,10 +143,10 @@
 				6A7838F42470257E00B8666A /* LoginDataForWHOICDAPI.swift */,
 				6A7838F22470253800B8666A /* TokenFetchingError.swift */,
 				6A0F5E7424701B7E00C28125 /* Codable objects - WHOICDAPI.swift */,
-				6A7838F8247028C800B8666A /* ICDAPIToken.swift */,
+				6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */,
 				6A258DEC24689CCA00F689BF /* getICDAPIToken.swift */,
 				6A0F5E6D2470187100C28125 /* RequestToken.swift */,
-				6A0F5E6F2470195F00C28125 /* CallWHOICDAPI.swift */,
+				6AD21354247035A500936099 /* auth0APICall.swift */,
 				6A0F5E7124701A0500C28125 /* RefreshTokenWHOICDAPI.swift */,
 			);
 			path = "Network Requests";
@@ -409,9 +409,9 @@
 				6AD7A24A24689548004BCAE8 /* ContentView.swift in Sources */,
 				6A6D7BF9246A4E4B004C18AA /* MainView.swift in Sources */,
 				6A649EC6246DFF0100B9AB0F /* AIColorExtensions.swift in Sources */,
+				6AD21355247035A500936099 /* auth0APICall.swift in Sources */,
 				6A649EBE246DFBC000B9AB0F /* EpocStatus.swift in Sources */,
 				6ACC9D6A246B49350034C7FD /* MainClinicalWorkView.swift in Sources */,
-				6A0F5E702470195F00C28125 /* CallWHOICDAPI.swift in Sources */,
 				6A258DFD246986BC00F689BF /* PatientFormView.swift in Sources */,
 				6A258DF124689CCA00F689BF /* ICDSearchResultsView.swift in Sources */,
 				6AD0CEEE2469ED0800EF3ED7 /* EpisodeOfCareRowView.swift in Sources */,
@@ -426,7 +426,7 @@
 				6A6D7BFB246A528A004C18AA /* ClinicalWorkListView.swift in Sources */,
 				6ACC9D6C246B4D9B0034C7FD /* AllClinicalWorkView.swift in Sources */,
 				6A649EC8246E06AD00B9AB0F /* AllPatientsView.swift in Sources */,
-				6A7838F9247028C800B8666A /* ICDAPIToken.swift in Sources */,
+				6A7838F9247028C800B8666A /* AuthOTokenResponsePayload.swift in Sources */,
 				6A0F5E7224701A0500C28125 /* RefreshTokenWHOICDAPI.swift in Sources */,
 				6A258DF724697A8800F689BF /* DismissKeyboard.swift in Sources */,
 			);

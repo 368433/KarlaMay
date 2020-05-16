@@ -10,16 +10,22 @@ import SwiftUI
 
 struct TestView: View {
     let loginData = LoginDataForWHOICDAPI()
-    @State private var token = ICDAPIToken()
+    @State private var tok = WHOICDToken()
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .onAppear(perform: getData)
+        Group{
+            if tok.isValid() {
+                Text(tok.value())
+            } else {
+                Text("invalid token")
+            }
+        }
+        .onAppear(perform: getData)
     }
     
     func getData(){
-        requestToken(tokenEndpoint: loginData.tokenEndpoint, grantType: loginData.grantType, clientID: loginData.clientID, clientSecret: loginData.ClientSecret){_ in
-            self.token = token
+        requestToken(tokenEndpoint: loginData.tokenEndpoint, grantType: loginData.grantType, clientID: loginData.clientID, clientSecret: loginData.ClientSecret){ token in
+            self.tok = WHOICDToken(token: token)
         }
     }
 }
