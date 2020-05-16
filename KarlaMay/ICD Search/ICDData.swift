@@ -9,38 +9,6 @@
 import SwiftUI
 import Foundation
 
-struct ICDSearchResponse: Codable {
-    var destinationEntities: [ICDDestinationEntity]
-    var sortedResults: [ICDDestinationEntity] {
-        return destinationEntities.sorted { (entity1, entity2) -> Bool in
-            entity1.score > entity2.score
-        }
-    }
-}
-
-struct ICDDestinationEntity: Codable, Identifiable, Hashable {
-    var id: String // the unique entity endpoint coded in ICD 11
-    var title: String
-    var score: Double
-    var titleIsASearchResult: Bool
-    var theCode: String
-    var chapter: String
-    var matchingPVs: [ICDPropertyValues]
-    var titleStripped: String {
-        return title.StripHTMLTags()
-    }
-    var matchingPVsJoined: String {
-        var result = ""
-        var labels = matchingPVs.makeIterator()
-        result += (labels.next()?.label.StripHTMLTags() ?? "") + " "
-        return result
-    }
-}
-
-struct ICDPropertyValues: Codable, Hashable {
-    var label: String
-}
-
 enum ICDSearchError: Error {
     case invalidToken
     case invalidURL

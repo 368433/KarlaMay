@@ -71,7 +71,8 @@ struct EpisodeOfCareForm: View {
                     }
                 }
             }
-            .sheet(isPresented: $showICDSearch){ICDSearchResultsView(searchResult: self.dxResult).environment(\.managedObjectContext, self.moc)}
+            .sheet(isPresented: $showICDSearch){WHOICDSearchView().environment(\.managedObjectContext, self.moc)}
+            //.sheet(isPresented: $showICDSearch){ICDSearchResultsView(searchResult: self.dxResult).environment(\.managedObjectContext, self.moc)}
             .navigationBarTitle(Text("Patient"))
             .navigationBarItems(
                 leading: Button("Cancel"){
