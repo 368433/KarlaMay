@@ -10,7 +10,7 @@
 
 import Foundation
 
-func requestToken(tokenEndpoint: String, grantType: String, clientID: String, clientSecret: String, authorizationCode: String? = nil, redirectUri: String? = nil, completion: @escaping (AuthOTokenResponsePayload) -> ()) {
+func auth0TokenRequest(tokenEndpoint: String, grantType: String, clientID: String, clientSecret: String, authorizationCode: String? = nil, redirectUri: String? = nil, completion: @escaping (AuthOTokenResponsePayload) -> ()) {
     guard let endpoint = URL(string: tokenEndpoint) else {return}
     guard let credentials = "grant_type=\(grantType)".data(using: String.Encoding.utf8) else {return}
     guard let clientID = "&client_id=\(clientID)".data(using: String.Encoding.utf8) else {return}
@@ -30,16 +30,16 @@ func requestToken(tokenEndpoint: String, grantType: String, clientID: String, cl
         if let error = error {
             print(error.localizedDescription)
         } else if let httpResponse = response as? HTTPURLResponse {
-            print(httpResponse.statusCode)
             if let data = data {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let token = try? decoder.decode(AuthOTokenResponsePayload.self, from: data) {
-                    print("gets decoded")
                     DispatchQueue.main.async {
                         completion(token)
                     }
                 }
+            } else {
+                print(httpResponse.statusCode)
             }
         } else {
             print("Unknown error")

@@ -1,5 +1,5 @@
 //
-//  AuthOTokenResponsePayload.swift
+//  WHOICDToken.swift
 //  KarlaMay
 //
 //  Created by quarticAIMBP2018 on 2020-05-16.
@@ -7,13 +7,6 @@
 //
 
 import Foundation
-
-struct AuthOTokenResponsePayload: Codable {
-    var accessToken: String = ""
-    var tokenType: String = ""
-    var expiresIn: Int = 0
-
-}
 
 @propertyWrapper
 struct WHOICDToken {
@@ -28,7 +21,7 @@ struct WHOICDToken {
     
     private var dateCreated = Date()
     func value() -> String { return wrappedValue.accessToken }
-    func isValid() -> Bool {
-        return Date().timeIntervalSince(dateCreated) < Double(icdAPIToken.expiresIn)
+    func isExpired() -> Bool {
+        return Date().timeIntervalSince(dateCreated) > Double(icdAPIToken.expiresIn)
     }
 }

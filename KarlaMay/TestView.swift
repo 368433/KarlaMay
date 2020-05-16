@@ -9,23 +9,30 @@
 import SwiftUI
 
 struct TestView: View {
-    let loginData = LoginDataForWHOICDAPI()
-    @State private var tok = WHOICDToken()
+    @ObservedObject var token = WHOICDAPIAccessToken()
     
     var body: some View {
-        Group{
-            if tok.isValid() {
-                Text(tok.value())
-            } else {
-                Text("invalid token")
-            }
-        }
-        .onAppear(perform: getData)
+        Text(token.access.value())
+    }
+}
+
+class WHOICDAPIAccessToken: ObservableObject {
+    private let loginData = LoginDataForWHOICDAPI()
+    @Published var access = WHOICDToken()
+    
+    init(){
+        checkValidity()
     }
     
-    func getData(){
-        requestToken(tokenEndpoint: loginData.tokenEndpoint, grantType: loginData.grantType, clientID: loginData.clientID, clientSecret: loginData.ClientSecret){ token in
-            self.tok = WHOICDToken(token: token)
+    func checkValidity(){
+        if access.isExpired() {
+            updateToken()
+        }
+    }
+    
+    private func updateToken(){
+        auth0TokenRequest(tokenEndpoint: loginData.tokenEndpoint, grantType: loginData.grantType, clientID: loginData.clientID, clientSecret: loginData.ClientSecret){ token in
+            self.access = WHOICDToken(token: token)
         }
     }
 }

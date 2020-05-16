@@ -59,8 +59,10 @@ class ICDLinearizationSearch {
     
     func search(query: String, completion: @escaping (ICDSearchResponse) -> ()) throws {
         guard apiToken.isValid() else {throw TokenFetchingError.invalidToken(comment: "in search function guard")}
+        
         guard !query.isEmpty else {throw ICDSearchError.emptyQuery}
         let searchQuery = FormatQueryForICD11API(query: query)
+        
         let apiEndPoint = "https://id.who.int/icd/release/11/\(releaseId)/\(linearizationName)/search?q=\(searchQuery)&includeKeywordResult=\(includeKeywordResult)&useFlexisearch=\(useFlexisearch)&flatResults=true"
         guard let url = URL(string: apiEndPoint) else {throw ICDSearchError.invalidURL}
         
