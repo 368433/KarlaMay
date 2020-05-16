@@ -15,12 +15,12 @@ struct WHOICDSearchResultsList: View {
     @ObservedObject var decoder = WHOICDResponseDecoder()
     var endpoint: WHOICDAPIEndpoint
     var token: String
-    var returnedResults: ICDresult
+    private var completion: (ICDDestinationEntity) -> Void
     
-    init(query: String, token: WHOICDAPIAccessToken, returnedResults: ICDresult) {
+    init(query: String, token: WHOICDAPIAccessToken, completion: @escaping (ICDDestinationEntity)->Void) {
         self.endpoint = WHOICDAPIEndpoint(query: query)
         self.token = token.access.value()
-        self.returnedResults = returnedResults
+        self.completion = completion
         if !query.isEmpty, !token.access.isExpired() {
             fetchData()
         }
@@ -30,18 +30,18 @@ struct WHOICDSearchResultsList: View {
         ForEach(decoder.results) { destinationEntity in
             ICDDiagnosisRow(diagnosis: destinationEntity)
                 .onTapGesture {
-                    let dx = Diagnosis(context: self.moc)
-                    dx.title = destinationEntity.titleStripped
-                    dx.icdCode = destinationEntity.theCode
-                    self.returnedResults.add(dx)
-                    //  try? self.moc.save()
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.completion(destinationEntity)
+//                    let dx = Diagnosis(context: self.moc)
+//                    dx.title = destinationEntity.titleStripped
+//                    dx.icdCode = destinationEntity.theCode
+//                    self.returnedResults.add(dx)
+//                    self.presentationMode.wrappedValue.dismiss()
             }
         }
     }
     private func fetchData(){
         do {
-            try auth0APICall(apiEndPoint: endpoint.endPoint(), additionalHeaders: nil, accessToken: token){ data in
+            try auth0APICall(apiEndPoint: endpoint.endPoint(), additionalHeaders: endpoint.additionalHeaders(), accessToken: token){ data in
                 self.decoder.data = data
             }
         } catch {

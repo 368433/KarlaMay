@@ -9,11 +9,7 @@
 import SwiftUI
 import Foundation
 
-enum ICDSearchError: Error {
-    case invalidToken
-    case invalidURL
-    case emptyQuery
-}
+
 
 class ICDLinearizationSearch {
     lazy var apiToken = APIToken()

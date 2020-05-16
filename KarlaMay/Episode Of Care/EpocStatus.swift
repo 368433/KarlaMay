@@ -29,6 +29,24 @@ enum EpocStatus: String, CaseIterable, RawRepresentable, Hashable {
         return []
     }
     
+    func update(epoc: EpisodeOfCare){
+        switch self {
+        case .inpatient:
+            epoc.isInpatient = true
+            epoc.isActive = true
+            epoc.isMine = true
+        case .outpatient:
+            epoc.isInpatient = false
+            epoc.isActive = true
+            epoc.isMine = true
+        case .archived:
+            epoc.isActive = false
+        case .transferred:
+            epoc.isMine = false
+            epoc.isActive = true
+        }
+    }
+    
     var predicate: NSPredicate {
         
         let yes = NSExpression(forConstantValue: true)

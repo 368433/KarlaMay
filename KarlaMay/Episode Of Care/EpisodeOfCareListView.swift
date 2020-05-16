@@ -24,11 +24,20 @@ struct EpisodeOfCareListView: View {
             List{
                 DynamicFilteredList(sorting: epocStatus.descriptor, predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
                     EpisodeOfCareRowView(episodeOfCare: epoc)
+                        .contextMenu {
+                            VStack{
+                                ForEach(EpocStatus.allCases, id: \.self){ status in
+                                    Button(status.label){
+                                        status.update(epoc: epoc)
+                                    }
+                                }
+                            }
+                    }
                 }
             }.listStyle(PlainListStyle())
         }
         .navigationBarTitle("Work cards")
-        .navigationBarItems(trailing: Button("Add"){self.showEpocForm.toggle()})
+        .navigationBarItems(trailing: Button(action: {self.showEpocForm.toggle()}){Image(systemName: "plus").padding()})
         .sheet(isPresented: $showEpocForm) {
             EpisodeOfCareForm().environment(\.managedObjectContext, self.moc)
         }

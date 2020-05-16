@@ -14,20 +14,22 @@ struct EpisodeOfCareForm: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var dxResult = ICDresult()
     
+    @State private var md: Physician?
     @State var patient: Patient?
     @State private var name = ""
     @State private var postalCode = ""
     @State private var ramq = ""
     @State private var startDate: Date = Date()
     @State private var epocStatus: EpocStatus = .inpatient
-    @State private var diagnoses: [Diagnosis] = []
     @State private var visits: [ClinicalVisit] = []
     
+    @State private var showFullIdentity = false
     @State private var showICDSearch = false
     @State private var showAddClinicalVisitForm = false
     @State private var hideDiagnosesList = false
-   
+    
     var parentList: ClinicalWork?
+    
     private var addIcon: some View {
         Image(systemName: "plus.rectangle.fill").font(.system(size: 24))
     }
@@ -35,11 +37,17 @@ struct EpisodeOfCareForm: View {
     var body: some View {
         NavigationView{
             Form{
-                Section(header: HStack { Text("Identification");Spacer();Button(action: {}){ Image(systemName: "doc.text.viewfinder").font(.title) }})
+                Section(header: HStack {
+                    Text("Identification")
+                    Button(showFullIdentity ? "Minimize":"Show full") {self.showFullIdentity.toggle()}
+                    Spacer()
+                    Button(action: {}){ Image(systemName: "doc.text.viewfinder").font(.title) }})
                 {
                     TextField("Name", text: $name)
-                    TextField("RAMQ", text: $ramq)
-                    TextField("Postal Code", text: $postalCode)
+                    if showFullIdentity{
+                        TextField("RAMQ", text: $ramq)
+                        TextField("Postal Code", text: $postalCode)
+                    }
                 }
                 
                 Section(header: Text("Episodes Of Care"))
@@ -52,27 +60,38 @@ struct EpisodeOfCareForm: View {
                     DatePicker(selection: $startDate, in:...Date(), displayedComponents: .date){Text("Start Date")}
                 }
                 
-                Section(header: HStack{ Text("Consulting Physician");Spacer();Button(action: {}){self.addIcon}}){
-                    Text("test")
+                Section(header: VStack(alignment: .leading, spacing:0){
+                    HStack{ Text("Consulting Physician");Spacer();Button(action: {}){self.addIcon}}
+                    if md == nil {
+                        Text("Add a consulting physician")
+                    }}){
+                        if md != nil {
+                            Text(md?.name ?? "")
+                        }
                 }
                 
-                Section(header: HStack { Text("Diagnosis");Spacer();Button(action: {self.showICDSearch.toggle()}){self.addIcon}})
+                Section(header: VStack(alignment: .leading, spacing:0){
+                    HStack { Text("Diagnosis");Spacer();Button(action: {self.showICDSearch.toggle()}){self.addIcon}}
+                    if dxResult.results.isEmpty{
+                        Text("No diagnosis currently selected").foregroundColor(.secondary).font(.footnote)
+                    }})
                 {
                     ForEach(self.dxResult.results, id: \.self){ dx in
                         DiagnosisRowView(diagnosis: dx)
-                    }
+                    }.onDelete(perform: deleteDiagnosis)
                 }
                 
-                Section(header:
-                    HStack {Text("Visits");Spacer();Button(action: {self.showAddClinicalVisitForm.toggle()}){self.addIcon}
-                }){
-                    ForEach(visits, id: \.self){ visit in
-                        Text(visit.actType ?? "No act type")
-                    }
+                Section(header: VStack(alignment: .leading, spacing:0){
+                    HStack {Text("Visits");Spacer();Button(action: {self.showAddClinicalVisitForm.toggle()}){self.addIcon}}
+                    if visits.isEmpty {
+                        Text("Currently no visits registered")
+                    }}){
+                        ForEach(visits, id: \.self){ visit in
+                            Text(visit.actType ?? "No act type")
+                        }
                 }
             }
-            .sheet(isPresented: $showICDSearch){WHOICDSearchView().environment(\.managedObjectContext, self.moc)}
-            //.sheet(isPresented: $showICDSearch){ICDSearchResultsView(searchResult: self.dxResult).environment(\.managedObjectContext, self.moc)}
+            .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
             .navigationBarTitle(Text("Patient"))
             .navigationBarItems(
                 leading: Button("Cancel"){
@@ -80,9 +99,15 @@ struct EpisodeOfCareForm: View {
                 }, trailing: Button("Done"){
                     self.saveValues()
                     self.dismissView()
-                }.disabled(self.name == "" && self.dxResult.results.isEmpty))
+                }.disabled(self.name == "" || self.dxResult.results.isEmpty))
         }
         .onAppear(perform: fillWithPatientDetails )
+    }
+    
+    private func deleteDiagnosis(at indexSet: IndexSet ){
+        for index in indexSet {
+            dxResult.results.remove(at: index)
+        }
     }
     
     private func fillWithPatientDetails(){

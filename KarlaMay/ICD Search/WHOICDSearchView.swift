@@ -14,13 +14,17 @@ struct WHOICDSearchView: View {
      feed it to a list view as a parameter
      the list view will make the call to the server or display no result if token is not valid
      **/
-
+    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @State private var searchTerm: String = ""
     @State private var searchQuery: String = ""
     @ObservedObject var token = WHOICDAPIAccessToken()
-    @ObservedObject var dxResult = ICDresult()
+    var dxResult: ICDresult
+    
+    init(returnedSearchResults: ICDresult){
+        self.dxResult = returnedSearchResults
+    }
     
     var body: some View {
         NavigationView {
@@ -30,14 +34,20 @@ struct WHOICDSearchView: View {
                         TextField("search WHO ICD-11 database", text: $searchTerm, onCommit: {self.searchQuery = self.searchTerm})
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         Button(action: {self.searchQuery = self.searchTerm ;UIApplication.shared.endEditing()}){
-                                Image(systemName: "magnifyingglass").padding(5)
+                            Image(systemName: "magnifyingglass").padding(5)
                         }
                         Button(action:{self.searchTerm.append("%")}){
                             Text("%").foregroundColor(.primary).padding(5)
                         }
                     }.padding([.leading, .trailing, .top])
                     
-                    WHOICDSearchResultsList(query: self.searchQuery, token: token, returnedResults: dxResult)
+                    WHOICDSearchResultsList(query: self.searchQuery, token: token){ destinationEntity in
+                        let dx = Diagnosis(context: self.moc)
+                        dx.title = destinationEntity.titleStripped
+                        dx.icdCode = destinationEntity.theCode
+                        self.dxResult.add(dx)
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                 }
             }
             .onAppear(perform:token.checkValidity)
@@ -52,6 +62,6 @@ struct WHOICDSearchView: View {
 
 struct WHOICDSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        WHOICDSearchView()
+        WHOICDSearchView(returnedSearchResults: ICDresult())
     }
 }
