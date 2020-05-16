@@ -144,10 +144,8 @@
 		6A0F5E7324701B0100C28125 /* Network Requests */ = {
 			isa = PBXGroup;
 			children = (
-				6A7838F22470253800B8666A /* TokenFetchingError.swift */,
 				6AD213592470412D00936099 /* WHO ICD API Calls */,
 				6AD213582470411500936099 /* Auth0 Calls */,
-				6A0F5E7124701A0500C28125 /* RefreshTokenWHOICDAPI.swift */,
 			);
 			path = "Network Requests";
 			sourceTree = "<group>";
@@ -155,14 +153,13 @@
 		6A258DEA24689CB900F689BF /* ICD Search */ = {
 			isa = PBXGroup;
 			children = (
-				6A258DF924697E8300F689BF /* DiagnosesListView.swift */,
+				6A258DED24689CCA00F689BF /* ICDSearchResultsView.swift */,
+				6A258DF32468A1D400F689BF /* ICDDiagnosisRow.swift */,
 				6A0F5E7324701B0100C28125 /* Network Requests */,
 				6A258DEE24689CCA00F689BF /* ICDData.swift */,
 				6A258DEC24689CCA00F689BF /* getICDAPIToken.swift */,
 				6A0F5E6B246F9CC800C28125 /* ICDResults.swift */,
 				6A0F5E7424701B7E00C28125 /* Codable objects - WHOICDAPI.swift */,
-				6A258DED24689CCA00F689BF /* ICDSearchResultsView.swift */,
-				6A258DF32468A1D400F689BF /* ICDDiagnosisRow.swift */,
 			);
 			path = "ICD Search";
 			sourceTree = "<group>";
@@ -226,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				6A65F8AF2469A9BC00AC43B7 /* Extension Diagnosis.swift */,
+				6A258DF924697E8300F689BF /* DiagnosesListView.swift */,
 				6AD0CEEB2469ECE700EF3ED7 /* DiagnosisRowView.swift */,
 			);
 			path = Diagnosis;
@@ -253,6 +251,8 @@
 		6AD213582470411500936099 /* Auth0 Calls */ = {
 			isa = PBXGroup;
 			children = (
+				6A0F5E7124701A0500C28125 /* RefreshTokenWHOICDAPI.swift */,
+				6A7838F22470253800B8666A /* TokenFetchingError.swift */,
 				6A0F5E6D2470187100C28125 /* auth0TokenRequest.swift */,
 				6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */,
 				6AD21354247035A500936099 /* auth0APICall.swift */,
