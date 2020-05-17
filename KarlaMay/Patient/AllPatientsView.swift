@@ -19,7 +19,8 @@ struct AllPatientsView: View {
             DynamicFilteredList(sorting: [NSSortDescriptor(keyPath: \Patient.name, ascending: true)], predicate: nil) { (patient: Patient) in
                 Text(patient.name ?? "NO name")
             }
-        }
+            }.listStyle(PlainListStyle())
+        .navigationBarTitle("Patients database")
         .navigationBarItems(trailing: Button("Add"){self.showPatientForm.toggle()})
         .sheet(isPresented: $showPatientForm) {
             PatientFormView(patient: nil).environment(\.managedObjectContext, self.moc)

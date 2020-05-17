@@ -47,7 +47,7 @@ enum MainViewSections: String, CaseIterable {
     
     enum subcategories: String, CaseIterable {
         case episodeOfCare = "Work cards"
-        case allClinicalWorkLists = "All clinical work lists"
+        case allClinicalWorkLists = "Clinical lists"
         case patients = "Patients"
         case tags = "Tags"
         case standardOperatingProcedures = "Protocols"
