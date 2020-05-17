@@ -26,7 +26,7 @@ struct AllClinicalWorkView: View {
                 VStack{
                     DynamicFilteredList(sorting: listType.descriptors, predicate: listType.predicate) { (list: ClinicalWork) in
                         NavigationLink(destination: ClinicalWorkView(clinicalWork: list)) {
-                            ClinicalWorkRowView(clinicalWork: list, isMainList: list.isMainList, isActive: list.isActive)
+                            ClinicalWorkRowView(clinicalWork: list, isActive: list.isActive)
                         }
                     }
                 }.padding([.leading, .trailing])

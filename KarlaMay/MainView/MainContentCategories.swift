@@ -18,7 +18,7 @@ enum MainViewSections: String, CaseIterable {
     var subcategories: [subcategories] {
         switch self{
         case .clinical:
-            return [.episodeOfCare, .mainClincalWorkList, .allClinicalWorkLists, .patients, .tags]
+            return [.episodeOfCare, .allClinicalWorkLists, .patients, .tags]
         case .laboratory:
             return [.standardOperatingProcedures, .labMeeting]
         case .administrative:
@@ -47,7 +47,6 @@ enum MainViewSections: String, CaseIterable {
     
     enum subcategories: String, CaseIterable {
         case episodeOfCare = "Work cards"
-        case mainClincalWorkList = "Main clinical work list"
         case allClinicalWorkLists = "All clinical work lists"
         case patients = "Patients"
         case tags = "Tags"
@@ -70,8 +69,6 @@ enum MainViewSections: String, CaseIterable {
                 return Image(systemName: "person.2")
             case .tags:
                 return Image(systemName: "tag")
-            case .mainClincalWorkList:
-                return Image(systemName: "star.fill")
             case .allClinicalWorkLists:
                 return Image(systemName: "doc.plaintext")
             case .standardOperatingProcedures:
@@ -101,8 +98,6 @@ enum MainViewSections: String, CaseIterable {
             switch self {
             case .episodeOfCare:
                 return AnyView(EpisodeOfCareListView())
-            case .mainClincalWorkList:
-                return AnyView(MainClinicalWorkView())
             case .allClinicalWorkLists:
                 return AnyView(AllClinicalWorkView())
             case .patients:

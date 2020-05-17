@@ -16,7 +16,6 @@ struct ClinicalWorkFormView: View {
     @State private var title = ""
     @State private var startDate = Date()
     @State private var isActive = true
-    @State private var isMainList = false
     @State private var comments = ""
     
     var body: some View {
@@ -34,7 +33,6 @@ struct ClinicalWorkFormView: View {
                 }
                 Section{
                     Toggle(isOn: $isActive, label: {Text("Active list: ")})
-                    Toggle(isOn: $isMainList, label: {Text("Main list:  ")})
                 }
                 Section(header: Text("Comments")) {
                     TextField("Description and comments", text: $comments)
@@ -59,7 +57,6 @@ struct ClinicalWorkFormView: View {
         newCW.startDate = self.startDate
         newCW.title = self.title
         newCW.isActive = self.isActive
-        newCW.isMainList = self.isMainList
         newCW.comments = self.comments
         try? self.moc.save()
     }

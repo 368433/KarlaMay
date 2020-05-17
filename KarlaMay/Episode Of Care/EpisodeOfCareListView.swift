@@ -14,6 +14,7 @@ struct EpisodeOfCareListView: View {
     @State private var epocStatus = EpocStatus.inpatient
     @State private var showEpocForm = false
     @State private var showEditEpocForm = false
+    var parentList: ClinicalWork?
     
     var body: some View {
         VStack{
@@ -31,7 +32,7 @@ struct EpisodeOfCareListView: View {
         .navigationBarTitle("Work cards")
         .navigationBarItems(trailing: Button(action: {self.showEpocForm.toggle()}){Image(systemName: "plus").padding()})
         .sheet(isPresented: $showEpocForm) {
-            EpisodeOfCareForm().environment(\.managedObjectContext, self.moc)
+            EpisodeOfCareForm(parentList: self.parentList).environment(\.managedObjectContext, self.moc)
         }
     }
 }

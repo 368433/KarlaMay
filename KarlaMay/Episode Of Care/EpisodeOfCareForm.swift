@@ -28,6 +28,7 @@ struct EpisodeOfCareForm: View {
     @State private var hideDiagnosesList = false
     
     var epoc: EpisodeOfCare?
+    var parentList: ClinicalWork?
     
     private var addIcon: some View {
         Image(systemName: "plus.rectangle.fill").font(.system(size: 24))
@@ -134,18 +135,19 @@ struct EpisodeOfCareForm: View {
         self.presentationMode.wrappedValue.dismiss()
     }
     private func saveValues(){
+        
+        guard let epocToSave = (epoc != nil) ? epoc: EpisodeOfCare(context: moc) else {print("Error creating epoc to save in epoc form view"); return }
+        epocToSave.startDate = self.startDate
+        epocToSave.setStatus(to: epocStatus)
+        epocToSave.addToClinicalVisits(NSSet(array: visits))
+        epocToSave.diagnosis = self.dxResult.results.first ?? nil
+        
+        let ptToSave = (epocToSave.patient != nil) ? epocToSave.patient : Patient(context: moc)
         let ptValues: [String: Any] = ["name":self.name, "postalCode":self.postalCode, "ramqNumber":self.ramqNumber]
-        
-        let epocToSave = (epoc != nil) ? epoc: EpisodeOfCare(context: moc)
-        epocToSave?.startDate = self.startDate
-        epocToSave?.setStatus(to: epocStatus)
-        epocToSave?.addToClinicalVisits(NSSet(array: visits))
-        epocToSave?.diagnosis = self.dxResult.results.first ?? nil
-        
-        let ptToSave = (epocToSave?.patient != nil) ? epocToSave?.patient : Patient(context: moc)
         ptToSave?.setValuesForKeys(ptValues)
+        epocToSave.patient = ptToSave
         
-        epocToSave?.patient = ptToSave
+        epocToSave.clinicalWork = parentList
         
         try? self.moc.save()
     }
