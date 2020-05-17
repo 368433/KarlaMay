@@ -9,10 +9,9 @@
 import SwiftUI
 
 struct TestView: View {
-    @ObservedObject var token = WHOICDAPIAccessToken()
     
     var body: some View {
-        Text(token.access.value())
+        ClinicalVisitForm()
     }
 }
 

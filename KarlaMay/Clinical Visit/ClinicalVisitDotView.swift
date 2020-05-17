@@ -14,15 +14,17 @@ struct ClinicalVisitDotView: View {
     var body: some View {
         VStack{
             Text(visit.actLabel).font(.caption)
-                .padding(7)
+                .fontWeight(.heavy)
+                .padding(8)
                 .background(Color.red)
                 .foregroundColor(Color.white)
                 .clipShape(Circle())
             Text(visit.shortDate).font(.footnote)
-                .padding(9)
-                .background(Color.red)
-                .foregroundColor(Color.white)
-                .clipShape(Circle())
+//                .fontWeight(.heavy)
+//                .padding(8)
+//                .background(Color.purple)
+//                .foregroundColor(Color.white)
+//                .clipShape(Circle())
         }
     }
 }

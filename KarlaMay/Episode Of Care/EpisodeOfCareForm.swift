@@ -15,10 +15,9 @@ struct EpisodeOfCareForm: View {
     @ObservedObject var dxResult = ICDresult()
     
     @State private var md: Physician?
-    @State var patient: Patient?
     @State private var name = ""
     @State private var postalCode = ""
-    @State private var ramq = ""
+    @State private var ramqNumber = ""
     @State private var startDate: Date = Date()
     @State private var epocStatus: EpocStatus = .inpatient
     @State private var visits: [ClinicalVisit] = []
@@ -28,7 +27,7 @@ struct EpisodeOfCareForm: View {
     @State private var showAddClinicalVisitForm = false
     @State private var hideDiagnosesList = false
     
-    var parentList: ClinicalWork?
+    var epoc: EpisodeOfCare?
     
     private var addIcon: some View {
         Image(systemName: "plus.rectangle.fill").font(.system(size: 24))
@@ -45,7 +44,7 @@ struct EpisodeOfCareForm: View {
                 {
                     TextField("Name", text: $name)
                     if showFullIdentity{
-                        TextField("RAMQ", text: $ramq)
+                        TextField("RAMQ", text: $ramqNumber)
                         TextField("Postal Code", text: $postalCode)
                     }
                 }
@@ -101,7 +100,7 @@ struct EpisodeOfCareForm: View {
                     self.dismissView()
                 }.disabled(self.name == "" || self.dxResult.results.isEmpty))
         }
-        .onAppear(perform: fillWithPatientDetails )
+        .onAppear(perform: populateFields )
     }
     
     private func deleteDiagnosis(at indexSet: IndexSet ){
@@ -110,38 +109,73 @@ struct EpisodeOfCareForm: View {
         }
     }
     
-    private func fillWithPatientDetails(){
-        if let patient = patient {
-            self.name = patient.name ?? ""
-            self.postalCode = patient.zip ?? ""
-            self.ramq = patient.ramqNumber ?? ""
+    private func populateFields(){
+        if let epoc = epoc {
+            self.startDate = epoc.startDate ?? Date()
+            self.epocStatus = EpocStatus.forEpoc(epoc)
+            self.visits = epoc.sortedVisits
+            self.dxResult.results = (epoc.diagnosis != nil) ? [epoc.diagnosis!]:[]
+            if let patient = epoc.patient {
+                self.name = patient.name ?? ""
+                self.postalCode = patient.postalCode ?? ""
+                self.ramqNumber = patient.ramqNumber ?? ""
+            }
         }
     }
     private func dismissView(){
         self.presentationMode.wrappedValue.dismiss()
     }
     private func saveValues(){
-        let newEpoc = EpisodeOfCare(context: moc)
-        newEpoc.diagnosis = self.dxResult.results.first ?? nil
-        newEpoc.clinicalWork = self.parentList
-        newEpoc.startDate = self.startDate
-        newEpoc.addToClinicalVisits(NSSet(array: visits))
-        newEpoc.isActive = self.epocStatus != EpocStatus.archived
-        newEpoc.isInpatient = self.epocStatus == EpocStatus.inpatient
-        newEpoc.isMine = self.epocStatus != EpocStatus.transferred
+        let ptValues: [String: Any] = ["name":self.name, "postalCode":self.postalCode, "ramqNumber":self.ramqNumber]
         
-        if let patient = patient {
-            patient.name = self.name
-            patient.ramqNumber = self.ramq
-            newEpoc.patient = patient
-        } else {
-            let patient = Patient(context: moc)
-            patient.name = self.name
-            patient.ramqNumber = self.ramq
-            newEpoc.patient = patient
-        }
+        let epocToSave = (epoc != nil) ? epoc: EpisodeOfCare(context: moc)
+        epocToSave?.startDate = self.startDate
+        epocToSave?.setStatus(to: epocStatus)
+        epocToSave?.addToClinicalVisits(NSSet(array: visits))
+        epocToSave?.diagnosis = self.dxResult.results.first ?? nil
+        
+        let ptToSave = (epocToSave?.patient != nil) ? epocToSave?.patient : Patient(context: moc)
+        ptToSave?.setValuesForKeys(ptValues)
+        
+        epocToSave?.patient = ptToSave
         
         try? self.moc.save()
+        
+//        let newEpoc = EpisodeOfCare(context: moc)
+//        newEpoc.startDate = self.startDate
+//        newEpoc.setStatus(to: epocStatus)
+//        newEpoc.addToClinicalVisits(NSSet(array: visits))
+//        newEpoc.diagnosis = self.dxResult.results.first ?? nil
+//        //pt
+//        let newPt = Patient(context: moc)
+//        newPt.name = self.name
+//        newPt.ramqNumber = self.ramqNumber
+//        newPt.postalCode = self.postalCode
+//        newEpoc.patient = newPt
+//
+//        if let epoc = epoc {
+//            epoc.startDate = self.startDate
+//            epoc.setStatus(to: epocStatus)
+//            epoc.addToClinicalVisits(NSSet(array: visits))
+//            epoc.diagnosis = self.dxResult.results.first ?? nil
+//            if let patient = epoc.patient {
+//                patient.name = self.name
+//                patient.ramqNumber = self.ramqNumber
+//                newEpoc.patient = patient
+//            } else {
+//                let newPt = Patient(context: moc)
+//                newPt.name = self.name
+//                newPt.ramqNumber = self.ramqNumber
+//                newPt.postalCode = self.postalCode
+//                epoc.patient = newPt
+//            }
+//        }
+        
+        
+    }
+    func setEpocValues(){}
+    func setPatientValues(for: Patient){
+        
     }
 }
 

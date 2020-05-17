@@ -22,4 +22,25 @@ extension EpisodeOfCare : Dated, Identifiable {
         guard let visits = self.clinicalVisits as? Set<ClinicalVisit> else { return []}
         return visits.sorted()
     }
+    
+    func setStatus(to status: EpocStatus){
+        switch status {
+        case .inpatient:
+            self.isInpatient = true
+            self.isArchived = false
+            self.isTransferred = false
+        case .outpatient:
+            self.isInpatient = false
+            self.isArchived = false
+            self.isTransferred = false
+        case .archived:
+            self.isInpatient = false
+            self.isArchived = true
+            self.isTransferred = false
+        case .transferred:
+            self.isInpatient = false
+            self.isArchived = false
+            self.isTransferred = true
+        }
+    }
 }

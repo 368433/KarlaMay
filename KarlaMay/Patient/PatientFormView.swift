@@ -84,7 +84,7 @@ struct PatientFormView: View {
     private func fillWithPatientDetails(){
         if let patient = patient {
             self.name = patient.name ?? ""
-            self.postalCode = patient.zip ?? ""
+            self.postalCode = patient.postalCode ?? ""
             self.ramq = patient.ramqNumber ?? ""
         }
     }

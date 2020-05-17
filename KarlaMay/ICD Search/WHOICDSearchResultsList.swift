@@ -31,11 +31,6 @@ struct WHOICDSearchResultsList: View {
             ICDDiagnosisRow(diagnosis: destinationEntity)
                 .onTapGesture {
                     self.completion(destinationEntity)
-//                    let dx = Diagnosis(context: self.moc)
-//                    dx.title = destinationEntity.titleStripped
-//                    dx.icdCode = destinationEntity.theCode
-//                    self.returnedResults.add(dx)
-//                    self.presentationMode.wrappedValue.dismiss()
             }
         }
     }

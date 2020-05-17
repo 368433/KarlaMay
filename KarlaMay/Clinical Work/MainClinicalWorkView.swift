@@ -25,7 +25,7 @@ struct MainClinicalWorkView: View {
             }
         }
         .sheet(isPresented: $showAddEpocForm, content: {
-            EpisodeOfCareForm(parentList: self.mainCWTag.first?.clinicalWork).environment(\.managedObjectContext, self.moc)
+            EpisodeOfCareForm().environment(\.managedObjectContext, self.moc)
         })
             .navigationBarTitle(self.viewTitle)
             .navigationBarItems(trailing:

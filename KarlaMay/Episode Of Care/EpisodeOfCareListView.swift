@@ -13,6 +13,7 @@ struct EpisodeOfCareListView: View {
     @Environment(\.managedObjectContext) var moc
     @State private var epocStatus = EpocStatus.inpatient
     @State private var showEpocForm = false
+    @State private var showEditEpocForm = false
     
     var body: some View {
         VStack{
@@ -24,15 +25,6 @@ struct EpisodeOfCareListView: View {
             List{
                 DynamicFilteredList(sorting: [], predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
                     EpisodeOfCareRowView(episodeOfCare: epoc)
-                        .contextMenu {
-                            VStack{
-                                ForEach(EpocStatus.allCases, id: \.self){ status in
-                                    Button(status.label){
-                                        status.update(epoc: epoc)
-                                    }
-                                }
-                            }
-                    }
                 }
             }.listStyle(PlainListStyle())
         }

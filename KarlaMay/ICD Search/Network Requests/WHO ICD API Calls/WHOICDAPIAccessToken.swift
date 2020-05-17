@@ -23,7 +23,7 @@ class WHOICDAPIAccessToken: ObservableObject {
     }
     
     private func updateToken(){
-        auth0TokenRequest(tokenEndpoint: loginData.tokenEndpoint, grantType: loginData.grantType, clientID: loginData.clientID, clientSecret: loginData.ClientSecret){ token in
+        auth0TokenRequest(tokenEndpoint: loginData.tokenEndpoint, grantType: GrantType.credentials, clientID: loginData.clientID, clientSecret: loginData.ClientSecret){ token in
             self.access = WHOICDToken(token: token)
         }
     }

@@ -26,7 +26,7 @@ struct DummyData {
         eoc.startDate = Date()
 //        eoc.patient = DummyData.dummyPatient
 //        eoc.diagnosis = DummyData.dummyDiagnosis
-//        eoc.addToClinicalVisits(DummyData.dummyClinicalVisit)
+        eoc.addToClinicalVisits(DummyData.dummyClinicalVisit)
         return eoc
     }
     
