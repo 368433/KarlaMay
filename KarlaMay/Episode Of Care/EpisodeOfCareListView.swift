@@ -15,6 +15,17 @@ struct EpisodeOfCareListView: View {
     @State private var showEpocForm = false
     @State private var showEditEpocForm = false
     var parentList: ClinicalWork?
+    private var filterPredicate: NSPredicate {
+        guard let parent = parentList else { return epocStatus.predicate}
+        let list = NSExpression(forKeyPath: \EpisodeOfCare.clinicalWork )
+        let forParent = NSExpression(forConstantValue: parent)
+        let listPredicate = NSComparisonPredicate(leftExpression: list, rightExpression: forParent, modifier: .direct, type: .equalTo, options: [])
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [epocStatus.predicate, listPredicate])
+    }
+    
+    init(parentList: ClinicalWork?){
+        self.parentList = parentList
+    }
     
     var body: some View {
         VStack{
@@ -24,8 +35,13 @@ struct EpisodeOfCareListView: View {
                 }
             }.pickerStyle(SegmentedPickerStyle())
             List{
-                DynamicFilteredList(sorting: [], predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
-                    EpisodeOfCareRowView(episodeOfCare: epoc)
+                if parentList != nil {
+                    DynamicFilteredList(sorting: [], predicate: filterPredicate) { (epoc: EpisodeOfCare) in
+                        EpisodeOfCareRowView(episodeOfCare: epoc)}
+                } else {
+                    DynamicFilteredList(sorting: [], predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
+                        EpisodeOfCareRowView(episodeOfCare: epoc)
+                    }
                 }
             }.id(UUID()).listStyle(PlainListStyle())
         }
@@ -40,6 +56,6 @@ struct EpisodeOfCareListView: View {
 
 struct EpisodeOfCareListView_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeOfCareListView()
+        EpisodeOfCareListView(parentList: nil)
     }
 }

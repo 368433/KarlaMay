@@ -97,7 +97,7 @@ enum MainViewSections: String, CaseIterable {
         var destinationView: some View {
             switch self {
             case .episodeOfCare:
-                return AnyView(EpisodeOfCareListView())
+                return AnyView(EpisodeOfCareListView(parentList: nil))
             case .allClinicalWorkLists:
                 return AnyView(AllClinicalWorkView())
             case .patients:

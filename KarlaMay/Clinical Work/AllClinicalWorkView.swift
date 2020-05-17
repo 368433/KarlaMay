@@ -25,7 +25,7 @@ struct AllClinicalWorkView: View {
             ScrollView(.vertical){
                 VStack{
                     DynamicFilteredList(sorting: listType.descriptors, predicate: listType.predicate) { (list: ClinicalWork) in
-                        NavigationLink(destination: ClinicalWorkView(clinicalWork: list)) {
+                        NavigationLink(destination: EpisodeOfCareListView(parentList: list)) {
                             ClinicalWorkRowView(clinicalWork: list, isActive: list.isActive)
                         }
                     }
