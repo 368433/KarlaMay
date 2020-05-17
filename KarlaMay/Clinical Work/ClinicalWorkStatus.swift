@@ -11,7 +11,7 @@ import SwiftUI
 import CoreData
 
 enum ClinicalWorkStatus: CaseIterable {
-    case main, active, archived
+    case active, archived
     
     var label: String {
         // create inpatient, outpatient, completed, transfered
@@ -20,8 +20,6 @@ enum ClinicalWorkStatus: CaseIterable {
             return "Active"
         case .archived:
             return "Archived"
-        case .main:
-            return "Main"
         }
     }
     
@@ -31,20 +29,11 @@ enum ClinicalWorkStatus: CaseIterable {
             return Image(systemName: "timelapse")
         case .archived:
             return Image(systemName: "archivebox")
-        case .main:
-            return Image(systemName: "list.dash")
         }
     }
     
     var predicate: NSPredicate? {
         switch self {
-        
-        // Demonstrates usage of predicates construction from parts
-        case .main:
-            let exp1 = NSExpression(forKeyPath: \ClinicalWork.isMainList)
-            let exp2 = NSExpression(forConstantValue: true)
-            return NSComparisonPredicate(leftExpression: exp1, rightExpression: exp2, modifier: .direct, type: .equalTo, options: .init())
-        
         // Demonstrates simpler syntax for predicate buidling
         case .active:
             return NSPredicate(format: "%K == true", "isActive")

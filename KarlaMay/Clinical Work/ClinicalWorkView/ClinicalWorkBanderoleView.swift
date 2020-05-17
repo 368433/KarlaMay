@@ -21,11 +21,6 @@ struct ClinicalWorkBanderoleView: View {
             Spacer()
             HStack(spacing: 18){
                 Button(action: {
-                    self.clinicalWork.isMainList.toggle()
-                }) {
-                    Image(systemName: self.clinicalWork.isMainList ? "star.fill": "star")
-                }
-                Button(action: {
                     self.clinicalWork.isActive.toggle()
                 }) {
                     Image(systemName: self.clinicalWork.isActive ? "archivebox": "archivebox.fill")
