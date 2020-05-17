@@ -11,21 +11,15 @@ import SwiftUI
 struct ClinicalVisitForm: View {
     
     var visit: ClinicalVisit?
-    var codesGenerator = CodesGenerator(actSite:.HPB)
-    @State private var actSite = ActSite.HPB
+    var completion: (_ visit: ClinicalVisit) -> Void
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
     @State private var startDate: Date = Date()
-    @State private var wasBilled = false
-    @State private var actDepartment = ""
-    @State private var actalpha = ""
-    @State private var actType = ""
-    @State private var bedsideLocation = ""
-    @State private var installation = ""
+    @State private var actType = ""    
     
-    var alpha: [String]{
-        if let alph = codesGenerator.codesDict[self.actDepartment] {
-            return Array(alph.keys)
-        }
-        return []
+    init(visit: ClinicalVisit? = nil, completion: @escaping (_ visit: ClinicalVisit)->Void){
+        self.visit = visit
+        self.completion = completion
     }
     
     var body: some View {
@@ -37,36 +31,32 @@ struct ClinicalVisitForm: View {
                     }
                 }
                 Section{
-                    Picker(selection: $actSite, label: Text("Act site")) {
-                        ForEach(ActSite.allCases, id:\.self) { site in
-                            Text(site.rawValue).tag(site)
-                        }
-                    }.pickerStyle(SegmentedPickerStyle())
-                    TextField("Act department", text: $actDepartment)
-                    AutofillWordsSuggestionsView(wordList: Array(codesGenerator.codesDict.keys).sorted()) { (act) in
-                        self.actDepartment = act
-                    }
-                }
-                
-                Section {
-                    TextField("Act alpha", text: $actalpha)
-                    AutofillWordsSuggestionsView(wordList: self.alpha.sorted()) { (act) in
-                        self.actalpha = act
+                    TextField("Act type", text: $actType)
+                    AutofillWordsSuggestionsView(wordList: ["VP", "C", "VC", "OPAT"]) { (act) in
+                        self.actType = act
                     }
                 }
             }
+            .navigationBarItems(
+                leading: Button("Cancel"){
+                    self.presentationMode.wrappedValue.dismiss()
+                },
+                trailing: Button("Done"){
+                    self.saveData()
+                    self.presentationMode.wrappedValue.dismiss()
+            })
         }
+    }
+    private func saveData(){
+        guard let visitToSave = ((self.visit != nil) ? self.visit:ClinicalVisit(context: moc)) else {return}
+        visitToSave.startDate = self.startDate
+        visitToSave.actType = self.actType
+        completion(visitToSave)
     }
 }
 
 struct ClinicalVisitForm_Previews: PreviewProvider {
     static var previews: some View {
-        ClinicalVisitForm()
+        ClinicalVisitForm(completion:{_ in})
     }
 }
-
-
-/*
- DatePicker(selection: $startDate, in:...Date(), displayedComponents: .date){Text("Start Date")}
- }
- */

@@ -18,11 +18,12 @@ struct EpisodeOfCareRowView: View {
     var body: some View {
         VStack(alignment: .leading){
             Group{
-                Text(episodeOfCare.patient?.name ?? "No patient Name").font(.headline)
-                HStack{
-                    Text("Age")
-                    Text("Room")
-                    }.foregroundColor(.primary).font(.caption)
+                Text("Room").foregroundColor(.secondary).font(.caption)
+                HStack {
+                    Text(episodeOfCare.patient?.name ?? "No patient Name").font(.headline)
+                    Spacer()
+                    Text("Age").foregroundColor(.secondary).font(.caption)
+                }
                 Text(episodeOfCare.episodeLabel).foregroundColor(.secondary)
             }.lineLimit(1)
             if episodeOfCare.clinicalVisits?.count != 0 {

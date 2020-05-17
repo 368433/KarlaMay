@@ -62,18 +62,17 @@ struct EpisodeOfCareForm: View {
                 Section(header: VStack(alignment: .leading, spacing:0){
                     HStack{ Text("Consulting Physician");Spacer();Button(action: {}){self.addIcon}}
                     if md == nil {
-                        Text("Add a consulting physician")
-                    }}){
-                        if md != nil {
-                            Text(md?.name ?? "")
-                        }
+                        Text("Add a consulting physician")}})
+                {
+                    if md != nil {
+                        Text(md?.name ?? "")
+                    }
                 }
                 
                 Section(header: VStack(alignment: .leading, spacing:0){
                     HStack { Text("Diagnosis");Spacer();Button(action: {self.showICDSearch.toggle()}){self.addIcon}}
                     if dxResult.results.isEmpty{
-                        Text("No diagnosis currently selected").foregroundColor(.secondary).font(.footnote)
-                    }})
+                        Text("No diagnosis currently selected").foregroundColor(.secondary).font(.footnote)}})
                 {
                     ForEach(self.dxResult.results, id: \.self){ dx in
                         DiagnosisRowView(diagnosis: dx)
@@ -83,11 +82,20 @@ struct EpisodeOfCareForm: View {
                 Section(header: VStack(alignment: .leading, spacing:0){
                     HStack {Text("Visits");Spacer();Button(action: {self.showAddClinicalVisitForm.toggle()}){self.addIcon}}
                     if visits.isEmpty {
-                        Text("Currently no visits registered")
-                    }}){
-                        ForEach(visits, id: \.self){ visit in
-                            Text(visit.actType ?? "No act type")
+                        Text("Currently no visits registered")}})
+                {
+                    ForEach(visits, id: \.self){ visit in
+                        Text(visit.actType ?? "No act type")
+                    }.onDelete { (indexSet) in
+                        for index in indexSet{
+                            self.visits.remove(at: index)
                         }
+                    }
+                }.sheet(isPresented: $showAddClinicalVisitForm) {
+                    ClinicalVisitForm(){ (visit) in
+                        print(self.visits.count)
+                        self.visits.append(visit)
+                    }.environment(\.managedObjectContext, self.moc)
                 }
             }
             .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
@@ -140,38 +148,6 @@ struct EpisodeOfCareForm: View {
         epocToSave?.patient = ptToSave
         
         try? self.moc.save()
-        
-//        let newEpoc = EpisodeOfCare(context: moc)
-//        newEpoc.startDate = self.startDate
-//        newEpoc.setStatus(to: epocStatus)
-//        newEpoc.addToClinicalVisits(NSSet(array: visits))
-//        newEpoc.diagnosis = self.dxResult.results.first ?? nil
-//        //pt
-//        let newPt = Patient(context: moc)
-//        newPt.name = self.name
-//        newPt.ramqNumber = self.ramqNumber
-//        newPt.postalCode = self.postalCode
-//        newEpoc.patient = newPt
-//
-//        if let epoc = epoc {
-//            epoc.startDate = self.startDate
-//            epoc.setStatus(to: epocStatus)
-//            epoc.addToClinicalVisits(NSSet(array: visits))
-//            epoc.diagnosis = self.dxResult.results.first ?? nil
-//            if let patient = epoc.patient {
-//                patient.name = self.name
-//                patient.ramqNumber = self.ramqNumber
-//                newEpoc.patient = patient
-//            } else {
-//                let newPt = Patient(context: moc)
-//                newPt.name = self.name
-//                newPt.ramqNumber = self.ramqNumber
-//                newPt.postalCode = self.postalCode
-//                epoc.patient = newPt
-//            }
-//        }
-        
-        
     }
     func setEpocValues(){}
     func setPatientValues(for: Patient){

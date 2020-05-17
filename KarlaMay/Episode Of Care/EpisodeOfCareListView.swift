@@ -26,7 +26,7 @@ struct EpisodeOfCareListView: View {
                 DynamicFilteredList(sorting: [], predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
                     EpisodeOfCareRowView(episodeOfCare: epoc)
                 }
-            }.listStyle(PlainListStyle())
+            }.id(UUID()).listStyle(PlainListStyle())
         }
         .navigationBarTitle("Work cards")
         .navigationBarItems(trailing: Button(action: {self.showEpocForm.toggle()}){Image(systemName: "plus").padding()})

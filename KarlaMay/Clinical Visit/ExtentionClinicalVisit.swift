@@ -16,9 +16,16 @@ extension ClinicalVisit: Dated {
     
     var shortDate: String{
         guard let startDate = self.startDate else { return "n/a"}
-        let day = Calendar.current.component(.day, from: startDate)
-        let month = Calendar.current.component(.month, from: startDate)
-        return "\(day)/\(month)"
+        let formatter = DateFormatter()
+        if Calendar.current.component(.weekOfYear, from: startDate) == Calendar.current.component(.weekOfYear, from: Date()) {
+            formatter.dateFormat = "EEE"
+            return formatter.string(from: startDate)
+        }
+        formatter.dateFormat = "dd/MM"
+        return formatter.string(from: startDate)
+//        let day = Calendar.current.component(.day, from: startDate)
+//        let month = Calendar.current.component(.month, from: startDate)
+//        return "\(day)/\(month)"
     }
     
     var actLabel: String {

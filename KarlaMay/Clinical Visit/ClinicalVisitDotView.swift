@@ -9,23 +9,23 @@
 import SwiftUI
 
 struct ClinicalVisitDotView: View {
+    
+    @Environment(\.managedObjectContext) var moc
+    @State private var showEditVisitForm = false
     var visit: ClinicalVisit
     
     var body: some View {
-        VStack{
-            Text(visit.actLabel).font(.caption)
-                .fontWeight(.heavy)
-                .padding(8)
-                .background(Color.red)
-                .foregroundColor(Color.white)
-                .clipShape(Circle())
-            Text(visit.shortDate).font(.footnote)
-//                .fontWeight(.heavy)
-//                .padding(8)
-//                .background(Color.purple)
-//                .foregroundColor(Color.white)
-//                .clipShape(Circle())
-        }
+//        GeometryReader { g in
+            VStack{
+                Text(self.visit.actLabel).fontWeight(.semibold).minimumScaleFactor(0.4)
+                    .frame(width: 20, height: 20, alignment: .center)
+                    .padding(5)
+                    .background(Color.red)
+                    .foregroundColor(Color.white)
+                    .clipShape(Circle())
+                Text(self.visit.shortDate).font(.footnote)
+        }.lineLimit(1)
+//        }
     }
 }
 

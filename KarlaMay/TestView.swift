@@ -11,7 +11,9 @@ import SwiftUI
 struct TestView: View {
     
     var body: some View {
-        ClinicalVisitForm()
+        Text("A single line of text, too long to fit in a box.")
+        //.frame(width: 200, height: 200)
+        .border(Color.gray)
     }
 }
 
