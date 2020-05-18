@@ -124,9 +124,8 @@ struct EpisodeOfCareForm: View {
             self.startDate = epoc.startDate ?? Date()
             self.epocStatus = EpocStatus.forEpoc(epoc)
             self.visitz.results = epoc.sortedVisits
-            self.dxResult.results = (epoc.diagnosis != nil) ? [epoc.diagnosis!]:[]
-            if let secondary = epoc.secondaryDiagnoses as? Set<Diagnosis> {
-                self.dxResult.results.append(contentsOf: secondary)
+            if let dxList = epoc.currentDiagnoses as? Set<Diagnosis> {
+                self.dxResult.results = Array(dxList)
             }
             self.physician = epoc.consultingPhysician
             if let patient = epoc.patient {
@@ -144,8 +143,7 @@ struct EpisodeOfCareForm: View {
         epocToSave.startDate = self.startDate
         epocToSave.setStatus(to: epocStatus)
         epocToSave.clinicalVisits = NSSet(array: visitz.results)
-        epocToSave.diagnosis = self.dxResult.results.first
-        epocToSave.secondaryDiagnoses = NSSet(array:self.dxResult.results)
+        epocToSave.currentDiagnoses = NSSet(array: self.dxResult.results)
         epocToSave.consultingPhysician = physician
         
         if let ptToSave = (epocToSave.patient != nil) ? epocToSave.patient : Patient(context: moc) {
