@@ -9,30 +9,26 @@
 import SwiftUI
 
 struct PatientSectionView: View {
-
+    
     @Environment(\.managedObjectContext) var moc
     @State private var showFullIdentity = false
-    @State private var name = ""
-    @State private var postalCode = ""
-    @State private var ramqNumber = ""
-
-    var patient: Patient
+    @ObservedObject var patient: Patient
     
     var body: some View {
         HStack {
             Color.purple.frame(width:10)
             VStack {
                 Section(header: HStack {
-                        Text("Identification")
-                        Button(showFullIdentity ? "Minimize":"Show full") {self.showFullIdentity.toggle()}
-                        Spacer()
-                        Button(action: {}){ Image(systemName: "doc.text.viewfinder").font(.title) }})
-                    {
-                        TextField("Name", text: $name)
-                        if showFullIdentity{
-                            TextField("RAMQ", text: $ramqNumber)
-                            TextField("Postal Code", text: $postalCode)
-                        }
+                    Text("Identification")
+                    Button(showFullIdentity ? "Minimize":"Show full") {self.showFullIdentity.toggle()}
+                    Spacer()
+                    Button(action: {}){ Image(systemName: "doc.text.viewfinder").font(.title) }})
+                {
+                    TextField("Name", text: self.$patient.name ?? "")
+                    if showFullIdentity{
+                        TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
+                        TextField("Postal Code", text: self.$patient.postalCode ?? "")
+                    }
                 }
             }
         }.cornerRadius(5)

@@ -35,20 +35,21 @@ struct EpisodeOfCareListView: View {
                 }
             }.pickerStyle(SegmentedPickerStyle())
             List{
-                if parentList != nil {
+//                if parentList != nil {
                     DynamicFilteredList(sorting: [], predicate: filterPredicate) { (epoc: EpisodeOfCare) in
                         EpisodeOfCareRowView(episodeOfCare: epoc)}
-                } else {
-                    DynamicFilteredList(sorting: [], predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
-                        EpisodeOfCareRowView(episodeOfCare: epoc)
-                    }
-                }
+//                } else {
+//                    DynamicFilteredList(sorting: [], predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
+//                        EpisodeOfCareRowView(episodeOfCare: epoc)
+//                    }
+//                }
             }.id(UUID()).listStyle(PlainListStyle())
         }
         .navigationBarTitle("Work cards")
         .navigationBarItems(trailing: Button(action: {self.showEpocForm.toggle()}){Image(systemName: "plus").padding()})
         .sheet(isPresented: $showEpocForm) {
-            EpisodeOfCareForm(parentList: self.parentList).environment(\.managedObjectContext, self.moc)
+//            let newEpoc = EpisodeOfCare(context: self.moc)
+            EpisodeOfCareForm(epoc: EpisodeOfCare(context: self.moc), parentList: self.parentList).environment(\.managedObjectContext, self.moc)
         }
     }
 }
