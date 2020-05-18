@@ -31,7 +31,7 @@ struct PhysicianForm: View {
                 }, trailing: Button("Done"){
                     self.saveData()
                     self.presentationMode.wrappedValue.dismiss()
-            })
+                }.disabled(self.name.isEmpty || self.license.isEmpty))
         }
     }
     

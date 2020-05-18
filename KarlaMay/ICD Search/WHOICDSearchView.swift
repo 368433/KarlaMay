@@ -45,7 +45,10 @@ struct WHOICDSearchView: View {
                         let dx = Diagnosis(context: self.moc)
                         dx.title = destinationEntity.titleStripped
                         dx.icdCode = destinationEntity.theCode
-                        self.dxResult.add(dx)
+                        DispatchQueue.main.async {
+                            self.dxResult.add(dx)
+                        }
+                        
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }

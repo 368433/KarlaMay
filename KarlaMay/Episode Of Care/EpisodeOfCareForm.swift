@@ -38,7 +38,8 @@ struct EpisodeOfCareForm: View {
     
     var body: some View {
         NavigationView{
-            Form{
+            ScrollView(.vertical){
+            VStack(alignment:.leading){
                 Section(header: HStack {
                     Text("Identification")
                     Button(showFullIdentity ? "Minimize":"Show full") {self.showFullIdentity.toggle()}
@@ -65,8 +66,9 @@ struct EpisodeOfCareForm: View {
                         }
                     }.pickerStyle(SegmentedPickerStyle())
                     if self.showStartDate {
+                        Form{
                         DatePicker(selection: $startDate, in:...Date(), displayedComponents: .date){Text("Start Date")}
-                    }
+                        }}
                 }
                 
                 /// PHYSICIAN
@@ -83,13 +85,6 @@ struct EpisodeOfCareForm: View {
                         }
                     }
                 }
-                .sheet(isPresented: $showPhysiciansList) {
-                    PhysicianList{ md in
-                        DispatchQueue.main.async {
-                            self.physician = md
-                        }
-                    }.environment(\.managedObjectContext, self.moc)
-                }
                 
                 /// DIAGNOSIS
                 Section(header: VStack(alignment: .leading, spacing:0){
@@ -100,7 +95,7 @@ struct EpisodeOfCareForm: View {
                     ForEach(self.dxResult.results, id: \.self){ dx in
                         DiagnosisRowView(diagnosis: dx)
                     }.onDelete(perform: deleteDiagnosis)
-                }.sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
+                }
                 
                 /// VISITS
                 Section(header: VStack(alignment: .leading, spacing:0){
@@ -115,13 +110,10 @@ struct EpisodeOfCareForm: View {
                             self.visits.remove(at: index)
                         }
                     }
-                }.sheet(isPresented: $showAddClinicalVisitForm) {
-                    ClinicalVisitForm(){ (visit) in
-                        self.visits.append(visit)
-                    }.environment(\.managedObjectContext, self.moc)
                 }
             }
-            
+            .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
+            .onAppear(perform: populateFields )
             .navigationBarTitle(Text("Patient"))
             .navigationBarItems(
                 leading: Button("Cancel"){
@@ -130,8 +122,18 @@ struct EpisodeOfCareForm: View {
                     self.saveValues()
                     self.dismissView()
                 }.disabled(self.name == "" || self.dxResult.results.isEmpty))
+            .sheet(isPresented: $showPhysiciansList) {
+                PhysicianList{ md in
+                        self.physician = md
+                }.environment(\.managedObjectContext, self.moc)
+            }
+            }.padding()
         }
-        .onAppear(perform: populateFields )
+        .sheet(isPresented: $showAddClinicalVisitForm) {
+            ClinicalVisitForm(){ (visit) in
+                DispatchQueue.main.async {self.visits.append(visit)}
+            }.environment(\.managedObjectContext, self.moc)
+        }
     }
     
     private func deleteDiagnosis(at indexSet: IndexSet ){
@@ -146,6 +148,9 @@ struct EpisodeOfCareForm: View {
             self.epocStatus = EpocStatus.forEpoc(epoc)
             self.visits = epoc.sortedVisits
             self.dxResult.results = (epoc.diagnosis != nil) ? [epoc.diagnosis!]:[]
+            if let secondary = epoc.secondaryDiagnoses as? Set<Diagnosis> {
+                self.dxResult.results.append(contentsOf: secondary)
+            }
             self.physician = epoc.consultingPhysician
             if let patient = epoc.patient {
                 self.name = patient.name ?? ""
@@ -162,14 +167,18 @@ struct EpisodeOfCareForm: View {
         guard let epocToSave = (epoc != nil) ? epoc: EpisodeOfCare(context: moc) else {print("Error creating epoc to save in epoc form view"); return }
         epocToSave.startDate = self.startDate
         epocToSave.setStatus(to: epocStatus)
-        epocToSave.addToClinicalVisits(NSSet(array: visits))
-        epocToSave.diagnosis = self.dxResult.results.first ?? nil
+        epocToSave.clinicalVisits = NSSet(array: visits)
+//        epocToSave.addToClinicalVisits(NSSet(array: visits))
+        epocToSave.diagnosis = self.dxResult.results.isEmpty ? nil:self.dxResult.results.removeFirst()
+        epocToSave.secondaryDiagnoses = NSSet(array:self.dxResult.results)
         epocToSave.consultingPhysician = physician
         
-        let ptToSave = (epocToSave.patient != nil) ? epocToSave.patient : Patient(context: moc)
-        let ptValues: [String: Any] = ["name":self.name, "postalCode":self.postalCode, "ramqNumber":self.ramqNumber]
-        ptToSave?.setValuesForKeys(ptValues)
-        epocToSave.patient = ptToSave
+        if let ptToSave = (epocToSave.patient != nil) ? epocToSave.patient : Patient(context: moc) {
+            let ptValues: [String: Any] = ["name":self.name, "postalCode":self.postalCode, "ramqNumber":self.ramqNumber]
+            ptToSave.setValuesForKeys(ptValues)
+            ptToSave.diagnoses = NSSet(array: dxResult.results)
+            epocToSave.patient = ptToSave
+        }
         
         epocToSave.clinicalWork = parentList
         

@@ -26,8 +26,9 @@
         <attribute name="icdEndpoint" optional="YES" attributeType="String"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="episodesOfCare" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="diagnosis" inverseEntity="EpisodeOfCare"/>
+        <relationship name="episodesOfCare" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="diagnosis" inverseEntity="EpisodeOfCare"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="diagnoses" inverseEntity="Patient"/>
+        <relationship name="secondaryEpocDx" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EpisodeOfCare" inverseName="secondaryDiagnoses" inverseEntity="EpisodeOfCare"/>
     </entity>
     <entity name="EpisodeOfCare" representedClassName="EpisodeOfCare" syncable="YES" codeGenerationType="class">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -41,6 +42,7 @@
         <relationship name="consultingPhysician" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Physician" inverseName="consultedEpisodes" inverseEntity="Physician"/>
         <relationship name="diagnosis" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Diagnosis" inverseName="episodesOfCare" inverseEntity="Diagnosis"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="episodesOfCare" inverseEntity="Patient"/>
+        <relationship name="secondaryDiagnoses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Diagnosis" inverseName="secondaryEpocDx" inverseEntity="Diagnosis"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="episodesOfCare" inverseEntity="Tag"/>
     </entity>
     <entity name="Patient" representedClassName="Patient" syncable="YES" codeGenerationType="class">
@@ -71,8 +73,8 @@
     <elements>
         <element name="ClinicalVisit" positionX="-18" positionY="108" width="128" height="178"/>
         <element name="ClinicalWork" positionX="-63" positionY="9" width="128" height="148"/>
-        <element name="Diagnosis" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="223"/>
+        <element name="Diagnosis" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="238"/>
         <element name="Patient" positionX="-54" positionY="36" width="128" height="208"/>
         <element name="Physician" positionX="-45" positionY="117" width="128" height="88"/>
         <element name="Tag" positionX="-45" positionY="117" width="128" height="118"/>

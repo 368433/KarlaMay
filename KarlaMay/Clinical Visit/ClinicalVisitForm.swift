@@ -44,14 +44,16 @@ struct ClinicalVisitForm: View {
                 trailing: Button("Done"){
                     self.saveData()
                     self.presentationMode.wrappedValue.dismiss()
-            })
+                }.disabled(self.actType.isEmpty))
         }
     }
     private func saveData(){
         guard let visitToSave = ((self.visit != nil) ? self.visit:ClinicalVisit(context: moc)) else {return}
         visitToSave.startDate = self.startDate
         visitToSave.actType = self.actType
-        completion(visitToSave)
+        DispatchQueue.main.async {
+            self.completion(visitToSave)
+        }
     }
 }
 
