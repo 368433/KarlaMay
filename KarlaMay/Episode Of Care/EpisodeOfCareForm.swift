@@ -18,9 +18,6 @@ struct EpisodeOfCareForm: View {
     @ObservedObject var patient: Patient
     
     @State private var physician: Physician?
-//    @State private var name = ""
-//    @State private var postalCode = ""
-//    @State private var ramqNumber = ""
     @State private var startDate: Date = Date()
     @State private var epocStatus: EpocStatus = .inpatient
     
@@ -48,42 +45,27 @@ struct EpisodeOfCareForm: View {
             VStack(alignment:.leading){
                 ScrollView(.vertical){
                     
-//                    HStack {
-//                        Color.purple.frame(width:10)
-//                        VStack {
-//                            Section(header: HStack {
-//                                Text("Identification")
-//                                Button(showFullIdentity ? "Minimize":"Show full") {self.showFullIdentity.toggle()}
-//                                Spacer()
-//                                Button(action: {}){ Image(systemName: "doc.text.viewfinder").font(.title) }})
-//                            {
-//                                TextField("Name", text: $name)
-//                                if showFullIdentity{
-//                                    TextField("RAMQ", text: $ramqNumber)
-//                                    TextField("Postal Code", text: $postalCode)
-//                                }
-//                            }
-//                        }
-//                    }.cornerRadius(5)
-                        PatientSectionView(patient: patient)
+                    PatientSectionView(patient: patient)
                     
                     /// EPISODE OF CARE
                     HStack {
                         Color.green.frame(width:8)
-                        VStack {
-                            HStack{
-                                Text("Episodes Of Care")
-                                Button(self.showStartDate ? "Hide date":"Show start date") { self.showStartDate.toggle()}
-                                Spacer()
-                            }
-                            
+                        VStack(alignment: .leading){
+                            Text("Episodes Of Care")
                             Picker(selection: $epocStatus, label: Text("Status")){
                                 ForEach(EpocStatus.allCases, id: \.self){ status in
                                     Text(status.rawValue).tag(status)
                                 }
                             }.pickerStyle(SegmentedPickerStyle())
-                            if self.showStartDate {
-                                Form{
+                            VStack(spacing: 0){
+                                HStack{
+                                    Text("Start Date")
+                                    Spacer()
+                                    Text(self.startDate.toString)
+                                }.onTapGesture {
+                                    self.showStartDate.toggle()
+                                }
+                                if showStartDate {
                                     DatePicker(selection: $startDate, in:...Date(), displayedComponents: .date){Text("Start Date")}
                                 }
                             }
@@ -139,11 +121,7 @@ struct EpisodeOfCareForm: View {
             self.dxResult.results = Array(dxList)
         }
         self.physician = epoc.consultingPhysician
-//        if let patient = epoc.patient {
-//            self.name = patient.name ?? ""
-//            self.postalCode = patient.postalCode ?? ""
-//            self.ramqNumber = patient.ramqNumber ?? ""
-//        }
+        
     }
     private func dismissView(){
         self.presentationMode.wrappedValue.dismiss()
@@ -157,29 +135,8 @@ struct EpisodeOfCareForm: View {
         epoc.currentDiagnoses = NSSet(array: self.dxResult.results)
         epoc.consultingPhysician = physician
         patient.diagnoses = NSSet(array: dxResult.results)
-//        if let ptToSave = (epoc.patient != nil) ? epoc.patient : Patient(context: moc) {
-//            let ptValues: [String: Any] = ["name":self.name, "postalCode":self.postalCode, "ramqNumber":self.ramqNumber]
-//            ptToSave.setValuesForKeys(ptValues)
-//            ptToSave.diagnoses = NSSet(array: dxResult.results)
-//            epoc.patient = ptToSave
-//        }
         epoc.clinicalWork = parentList
         
-        //        guard let epocToSave = (epoc != nil) ? epoc: EpisodeOfCare(context: moc) else {print("Error creating epoc to save in epoc form view"); return }
-        //        epocToSave.startDate = self.startDate
-        //        epocToSave.setStatus(to: epocStatus)
-        //        epocToSave.clinicalVisits = NSSet(array: visitz.results)
-        //        epocToSave.currentDiagnoses = NSSet(array: self.dxResult.results)
-        //        epocToSave.consultingPhysician = physician
-        
-        //        if let ptToSave = (epocToSave.patient != nil) ? epocToSave.patient : Patient(context: moc) {
-        //            let ptValues: [String: Any] = ["name":self.name, "postalCode":self.postalCode, "ramqNumber":self.ramqNumber]
-        //            ptToSave.setValuesForKeys(ptValues)
-        //            ptToSave.diagnoses = NSSet(array: dxResult.results)
-        //            epocToSave.patient = ptToSave
-        //        }
-        //
-        //        epocToSave.clinicalWork = parentList
         try? self.moc.save()
     }
     func setEpocValues(){}
