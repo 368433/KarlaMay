@@ -15,23 +15,29 @@ struct VisitSectionView: View {
     @State private var showClinicalVisitForm = false
     
     var body: some View {
-        Section(header: VStack(alignment: .leading, spacing:0){
-            HStack {Text("Visits");Spacer();Button(action: {self.showClinicalVisitForm.toggle()}){AddIcon()}}
-            if visits.results.isEmpty {Text("Currently no visits registered")}})
-        {
-            ForEach(visits.results, id: \.self){ visit in
-                Text(visit.actType ?? "No act type")
-            }.onDelete { (indexSet) in
-                for index in indexSet{
-                    self.visits.results.remove(at: index)
+        HStack{
+            Color.yellow.frame(width:8)
+            VStack(alignment:.leading){
+                HStack {
+                    Text("Visits")
+                    Spacer()
+                    Button(action: {self.showClinicalVisitForm.toggle()}){AddIcon()}
+                }
+                if visits.results.isEmpty {Text("Currently no visits registered")}
+                
+                ForEach(visits.results, id: \.self){ visit in
+                    ClinicalVisitRowView(clinicalVisit: visit)
+                }.onDelete { (indexSet) in
+                    for index in indexSet{
+                        self.visits.results.remove(at: index)
+                    }
                 }
             }
-        }
-        .sheet(isPresented: $showClinicalVisitForm) {
-            ClinicalVisitForm(){ (visit) in DispatchQueue.main.async {self.visits.results.append(visit)} }.environment(\.managedObjectContext, self.moc)
+        }.cornerRadius(5)
+            .sheet(isPresented: $showClinicalVisitForm) {
+                ClinicalVisitForm(){ (visit) in DispatchQueue.main.async {self.visits.results.append(visit)} }.environment(\.managedObjectContext, self.moc)
         }
     }
-
 }
 
 struct VisitSectionView_Previews: PreviewProvider {

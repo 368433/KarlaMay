@@ -42,6 +42,7 @@
 		6A7838F52470257E00B8666A /* LoginDataForWHOICDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F42470257E00B8666A /* LoginDataForWHOICDAPI.swift */; };
 		6A7838F7247025C300B8666A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F6247025C300B8666A /* TestView.swift */; };
 		6A7838F9247028C800B8666A /* AuthOTokenResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */; };
+		6A8352A12472CDCF00D987D6 /* DiagnosisSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8352A02472CDCF00D987D6 /* DiagnosisSectionView.swift */; };
 		6AB1248E2471B85A0047BF66 /* PhysicianForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1248D2471B85A0047BF66 /* PhysicianForm.swift */; };
 		6AB124902471B9920047BF66 /* PhysicianList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1248F2471B9920047BF66 /* PhysicianList.swift */; };
 		6AB124922471BBEA0047BF66 /* PhysicianRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB124912471BBEA0047BF66 /* PhysicianRowView.swift */; };
@@ -52,6 +53,7 @@
 		6AC7533E2470460D003A38C2 /* WHOICDSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7533D2470460D003A38C2 /* WHOICDSearchResponse.swift */; };
 		6ACAB3B924724A8900A5CAE3 /* AddIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACAB3B824724A8900A5CAE3 /* AddIcon.swift */; };
 		6ACAB3BB2472B0BB00A5CAE3 /* VisitSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACAB3BA2472B0BB00A5CAE3 /* VisitSectionView.swift */; };
+		6ACAB3BD2472BF5A00A5CAE3 /* PatientSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACAB3BC2472BF5A00A5CAE3 /* PatientSectionView.swift */; };
 		6ACC9D6C246B4D9B0034C7FD /* AllClinicalWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC9D6B246B4D9B0034C7FD /* AllClinicalWorkView.swift */; };
 		6AD0CEE82469CD0000EF3ED7 /* ExtentionClinicalVisit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CEE72469CD0000EF3ED7 /* ExtentionClinicalVisit.swift */; };
 		6AD0CEEA2469EA2E00EF3ED7 /* ClinicalVisitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CEE92469EA2E00EF3ED7 /* ClinicalVisitRowView.swift */; };
@@ -118,6 +120,7 @@
 		6A7838F42470257E00B8666A /* LoginDataForWHOICDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataForWHOICDAPI.swift; sourceTree = "<group>"; };
 		6A7838F6247025C300B8666A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthOTokenResponsePayload.swift; sourceTree = "<group>"; };
+		6A8352A02472CDCF00D987D6 /* DiagnosisSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisSectionView.swift; sourceTree = "<group>"; };
 		6AB1248D2471B85A0047BF66 /* PhysicianForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicianForm.swift; sourceTree = "<group>"; };
 		6AB1248F2471B9920047BF66 /* PhysicianList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicianList.swift; sourceTree = "<group>"; };
 		6AB124912471BBEA0047BF66 /* PhysicianRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicianRowView.swift; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 		6AC7533D2470460D003A38C2 /* WHOICDSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHOICDSearchResponse.swift; sourceTree = "<group>"; };
 		6ACAB3B824724A8900A5CAE3 /* AddIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIcon.swift; sourceTree = "<group>"; };
 		6ACAB3BA2472B0BB00A5CAE3 /* VisitSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitSectionView.swift; sourceTree = "<group>"; };
+		6ACAB3BC2472BF5A00A5CAE3 /* PatientSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientSectionView.swift; sourceTree = "<group>"; };
 		6ACC9D6B246B4D9B0034C7FD /* AllClinicalWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllClinicalWorkView.swift; sourceTree = "<group>"; };
 		6AD0CEE72469CD0000EF3ED7 /* ExtentionClinicalVisit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionClinicalVisit.swift; sourceTree = "<group>"; };
 		6AD0CEE92469EA2E00EF3ED7 /* ClinicalVisitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalVisitRowView.swift; sourceTree = "<group>"; };
@@ -229,7 +233,9 @@
 				6AD0CEED2469ED0800EF3ED7 /* EpisodeOfCareRowView.swift */,
 				6A364CA0246E2B4600442D69 /* EpisodeOfCareListView.swift */,
 				6A649EBB246DFB7C00B9AB0F /* EpisodeOfCareForm.swift */,
+				6A8352A02472CDCF00D987D6 /* DiagnosisSectionView.swift */,
 				6ACAB3BA2472B0BB00A5CAE3 /* VisitSectionView.swift */,
+				6ACAB3BC2472BF5A00A5CAE3 /* PatientSectionView.swift */,
 				6ACAB3B824724A8900A5CAE3 /* AddIcon.swift */,
 				6A649EBD246DFBC000B9AB0F /* EpocStatus.swift */,
 			);
@@ -465,6 +471,7 @@
 				6AD0CEFC246A48E200EF3ED7 /* ClinicalWorkBanderoleView.swift in Sources */,
 				6ACAB3BB2472B0BB00A5CAE3 /* VisitSectionView.swift in Sources */,
 				6AFE51DA246BA17100D5A333 /* UniqueTag-enum.swift in Sources */,
+				6A8352A12472CDCF00D987D6 /* DiagnosisSectionView.swift in Sources */,
 				6AB124922471BBEA0047BF66 /* PhysicianRowView.swift in Sources */,
 				6A258DF42468A1D400F689BF /* ICDDiagnosisRow.swift in Sources */,
 				6A258DF024689CCA00F689BF /* getICDAPIToken.swift in Sources */,
@@ -492,6 +499,7 @@
 				6A364CA1246E2B4600442D69 /* EpisodeOfCareListView.swift in Sources */,
 				6A649EC2246DFD2E00B9AB0F /* SearchView.swift in Sources */,
 				6AE1F510247170DF0069EC21 /* BillingCodes.swift in Sources */,
+				6ACAB3BD2472BF5A00A5CAE3 /* PatientSectionView.swift in Sources */,
 				6A7838F7247025C300B8666A /* TestView.swift in Sources */,
 				6AD0CEEA2469EA2E00EF3ED7 /* ClinicalVisitRowView.swift in Sources */,
 				6A65F8A92469A5F500AC43B7 /* ExentsionEpisodeOfCare.swift in Sources */,

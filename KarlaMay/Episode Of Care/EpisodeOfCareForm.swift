@@ -21,7 +21,6 @@ struct EpisodeOfCareForm: View {
     @State private var ramqNumber = ""
     @State private var startDate: Date = Date()
     @State private var epocStatus: EpocStatus = .inpatient
-    @State private var visits: [ClinicalVisit] = []
     
     @State private var showFullIdentity = false
     @State private var showICDSearch = false
@@ -104,39 +103,25 @@ struct EpisodeOfCareForm: View {
                         }
                 }.cornerRadius(5)
                     
-                    /// DIAGNOSIS
-                    HStack {
-                        Color.blue.frame(width: 8)
-                        VStack(alignment: .leading) {
-                            Section(header: VStack(alignment: .leading, spacing:0){
-                                HStack { Text("Diagnosis");Spacer();Button(action: {self.showICDSearch.toggle()}){self.addIcon}}
-                                if dxResult.results.isEmpty{
-                                    Text("No diagnosis currently selected").foregroundColor(.secondary).font(.footnote)}})
-                            {
-                                    ForEach(self.dxResult.results, id: \.self){ dx in
-                                        DiagnosisRowView(diagnosis: dx)
-                                    }.onDelete(perform: deleteDiagnosis)
-                            }
-                        }
-                    }.cornerRadius(5)
-//                        .clipped()
-
-                    /// VISITS
-//                    Section(header: VStack(alignment: .leading, spacing:0){
-//                        HStack {Text("Visits");Spacer();Button(action: {self.showAddClinicalVisitForm.toggle()}){self.addIcon}}
-//                        if visits.isEmpty {Text("Currently no visits registered")}})
-//                    {
-//                        ForEach(visits, id: \.self){ visit in
-//                            Text(visit.actType ?? "No act type")
-//                        }.onDelete { (indexSet) in
-//                            for index in indexSet{
-//                                self.visits.remove(at: index)
+//                    /// DIAGNOSIS
+//                    HStack {
+//                        Color.blue.frame(width: 8)
+//                        VStack(alignment: .leading) {
+//                            Section(header: VStack(alignment: .leading, spacing:0){
+//                                HStack { Text("Diagnosis");Spacer();Button(action: {self.showICDSearch.toggle()}){self.addIcon}}
+//                                if dxResult.results.isEmpty{
+//                                    Text("No diagnosis currently selected").foregroundColor(.secondary).font(.footnote)}})
+//                            {
+//                                    ForEach(self.dxResult.results, id: \.self){ dx in
+//                                        DiagnosisRowView(diagnosis: dx)
+//                                    }.onDelete(perform: deleteDiagnosis)
 //                            }
 //                        }
-//                    }
-                VisitSectionView(visits: visitz )
+//                    }.cornerRadius(5)
+                DiagnosisSectionView(dxResult: dxResult)
+                VisitSectionView(visits: visitz)
                 }
-                .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
+//                .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
                 .onAppear(perform: populateFields )
                 .navigationBarTitle(Text("Patient"))
                 .navigationBarItems(leading: Button("Cancel"){self.dismissView()},
@@ -146,10 +131,9 @@ struct EpisodeOfCareForm: View {
                     .sheet(isPresented: $showPhysiciansList) {
                         PhysicianList{ md in self.physician = md }.environment(\.managedObjectContext, self.moc)}
             }.padding([.leading, .trailing])
+                .background(Color(UIColor.systemGray5))
         }
-//        .sheet(isPresented: $showAddClinicalVisitForm) {
-//            ClinicalVisitForm(){ (visit) in DispatchQueue.main.async {self.visits.append(visit)} }.environment(\.managedObjectContext, self.moc)
-//        }
+
     }
     
     private func deleteDiagnosis(at indexSet: IndexSet ){
@@ -162,7 +146,6 @@ struct EpisodeOfCareForm: View {
         if let epoc = epoc {
             self.startDate = epoc.startDate ?? Date()
             self.epocStatus = EpocStatus.forEpoc(epoc)
-//            self.visits = epoc.sortedVisits
             self.visitz.results = epoc.sortedVisits
             self.dxResult.results = (epoc.diagnosis != nil) ? [epoc.diagnosis!]:[]
             if let secondary = epoc.secondaryDiagnoses as? Set<Diagnosis> {
@@ -184,7 +167,6 @@ struct EpisodeOfCareForm: View {
         guard let epocToSave = (epoc != nil) ? epoc: EpisodeOfCare(context: moc) else {print("Error creating epoc to save in epoc form view"); return }
         epocToSave.startDate = self.startDate
         epocToSave.setStatus(to: epocStatus)
-//        epocToSave.clinicalVisits = NSSet(array: visits)
         epocToSave.clinicalVisits = NSSet(array: visitz.results)
         //        epocToSave.addToClinicalVisits(NSSet(array: visits))
         epocToSave.diagnosis = self.dxResult.results.isEmpty ? nil:self.dxResult.results.removeFirst()
