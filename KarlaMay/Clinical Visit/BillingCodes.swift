@@ -34,6 +34,8 @@ enum ActSite: String, CaseIterable {
         }
     }
 }
+let lieu = ["Cabinet", "Hopital", "ClinExt", "Urgence", "Autres"]
+let categ = ["Rout", "MIEE", "Crit", "Opat", "iNoso", "Transf"]
 struct ramqCodes {
     let clinicDict = [
         "Cabinet": [

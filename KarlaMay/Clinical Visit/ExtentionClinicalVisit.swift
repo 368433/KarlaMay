@@ -9,6 +9,7 @@
 import Foundation
 
 extension ClinicalVisit: Dated {
+    
     var dateLabel: String {
         guard let startDate = self.startDate else { return "Missing start date"}
         return startDate.toString

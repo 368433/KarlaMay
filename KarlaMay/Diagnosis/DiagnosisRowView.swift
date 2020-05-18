@@ -15,7 +15,7 @@ struct DiagnosisRowView: View {
         VStack(alignment: .leading){
             Text(diagnosis.icdCodeLabel).foregroundColor(.secondary)
             Text(diagnosis.titleLabel).foregroundColor(.primary)
-        }
+        }.lineLimit(1)
     }
 }
 

@@ -23,6 +23,8 @@
 		6A364CA1246E2B4600442D69 /* EpisodeOfCareListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A364CA0246E2B4600442D69 /* EpisodeOfCareListView.swift */; };
 		6A4D72FB246CB59A00C15B2E /* DynamicFilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6794EE246CB40300FF6C4B /* DynamicFilteredList.swift */; };
 		6A5EE72B24708A9E003B1E58 /* ICDSearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EE72A24708A9E003B1E58 /* ICDSearchError.swift */; };
+		6A5F6CFF247231D3001DA480 /* RamqBillingCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5F6CFE247231D3001DA480 /* RamqBillingCodes.swift */; };
+		6A5F6D0124724109001DA480 /* VisitsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5F6D0024724109001DA480 /* VisitsResults.swift */; };
 		6A649EBC246DFB7C00B9AB0F /* EpisodeOfCareForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A649EBB246DFB7C00B9AB0F /* EpisodeOfCareForm.swift */; };
 		6A649EBE246DFBC000B9AB0F /* EpocStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A649EBD246DFBC000B9AB0F /* EpocStatus.swift */; };
 		6A649EC1246DFD2E00B9AB0F /* SearchableContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A649EBF246DFD2E00B9AB0F /* SearchableContent.swift */; };
@@ -40,6 +42,9 @@
 		6A7838F52470257E00B8666A /* LoginDataForWHOICDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F42470257E00B8666A /* LoginDataForWHOICDAPI.swift */; };
 		6A7838F7247025C300B8666A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F6247025C300B8666A /* TestView.swift */; };
 		6A7838F9247028C800B8666A /* AuthOTokenResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */; };
+		6AB1248E2471B85A0047BF66 /* PhysicianForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1248D2471B85A0047BF66 /* PhysicianForm.swift */; };
+		6AB124902471B9920047BF66 /* PhysicianList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1248F2471B9920047BF66 /* PhysicianList.swift */; };
+		6AB124922471BBEA0047BF66 /* PhysicianRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB124912471BBEA0047BF66 /* PhysicianRowView.swift */; };
 		6AB479B92470A3D400C7ADCC /* ClinicalVisitDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB479B82470A3D400C7ADCC /* ClinicalVisitDotView.swift */; };
 		6AC7533624704394003A38C2 /* WHOICDAPIAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7533524704394003A38C2 /* WHOICDAPIAccessToken.swift */; };
 		6AC7533A24704435003A38C2 /* WHOICDSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7533924704435003A38C2 /* WHOICDSearchView.swift */; };
@@ -91,6 +96,8 @@
 		6A258E002469916100F689BF /* ExtentsionPatient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentsionPatient.swift; sourceTree = "<group>"; };
 		6A364CA0246E2B4600442D69 /* EpisodeOfCareListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeOfCareListView.swift; sourceTree = "<group>"; };
 		6A5EE72A24708A9E003B1E58 /* ICDSearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICDSearchError.swift; sourceTree = "<group>"; };
+		6A5F6CFE247231D3001DA480 /* RamqBillingCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamqBillingCodes.swift; sourceTree = "<group>"; };
+		6A5F6D0024724109001DA480 /* VisitsResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsResults.swift; sourceTree = "<group>"; };
 		6A649EBB246DFB7C00B9AB0F /* EpisodeOfCareForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeOfCareForm.swift; sourceTree = "<group>"; };
 		6A649EBD246DFBC000B9AB0F /* EpocStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpocStatus.swift; sourceTree = "<group>"; };
 		6A649EBF246DFD2E00B9AB0F /* SearchableContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchableContent.swift; sourceTree = "<group>"; };
@@ -109,6 +116,9 @@
 		6A7838F42470257E00B8666A /* LoginDataForWHOICDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataForWHOICDAPI.swift; sourceTree = "<group>"; };
 		6A7838F6247025C300B8666A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		6A7838F8247028C800B8666A /* AuthOTokenResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthOTokenResponsePayload.swift; sourceTree = "<group>"; };
+		6AB1248D2471B85A0047BF66 /* PhysicianForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicianForm.swift; sourceTree = "<group>"; };
+		6AB1248F2471B9920047BF66 /* PhysicianList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicianList.swift; sourceTree = "<group>"; };
+		6AB124912471BBEA0047BF66 /* PhysicianRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicianRowView.swift; sourceTree = "<group>"; };
 		6AB479B82470A3D400C7ADCC /* ClinicalVisitDotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalVisitDotView.swift; sourceTree = "<group>"; };
 		6AC7533524704394003A38C2 /* WHOICDAPIAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHOICDAPIAccessToken.swift; sourceTree = "<group>"; };
 		6AC7533924704435003A38C2 /* WHOICDSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHOICDSearchView.swift; sourceTree = "<group>"; };
@@ -170,11 +180,11 @@
 			isa = PBXGroup;
 			children = (
 				6A5EE729247088C9003B1E58 /* Old versions of WHO ICD calls */,
+				6A0F5E7324701B0100C28125 /* Network Requests */,
 				6AC7533924704435003A38C2 /* WHOICDSearchView.swift */,
 				6AC7533B2470452B003A38C2 /* WHOICDSearchResultsList.swift */,
 				6A0F5E6B246F9CC800C28125 /* ICDResults.swift */,
 				6A258DF32468A1D400F689BF /* ICDDiagnosisRow.swift */,
-				6A0F5E7324701B0100C28125 /* Network Requests */,
 			);
 			path = "ICD Search";
 			sourceTree = "<group>";
@@ -270,10 +280,22 @@
 				6AD0CEE72469CD0000EF3ED7 /* ExtentionClinicalVisit.swift */,
 				6AD0CEE92469EA2E00EF3ED7 /* ClinicalVisitRowView.swift */,
 				6AE1F50F247170DF0069EC21 /* BillingCodes.swift */,
+				6A5F6CFE247231D3001DA480 /* RamqBillingCodes.swift */,
 				6AE1F50D24716C4A0069EC21 /* ClinicalVisitForm.swift */,
+				6A5F6D0024724109001DA480 /* VisitsResults.swift */,
 				6AB479B82470A3D400C7ADCC /* ClinicalVisitDotView.swift */,
 			);
 			path = "Clinical Visit";
+			sourceTree = "<group>";
+		};
+		6AB1248C2471B8440047BF66 /* Physician */ = {
+			isa = PBXGroup;
+			children = (
+				6AB1248D2471B85A0047BF66 /* PhysicianForm.swift */,
+				6AB1248F2471B9920047BF66 /* PhysicianList.swift */,
+				6AB124912471BBEA0047BF66 /* PhysicianRowView.swift */,
+			);
+			path = Physician;
 			sourceTree = "<group>";
 		};
 		6AD213582470411500936099 /* Auth0 Calls */ = {
@@ -330,6 +352,7 @@
 				6A258DFE2469899F00F689BF /* Episode Of Care */,
 				6AA470132469AE5B0023A7B0 /* Clinical Visit */,
 				6A65F8AA2469A65C00AC43B7 /* Diagnosis */,
+				6AB1248C2471B8440047BF66 /* Physician */,
 				6A258DEA24689CB900F689BF /* ICD Search */,
 				6A258DF524697A6D00F689BF /* Helpers */,
 				6AD7A24B2468954B004BCAE8 /* Assets.xcassets */,
@@ -432,8 +455,10 @@
 			files = (
 				6AD0CEE82469CD0000EF3ED7 /* ExtentionClinicalVisit.swift in Sources */,
 				6AE1F50E24716C4A0069EC21 /* ClinicalVisitForm.swift in Sources */,
+				6A5F6D0124724109001DA480 /* VisitsResults.swift in Sources */,
 				6AD0CEFC246A48E200EF3ED7 /* ClinicalWorkBanderoleView.swift in Sources */,
 				6AFE51DA246BA17100D5A333 /* UniqueTag-enum.swift in Sources */,
+				6AB124922471BBEA0047BF66 /* PhysicianRowView.swift in Sources */,
 				6A258DF42468A1D400F689BF /* ICDDiagnosisRow.swift in Sources */,
 				6A258DF024689CCA00F689BF /* getICDAPIToken.swift in Sources */,
 				6A65F8B02469A9BC00AC43B7 /* Extension Diagnosis.swift in Sources */,
@@ -455,6 +480,7 @@
 				6AC7533A24704435003A38C2 /* WHOICDSearchView.swift in Sources */,
 				6A0F5E6C246F9CC800C28125 /* ICDResults.swift in Sources */,
 				6A258E012469916100F689BF /* ExtentsionPatient.swift in Sources */,
+				6AB124902471B9920047BF66 /* PhysicianList.swift in Sources */,
 				6A6D7BFD246A6255004C18AA /* MainContentCategories.swift in Sources */,
 				6A364CA1246E2B4600442D69 /* EpisodeOfCareListView.swift in Sources */,
 				6A649EC2246DFD2E00B9AB0F /* SearchView.swift in Sources */,
@@ -470,8 +496,10 @@
 				6A5EE72B24708A9E003B1E58 /* ICDSearchError.swift in Sources */,
 				6A6D7BF9246A4E4B004C18AA /* MainView.swift in Sources */,
 				6A649EC6246DFF0100B9AB0F /* AIColorExtensions.swift in Sources */,
+				6A5F6CFF247231D3001DA480 /* RamqBillingCodes.swift in Sources */,
 				6AD21355247035A500936099 /* auth0APICall.swift in Sources */,
 				6A649EBE246DFBC000B9AB0F /* EpocStatus.swift in Sources */,
+				6AB1248E2471B85A0047BF66 /* PhysicianForm.swift in Sources */,
 				6A258DFD246986BC00F689BF /* PatientFormView.swift in Sources */,
 				6AE1F50C247150D50069EC21 /* GrantType.swift in Sources */,
 				6A258DF124689CCA00F689BF /* ICDSearchResultsView.swift in Sources */,
