@@ -25,16 +25,11 @@ struct EpisodeOfCareForm: View {
     @State private var showFullIdentity = false
     @State private var showICDSearch = false
     @State private var showAddClinicalVisitForm = false
-    @State private var hideDiagnosesList = false
     @State private var showPhysiciansList = false
     @State private var showStartDate = false
     
     var epoc: EpisodeOfCare?
     var parentList: ClinicalWork?
-    
-    private var addIcon: some View {
-        Image(systemName: "plus.rectangle.fill").font(.system(size: 24))
-    }
     
     var body: some View {
         NavigationView{
@@ -90,7 +85,7 @@ struct EpisodeOfCareForm: View {
                             HStack{
                                 Text("Consulting Physician")
                                 Spacer()
-                                Button(action: {self.showPhysiciansList.toggle()}){self.addIcon}
+                                Button(action: {self.showPhysiciansList.toggle()}){AddIcon()}
                             }
                             if physician == nil {Text("Add a consulting physician")}
                             if physician != nil {
@@ -103,25 +98,9 @@ struct EpisodeOfCareForm: View {
                         }
                 }.cornerRadius(5)
                     
-//                    /// DIAGNOSIS
-//                    HStack {
-//                        Color.blue.frame(width: 8)
-//                        VStack(alignment: .leading) {
-//                            Section(header: VStack(alignment: .leading, spacing:0){
-//                                HStack { Text("Diagnosis");Spacer();Button(action: {self.showICDSearch.toggle()}){self.addIcon}}
-//                                if dxResult.results.isEmpty{
-//                                    Text("No diagnosis currently selected").foregroundColor(.secondary).font(.footnote)}})
-//                            {
-//                                    ForEach(self.dxResult.results, id: \.self){ dx in
-//                                        DiagnosisRowView(diagnosis: dx)
-//                                    }.onDelete(perform: deleteDiagnosis)
-//                            }
-//                        }
-//                    }.cornerRadius(5)
                 DiagnosisSectionView(dxResult: dxResult)
                 VisitSectionView(visits: visitz)
                 }
-//                .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
                 .onAppear(perform: populateFields )
                 .navigationBarTitle(Text("Patient"))
                 .navigationBarItems(leading: Button("Cancel"){self.dismissView()},
@@ -131,9 +110,7 @@ struct EpisodeOfCareForm: View {
                     .sheet(isPresented: $showPhysiciansList) {
                         PhysicianList{ md in self.physician = md }.environment(\.managedObjectContext, self.moc)}
             }.padding([.leading, .trailing])
-                .background(Color(UIColor.systemGray5))
         }
-
     }
     
     private func deleteDiagnosis(at indexSet: IndexSet ){
@@ -163,13 +140,11 @@ struct EpisodeOfCareForm: View {
         self.presentationMode.wrappedValue.dismiss()
     }
     private func saveValues(){
-        
         guard let epocToSave = (epoc != nil) ? epoc: EpisodeOfCare(context: moc) else {print("Error creating epoc to save in epoc form view"); return }
         epocToSave.startDate = self.startDate
         epocToSave.setStatus(to: epocStatus)
         epocToSave.clinicalVisits = NSSet(array: visitz.results)
-        //        epocToSave.addToClinicalVisits(NSSet(array: visits))
-        epocToSave.diagnosis = self.dxResult.results.isEmpty ? nil:self.dxResult.results.removeFirst()
+        epocToSave.diagnosis = self.dxResult.results.first
         epocToSave.secondaryDiagnoses = NSSet(array:self.dxResult.results)
         epocToSave.consultingPhysician = physician
         
@@ -181,7 +156,6 @@ struct EpisodeOfCareForm: View {
         }
         
         epocToSave.clinicalWork = parentList
-        
         try? self.moc.save()
     }
     func setEpocValues(){}
