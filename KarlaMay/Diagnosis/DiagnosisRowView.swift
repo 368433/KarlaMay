@@ -13,8 +13,8 @@ struct DiagnosisRowView: View {
     var diagnosis: Diagnosis
     var body: some View {
         VStack(alignment: .leading){
-            Text(diagnosis.icdCodeLabel).foregroundColor(.secondary)
             Text(diagnosis.titleLabel).foregroundColor(.primary)
+            Text(diagnosis.icdCodeLabel).foregroundColor(.secondary).font(.caption)
         }.lineLimit(1)
     }
 }
