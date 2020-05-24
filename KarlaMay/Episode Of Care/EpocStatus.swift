@@ -38,10 +38,6 @@ enum EpocStatus: String, CaseIterable, RawRepresentable, Hashable {
     
     var predicate: NSPredicate {
         
-//        let status = NSExpression(forKeyPath: \EpisodeOfCare.status)
-//        let value = NSExpression(forConstantValue: self.rawValue)
-//        return NSComparisonPredicate(leftExpression: value, rightExpression: status, modifier: .direct, type: .equalTo, options: [])
-        
         switch self {
         case .inpatient:
             let inPatient = NSExpression(forKeyPath: \EpisodeOfCare.isInpatient)
@@ -65,28 +61,5 @@ enum EpocStatus: String, CaseIterable, RawRepresentable, Hashable {
             let yes = NSExpression(forConstantValue: true)
             return NSComparisonPredicate(leftExpression: transferred, rightExpression: yes, modifier: .direct, type: .equalTo, options: [])
         }
-        
-//        let yes = NSExpression(forConstantValue: true)
-//        let mine = NSExpression(forKeyPath: \EpisodeOfCare.isMine)
-//        let inPatient = NSExpression(forKeyPath: \EpisodeOfCare.isInpatient)
-//        let active = NSExpression(forKeyPath: \EpisodeOfCare.isActive)
-//
-//        let isMine = NSComparisonPredicate(leftExpression: yes, rightExpression: mine, modifier: .direct, type: .equalTo, options: [])
-//        let isActive = NSComparisonPredicate(leftExpression: active, rightExpression: yes, modifier: .direct, type: .equalTo, options: [])
-//
-//        switch self {
-//        case .inpatient:
-//            let isInPatient = NSComparisonPredicate(leftExpression: inPatient, rightExpression: yes, modifier: .direct, type: .equalTo, options: .init())
-//            return NSCompoundPredicate(type: .and, subpredicates: [isInPatient, isActive, isMine])
-//        case .outpatient:
-//            let isOutPatient = NSComparisonPredicate(leftExpression: inPatient, rightExpression: yes, modifier: .direct, type: .notEqualTo, options: [])
-//            return NSCompoundPredicate(type: .and, subpredicates: [isOutPatient, isActive, isMine])
-//        case .archived:
-//            let isArchived = NSComparisonPredicate(leftExpression: active, rightExpression: yes, modifier: .direct, type: .notEqualTo, options: [])
-//            return NSCompoundPredicate(type: .and, subpredicates: [isArchived])
-//        case .transferred:
-//            let notMine = NSComparisonPredicate(leftExpression: mine, rightExpression: yes, modifier: .direct, type: .notEqualTo, options: [])
-//            return NSCompoundPredicate(type: .and, subpredicates: [isActive, notMine])
-//        }
     }
 }

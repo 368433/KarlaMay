@@ -20,7 +20,7 @@ struct DiagnosisSectionView: View {
             Color.blue.frame(width: 8)
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Diagnosis".uppercased()).font(.callout)
+                    Text("Diagnosis").font(.callout)
                     Spacer()
                     Button(action: {self.showICDSearch.toggle()}){AddIcon()}
                 }

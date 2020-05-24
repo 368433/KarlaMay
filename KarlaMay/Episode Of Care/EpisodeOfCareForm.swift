@@ -12,14 +12,15 @@ struct EpisodeOfCareForm: View {
     
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var dxResult = ICDresult()
-    @ObservedObject var visitz = VisitsResults()
     @ObservedObject var epoc: EpisodeOfCare
     @ObservedObject var patient: Patient
-    
+    @ObservedObject var dxResult = ICDresult()
+    @ObservedObject var visits = VisitsResults()
     @State private var physician: Physician?
-    @State private var startDate: Date = Date()
-    @State private var epocStatus: EpocStatus = .inpatient
+    
+    
+//    @State private var startDate: Date = Date()
+//    @State private var epocStatus: EpocStatus = .inpatient
     
     @State private var showFullIdentity = false
     @State private var showICDSearch = false
@@ -46,31 +47,32 @@ struct EpisodeOfCareForm: View {
                 ScrollView(.vertical){
                     
                     PatientSectionView(patient: patient)
+                    EpocSectionView(epoc: epoc)
                     
-                    /// EPISODE OF CARE
-                    HStack {
-                        Color.green.frame(width:8)
-                        VStack(alignment: .leading){
-                            Text("Episodes Of Care")
-                            Picker(selection: $epocStatus, label: Text("Status")){
-                                ForEach(EpocStatus.allCases, id: \.self){ status in
-                                    Text(status.rawValue).tag(status)
-                                }
-                            }.pickerStyle(SegmentedPickerStyle())
-                            VStack(spacing: 0){
-                                HStack{
-                                    Text("Start Date")
-                                    Spacer()
-                                    Text(self.startDate.toString)
-                                }.onTapGesture {
-                                    self.showStartDate.toggle()
-                                }
-                                if showStartDate {
-                                    DatePicker(selection: $startDate, in:...Date(), displayedComponents: .date){Text("Start Date")}
-                                }
-                            }
-                        }
-                    }.cornerRadius(5)
+//                    /// EPISODE OF CARE
+//                    HStack {
+//                        Color.green.frame(width:8)
+//                        VStack(alignment: .leading){
+//                            Text("Episodes Of Care")
+//                            Picker(selection: $epocStatus, label: Text("Status")){
+//                                ForEach(EpocStatus.allCases, id: \.self){ status in
+//                                    Text(status.rawValue).tag(status)
+//                                }
+//                            }.pickerStyle(SegmentedPickerStyle())
+//                            VStack(spacing: 0){
+//                                HStack{
+//                                    Text("Start Date")
+//                                    Spacer()
+//                                    Text(self.startDate.toString)
+//                                }.onTapGesture {
+//                                    self.showStartDate.toggle()
+//                                }
+//                                if showStartDate {
+//                                    DatePicker(selection: self.$epoc.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
+//                                }
+//                            }
+//                        }
+//                    }.cornerRadius(5)
                     
                     /// PHYSICIAN
                     HStack {
@@ -93,16 +95,14 @@ struct EpisodeOfCareForm: View {
                     }.cornerRadius(5)
                     
                     DiagnosisSectionView(dxResult: dxResult)
-                    VisitSectionView(visits: visitz)
+                    VisitSectionView(visits: visits)
                 }
                 .onAppear(perform: populateFields )
                 .navigationBarTitle(Text("Patient"))
-                .navigationBarItems(leading: Button("Cancel"){self.dismissView()},
-                                    trailing: Button("Done"){
-                                        self.saveValues()
-                                        self.dismissView()})
-                    .sheet(isPresented: $showPhysiciansList) {
-                        PhysicianList{ md in self.physician = md }.environment(\.managedObjectContext, self.moc)}
+                .navigationBarItems(leading: Button("Cancel"){self.dismissView()})
+                .navigationBarItems(trailing: Button("Done"){self.saveValues();self.dismissView()})
+                .sheet(isPresented: $showPhysiciansList) {
+                    PhysicianList{ md in self.physician = md }.environment(\.managedObjectContext, self.moc)}
             }.padding([.leading, .trailing])
         }
     }
@@ -114,34 +114,29 @@ struct EpisodeOfCareForm: View {
     }
     
     private func populateFields(){
-        self.startDate = epoc.startDate ?? Date()
-        self.epocStatus = EpocStatus.forEpoc(epoc)
-        self.visitz.results = epoc.sortedVisits
+//        self.epocStatus = EpocStatus.forEpoc(epoc)
+        print(self.patient.name ?? "No name")
+        self.epoc.setStatus(to: .inpatient)
+        self.visits.results = epoc.sortedVisits
         if let dxList = epoc.currentDiagnoses as? Set<Diagnosis> {
             self.dxResult.results = Array(dxList)
         }
         self.physician = epoc.consultingPhysician
-        
     }
     private func dismissView(){
         self.presentationMode.wrappedValue.dismiss()
     }
     private func saveValues(){
-        
         epoc.patient = patient
-        epoc.startDate = self.startDate
-        epoc.setStatus(to: epocStatus)
-        epoc.clinicalVisits = NSSet(array: visitz.results)
+//        epoc.startDate = self.startDate
+//        epoc.setStatus(to: epocStatus)
+        epoc.clinicalVisits = NSSet(array: visits.results)
         epoc.currentDiagnoses = NSSet(array: self.dxResult.results)
         epoc.consultingPhysician = physician
         patient.diagnoses = NSSet(array: dxResult.results)
         epoc.clinicalWork = parentList
         
         try? self.moc.save()
-    }
-    func setEpocValues(){}
-    func setPatientValues(for: Patient){
-        
     }
 }
 

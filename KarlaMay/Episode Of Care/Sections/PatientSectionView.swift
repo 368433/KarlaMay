@@ -17,18 +17,17 @@ struct PatientSectionView: View {
     var body: some View {
         HStack {
             Color.purple.frame(width:10)
-            VStack {
-                Section(header: HStack {
-                    Text("Identification")
+            VStack(){
+                HStack {
+                    Text("Identification".capitalized).font(.headline)
                     Button(showFullIdentity ? "Minimize":"Show full") {self.showFullIdentity.toggle()}
                     Spacer()
-                    Button(action: {}){ Image(systemName: "doc.text.viewfinder").font(.title) }})
-                {
-                    TextField("Name", text: self.$patient.name ?? "")
-                    if showFullIdentity{
-                        TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
-                        TextField("Postal Code", text: self.$patient.postalCode ?? "")
-                    }
+                    Button(action: {}){ Image(systemName: "doc.text.viewfinder").padding([.top], 2).font(.title) }
+                }
+                TextField("Name", text: self.$patient.name ?? "")
+                if showFullIdentity{
+                    TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
+                    TextField("Postal Code", text: self.$patient.postalCode ?? "")
                 }
             }
         }.cornerRadius(5)

@@ -23,6 +23,15 @@ extension EpisodeOfCare : Dated, Identifiable {
         return visits.sorted()
     }
     
+    var epocStatus: EpocStatus {
+        get{
+            return EpocStatus.forEpoc(self)
+        }
+        set{
+            self.setStatus(to: newValue)
+        }
+    }
+    
     func setStatus(to status: EpocStatus){
         switch status {
         case .inpatient:
