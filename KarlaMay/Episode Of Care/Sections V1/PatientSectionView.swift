@@ -15,8 +15,8 @@ struct PatientSectionView: View {
     @ObservedObject var patient: Patient
     
     var body: some View {
-        HStack {
-            Color.purple.frame(width:10)
+        HStack (spacing: 0){
+            Color.purple.frame(width:5)
             VStack(){
                 HStack {
                     Text("Identification".capitalized).font(.headline)
@@ -29,8 +29,8 @@ struct PatientSectionView: View {
                     TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
                     TextField("Postal Code", text: self.$patient.postalCode ?? "")
                 }
-            }
-        }.cornerRadius(5)
+            }.padding()
+        }.cornerRadius(5).background(Color(UIColor.systemGray6))
     }
 }
 
