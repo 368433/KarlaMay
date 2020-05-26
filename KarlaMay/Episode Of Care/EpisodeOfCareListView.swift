@@ -49,7 +49,8 @@ struct EpisodeOfCareListView: View {
         .navigationBarItems(trailing: Button(action: {self.showEpocForm.toggle()}){Image(systemName: "plus").padding()})
         .sheet(isPresented: $showEpocForm) {
 //            let newEpoc = EpisodeOfCare(context: self.moc)
-            EpisodeOfCareForm(epoc: EpisodeOfCare(context: self.moc), parentList: self.parentList).environment(\.managedObjectContext, self.moc)
+//            EpisodeOfCareForm(epoc: EpisodeOfCare(context: self.moc), parentList: self.parentList).environment(\.managedObjectContext, self.moc)
+            EpisodeOfCareForm2(episodeToEdit: nil, parentList: self.parentList).environment(\.managedObjectContext, self.moc)
         }
     }
 }

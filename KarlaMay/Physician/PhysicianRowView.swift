@@ -12,10 +12,12 @@ struct PhysicianRowView: View {
     
     var physician: Physician
     var body: some View {
-        VStack(alignment: .leading){
+        HStack(alignment: .center){
             Text(physician.name ?? "No name").font(.headline)
+            Spacer()
             Text(physician.license ?? "No license").foregroundColor(.secondary)
         }
+    .contentShape(Rectangle())
     }
 }
 

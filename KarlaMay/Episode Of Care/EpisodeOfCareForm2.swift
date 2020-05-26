@@ -13,8 +13,7 @@ struct EpisodeOfCareForm2: View {
     @State private var name: String = ""
     
     @ObservedObject var episode: EpisodeOfCare
-    @ObservedObject var patient: Patient
-    @ObservedObject var consultingPhysician: Physician
+    //    @ObservedObject var patient: Patient
     var diagnoses: [Diagnosis] = []
     var visits: [ClinicalVisit] = []
     var parentList: ClinicalWork?
@@ -22,31 +21,17 @@ struct EpisodeOfCareForm2: View {
     init(episodeToEdit: EpisodeOfCare? = nil, parentList: ClinicalWork? = nil){
         let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         self.episode = episodeToEdit != nil ? episodeToEdit! : EpisodeOfCare(context: moc)
-        self.patient = episodeToEdit?.patient != nil ? episodeToEdit!.patient! : Patient(context: moc)
-        if let physician = episodeToEdit?.consultingPhysician { self.consultingPhysician = physician}
-        else {self.consultingPhysician = Physician(context: moc)}
-        if let diagnoses = episodeToEdit?.currentDiagnoses as? Set<Diagnosis> {self.diagnoses = Array(diagnoses)}
-        if let visits = episodeToEdit?.clinicalVisits as? Set<ClinicalVisit> {self.visits = Array(visits)}
         self.parentList = parentList
     }
     
     var body: some View {
         NavigationView{
-            Form{
-                Section(header: Text("Identification")){
-                    TextField("Name", text: $patient.name ?? "")
-                    NavigationLink(destination: Text("testing")){
-                        Button(action:{}){
-                            HStack{
-                                Text("Physician")
-                                Spacer()
-                                Text("Alphonso")
-                            }
-                        }.padding(.trailing)
-                        
-                    }
+            VStack(alignment: .leading){
+                Form{
+                    consultingMDForm(episode: episode)
                 }
             }
+        .navigationBarTitle("test")
         }
     }
 }
