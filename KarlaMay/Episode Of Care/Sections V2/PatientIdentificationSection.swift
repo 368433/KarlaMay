@@ -9,13 +9,22 @@
 import SwiftUI
 
 struct PatientIdentificationSection: View {
+    
+    @ObservedObject var episode : EpisodeOfCare
+    
+    init(episode: EpisodeOfCare){
+        self.episode = episode
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+         Section(header: Text("Consulting Physician")){
+            Text("test")
+        }
     }
 }
 
 struct PatientIdentificationSection_Previews: PreviewProvider {
     static var previews: some View {
-        PatientIdentificationSection()
+        PatientIdentificationSection(episode: DummyData.dummyEpisodeOfCare)
     }
 }

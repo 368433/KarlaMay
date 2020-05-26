@@ -248,7 +248,6 @@
 				6A364CA0246E2B4600442D69 /* EpisodeOfCareListView.swift */,
 				6A649EBB246DFB7C00B9AB0F /* EpisodeOfCareForm.swift */,
 				6A000ADE247B44A900717D0F /* EpisodeOfCareForm2.swift */,
-				6A4BC2C3247C189700347772 /* consultingMDForm.swift */,
 				6A4BC2C2247C0C3E00347772 /* Sections V2 */,
 				6A625E432479F2CF001D1C82 /* Sections V1 */,
 				6A649EBD246DFBC000B9AB0F /* EpocStatus.swift */,
@@ -272,6 +271,7 @@
 		6A4BC2C2247C0C3E00347772 /* Sections V2 */ = {
 			isa = PBXGroup;
 			children = (
+				6A4BC2C3247C189700347772 /* consultingMDForm.swift */,
 				6ACC8EA2247DD2F200BD626A /* PatientIdentificationSection.swift */,
 			);
 			path = "Sections V2";
