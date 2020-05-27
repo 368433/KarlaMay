@@ -9,39 +9,42 @@
 import SwiftUI
 
 struct DiagnosisSection2: View {
+    
     @ObservedObject var episode: EpisodeOfCare
-    @ObservedObject var dxResult: ICDresult = ICDresult()
+    //    @State var results: NSSet
+    //    @ObservedObject var dxResult: ICDresult = ICDresult()
     @Environment(\.managedObjectContext) var moc
     @State private var showICDSearch = false
     
     init(episode: EpisodeOfCare){
         self.episode = episode
-        self.episode.currentDiagnoses = episode.currentDiagnoses == nil ? []:episode.currentDiagnoses!
+        if episode.currentDiagnoses == nil {
+            self.episode.currentDiagnoses = []
+        }
     }
     
     var body: some View {
         Section(header: HStack {
             Text("Diagnosis").font(.callout)
-            Spacer()
-            Button(action: {self.showICDSearch.toggle()}){AddIcon()}
+//            Spacer()
+//            Button(action: {self.showICDSearch.toggle()}){AddIcon()}
         }){
-            if episode.currentDiagnoses?.count == 0 {
+            NavigationLink(destination: WHOICDSearch2(results: self.$episode.currentDiagnoses)) {
+                Text("Add dx")
+            }
+            if self.episode.currentDiagnoses!.count == 0 {
                 Text("No diagnoses").foregroundColor(.secondary)
             } else {
-                ScrollView(.horizontal){
-                    VStack{
-                        ForEach(0..<self.episode.currentDiagnoses!.count){ index in
-                            DiagnosisRowView(diagnosis: self.episode.diagnosisList[index])
-                        }.onDelete(perform: deleteDiagnosis)
-                    }
-                }
+                ForEach(0..<self.episode.currentDiagnoses!.count, id: \.self){ index in
+                    //                DiagnosisRowView(diagnosis: dx)
+                    Text("test")
+                }.onDelete(perform: deleteDiagnosis)
             }
         }
-        .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
+//        .sheet(isPresented: $showICDSearch){WHOICDSearch2(results: self.$episode.currentDiagnoses).environment(\.managedObjectContext, self.moc)}
     }
     
     private func deleteDiagnosis(at indexSet: IndexSet){
-        
     }
 }
 

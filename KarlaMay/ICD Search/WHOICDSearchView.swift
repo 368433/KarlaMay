@@ -20,11 +20,21 @@ struct WHOICDSearchView: View {
     @State private var searchTerm: String = ""
     @State private var searchQuery: String = ""
     @ObservedObject var token = WHOICDAPIAccessToken()
-    var dxResult: ICDresult
-    
-    init(returnedSearchResults: ICDresult){
-        self.dxResult = returnedSearchResults
+//    var dxResult: ICDresult
+//    var results: NSSet
+//    @State var results: Set<Diagnosis>
+    var completion: (_ dx: Diagnosis) -> Void
+//
+    init(completion: @escaping (_ dx: Diagnosis) -> Void){
+        self.completion = completion
     }
+    
+//    init(returnedSearchResults: ICDresult){
+//        self.dxResult = returnedSearchResults
+//    }
+//    init(results: NSSet){
+//        self.results = results
+//    }
     
     var body: some View {
         NavigationView {
@@ -45,10 +55,13 @@ struct WHOICDSearchView: View {
                         let dx = Diagnosis(context: self.moc)
                         dx.title = destinationEntity.titleStripped
                         dx.icdCode = destinationEntity.theCode
-                        DispatchQueue.main.async {
-                            self.dxResult.add(dx)
-                        }
-                        
+                        self.completion(dx)
+//                        self.results.adding(dx)
+//                        DispatchQueue.main.async {
+////                            self.completion(dx)
+////                            self.results.insert(dx)
+//                            self.dxResult.add(dx)
+//                        }
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }
@@ -63,8 +76,8 @@ struct WHOICDSearchView: View {
     }
 }
 
-struct WHOICDSearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        WHOICDSearchView(returnedSearchResults: ICDresult())
-    }
-}
+//struct WHOICDSearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WHOICDSearchView(returnedSearchResults: ICDresult())
+//    }
+//}

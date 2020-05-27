@@ -14,6 +14,7 @@ struct EpisodeOfCareForm2: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var episode: EpisodeOfCare
     @ObservedObject var patient: Patient
+    @ObservedObject var dxResult = ICDresult()
     var diagnoses: [Diagnosis] = []
     var visits: [ClinicalVisit] = []
     var parentList: ClinicalWork?
@@ -37,11 +38,13 @@ struct EpisodeOfCareForm2: View {
                     PatientIdentificationSection(patient: self.patient)
                     consultingMDForm(episode: episode)
                     DatePicker(selection: self.$episode.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
+                    DiagnosisSection2(episode: self.episode)
                 }
             }
         .navigationBarTitle("Cue Card")
             .navigationBarItems(
                 leading: Button("Cancel"){
+                    print(self.episode.currentDiagnoses?.count)
                     self.presentationMode.wrappedValue.dismiss()
                 },
                 trailing:Button("Done"){

@@ -25,6 +25,8 @@
 		6A364CA1246E2B4600442D69 /* EpisodeOfCareListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A364CA0246E2B4600442D69 /* EpisodeOfCareListView.swift */; };
 		6A4BC2C4247C189700347772 /* consultingMDForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4BC2C3247C189700347772 /* consultingMDForm.swift */; };
 		6A4D72FB246CB59A00C15B2E /* DynamicFilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6794EE246CB40300FF6C4B /* DynamicFilteredList.swift */; };
+		6A4DFF1F247E7BD90006A920 /* WHOICDSearch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4DFF1E247E7BD90006A920 /* WHOICDSearch2.swift */; };
+		6A4DFF21247EAA230006A920 /* DiagnosisSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4DFF20247EAA230006A920 /* DiagnosisSearch.swift */; };
 		6A5D382F247372F50027C1C9 /* PhysicianSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D382E247372F50027C1C9 /* PhysicianSectionView.swift */; };
 		6A5D3831247376370027C1C9 /* EpocSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D3830247376370027C1C9 /* EpocSectionView.swift */; };
 		6A5EE72B24708A9E003B1E58 /* ICDSearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EE72A24708A9E003B1E58 /* ICDSearchError.swift */; };
@@ -109,6 +111,8 @@
 		6A258E002469916100F689BF /* ExtentsionPatient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentsionPatient.swift; sourceTree = "<group>"; };
 		6A364CA0246E2B4600442D69 /* EpisodeOfCareListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeOfCareListView.swift; sourceTree = "<group>"; };
 		6A4BC2C3247C189700347772 /* consultingMDForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = consultingMDForm.swift; sourceTree = "<group>"; };
+		6A4DFF1E247E7BD90006A920 /* WHOICDSearch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHOICDSearch2.swift; sourceTree = "<group>"; };
+		6A4DFF20247EAA230006A920 /* DiagnosisSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisSearch.swift; sourceTree = "<group>"; };
 		6A5D382E247372F50027C1C9 /* PhysicianSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicianSectionView.swift; sourceTree = "<group>"; };
 		6A5D3830247376370027C1C9 /* EpocSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpocSectionView.swift; sourceTree = "<group>"; };
 		6A5EE72A24708A9E003B1E58 /* ICDSearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICDSearchError.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 			children = (
 				6A5EE729247088C9003B1E58 /* Old versions of WHO ICD calls */,
 				6A0F5E7324701B0100C28125 /* Network Requests */,
+				6A4DFF1E247E7BD90006A920 /* WHOICDSearch2.swift */,
 				6AC7533924704435003A38C2 /* WHOICDSearchView.swift */,
 				6AC7533B2470452B003A38C2 /* WHOICDSearchResultsList.swift */,
 				6A0F5E6B246F9CC800C28125 /* ICDResults.swift */,
@@ -307,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				6A65F8AF2469A9BC00AC43B7 /* Extension Diagnosis.swift */,
+				6A4DFF20247EAA230006A920 /* DiagnosisSearch.swift */,
 				6A258DF924697E8300F689BF /* DiagnosesListView.swift */,
 				6AD0CEEB2469ECE700EF3ED7 /* DiagnosisRowView.swift */,
 			);
@@ -509,6 +515,7 @@
 				6ACAB3BB2472B0BB00A5CAE3 /* VisitSectionView.swift in Sources */,
 				6AFE51DA246BA17100D5A333 /* UniqueTag-enum.swift in Sources */,
 				6A8352A12472CDCF00D987D6 /* DiagnosisSectionView.swift in Sources */,
+				6A4DFF21247EAA230006A920 /* DiagnosisSearch.swift in Sources */,
 				6AB124922471BBEA0047BF66 /* PhysicianRowView.swift in Sources */,
 				6A258DF42468A1D400F689BF /* ICDDiagnosisRow.swift in Sources */,
 				6A258DF024689CCA00F689BF /* getICDAPIToken.swift in Sources */,
@@ -538,6 +545,7 @@
 				6A364CA1246E2B4600442D69 /* EpisodeOfCareListView.swift in Sources */,
 				6A649EC2246DFD2E00B9AB0F /* SearchView.swift in Sources */,
 				6AE1F510247170DF0069EC21 /* BillingCodes.swift in Sources */,
+				6A4DFF1F247E7BD90006A920 /* WHOICDSearch2.swift in Sources */,
 				6ACAB3BD2472BF5A00A5CAE3 /* PatientSectionView.swift in Sources */,
 				6A7838F7247025C300B8666A /* TestView.swift in Sources */,
 				6AD0CEEA2469EA2E00EF3ED7 /* ClinicalVisitRowView.swift in Sources */,

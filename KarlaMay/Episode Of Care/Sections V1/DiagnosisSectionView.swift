@@ -29,7 +29,7 @@ struct DiagnosisSectionView: View {
                 }.onDelete(perform: deleteDiagnosis)
             }
         }.cornerRadius(5)
-            .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
+//            .sheet(isPresented: $showICDSearch){WHOICDSearchView(returnedSearchResults: self.dxResult).environment(\.managedObjectContext, self.moc)}
     }
     
     private func deleteDiagnosis(at indexSet: IndexSet){

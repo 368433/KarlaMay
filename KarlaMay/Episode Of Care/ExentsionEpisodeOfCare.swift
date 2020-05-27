@@ -22,7 +22,18 @@ extension EpisodeOfCare : Dated, Identifiable {
         guard let visits = self.clinicalVisits as? Set<ClinicalVisit> else { return []}
         return visits.sorted()
     }
-    var diagnosisList: [Diagnosis] {
+    
+    var wrappedCurrentDiagnoses: Set<Diagnosis> {
+        get {
+            return self.currentDiagnoses as? Set<Diagnosis> ?? []
+        }
+        set {
+            self.currentDiagnoses = NSSet(object: newValue)
+        }
+        
+    }
+    
+    var sortedDiagnosisList: [Diagnosis] {
         guard let dxList = self.currentDiagnoses as? Set<Diagnosis> else {return []}
         return dxList.sorted()
     }
@@ -34,12 +45,6 @@ extension EpisodeOfCare : Dated, Identifiable {
         set{
             self.setStatus(to: newValue)
         }
-    }
-    
-    var notReadyToSave: Bool {
-        guard let pt = self.patient else {return true}
-        guard let name = pt.name else {return true}
-        return name.isEmpty
     }
     
     func setStatus(to status: EpocStatus){

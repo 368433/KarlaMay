@@ -42,7 +42,6 @@ struct WHOICDSearchResultsList: View {
         } catch {
             print("error")
         }
-        
     }
 }
 
