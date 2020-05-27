@@ -10,17 +10,23 @@ import SwiftUI
 
 struct EpisodeOfCareForm2: View {
     
-    @State private var name: String = ""
-    
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var episode: EpisodeOfCare
-    //    @ObservedObject var patient: Patient
+    @ObservedObject var patient: Patient
     var diagnoses: [Diagnosis] = []
     var visits: [ClinicalVisit] = []
     var parentList: ClinicalWork?
     
     init(episodeToEdit: EpisodeOfCare? = nil, parentList: ClinicalWork? = nil){
         let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        self.episode = episodeToEdit != nil ? episodeToEdit! : EpisodeOfCare(context: moc)
+        
+        if let episode = episodeToEdit { self.episode = episode }
+        else { self.episode = EpisodeOfCare(context: moc)}
+        
+        if let patient = episodeToEdit?.patient {self.patient = patient}
+        else {self.patient = Patient(context: moc)}
+        
         self.parentList = parentList
     }
     
@@ -28,11 +34,22 @@ struct EpisodeOfCareForm2: View {
         NavigationView{
             VStack(alignment: .leading){
                 Form{
+                    PatientIdentificationSection(patient: self.patient)
                     consultingMDForm(episode: episode)
+                    DatePicker(selection: self.$episode.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
                 }
             }
-        .navigationBarTitle("test")
+        .navigationBarTitle("Cue Card")
+            .navigationBarItems(
+                leading: Button("Cancel"){
+                    self.presentationMode.wrappedValue.dismiss()
+                },
+                trailing:Button("Done"){
+                    try? self.moc.save()
+                    self.presentationMode.wrappedValue.dismiss()
+                }.disabled(self.patient.wrappedName.isEmpty))
         }
+        .onAppear {self.episode.patient = self.patient}
     }
 }
 

@@ -16,16 +16,16 @@ struct consultingMDForm: View {
         self.episode = episode
     }
     
-    var physicianName: String {
-        guard let md = self.episode.consultingPhysician else { return "None assigned"}
-        guard let name = md.name else { return "Missing name"}
-        return name
-    }
-    
     var physicianLicense: String {
         guard let md = self.episode.consultingPhysician else { return ""}
         guard let license = md.license else { return "Missing license"}
         return license
+    }
+    var nameLabel: some View {
+        guard let md = self.episode.consultingPhysician else {
+            return Text("None assigned").foregroundColor(.secondary)}
+        guard let name = md.name else { return Text("Missing name")}
+        return Text(name)
     }
     
     var body: some View {
@@ -34,10 +34,10 @@ struct consultingMDForm: View {
                 self.episode.consultingPhysician = md
             })){
                 HStack{
-                    Text("Physician")
+                    Text("Doctor:")
                     Spacer()
                     VStack(alignment:.trailing) {
-                        Text(physicianName)
+                        nameLabel
                         if self.episode.consultingPhysician != nil {
                             Text(physicianLicense).foregroundColor(.secondary)
                         }

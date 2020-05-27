@@ -10,21 +10,31 @@ import SwiftUI
 
 struct PatientIdentificationSection: View {
     
-    @ObservedObject var episode : EpisodeOfCare
-    
-    init(episode: EpisodeOfCare){
-        self.episode = episode
-    }
+    @ObservedObject var patient: Patient
     
     var body: some View {
-         Section(header: Text("Consulting Physician")){
-            Text("test")
+        Section(header: HStack {
+            Text("Patient identification")
+            Spacer()
+            Button(action: {}){Image(systemName: "magnifyingglass").font(.headline)}.padding(.trailing)
+            Button(action: {}){Image(systemName: "doc.text.viewfinder").font(.title) }
+        }){
+            VStack(alignment: .leading, spacing: 0){
+                if self.patient.wrappedName.isEmpty {
+                    Text("required".capitalized).font(.footnote).foregroundColor(.red)
+                }else{
+                    Text("Name".capitalized).font(.footnote).foregroundColor(.blue)
+                }
+                TextField("Name", text: self.$patient.wrappedName)
+            }
+            TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
+            TextField("Postal Code", text: self.$patient.postalCode ?? "")
         }
     }
 }
 
 struct PatientIdentificationSection_Previews: PreviewProvider {
     static var previews: some View {
-        PatientIdentificationSection(episode: DummyData.dummyEpisodeOfCare)
+        PatientIdentificationSection(patient: DummyData.dummyPatient)
     }
 }

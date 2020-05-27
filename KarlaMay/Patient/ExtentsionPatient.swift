@@ -9,6 +9,15 @@
 import Foundation
 
 extension Patient {
+    var wrappedName: String {
+        get{
+            return self.name ?? ""
+        }
+        set {
+            self.name = newValue
+        }
+    }
+    
     func hasNoDx() -> Bool {
         return self.diagnoses?.count == 0 ? true:false
     }
