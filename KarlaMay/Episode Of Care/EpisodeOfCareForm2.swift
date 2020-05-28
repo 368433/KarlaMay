@@ -28,6 +28,9 @@ struct EpisodeOfCareForm2: View {
         if let patient = episodeToEdit?.patient {self.patient = patient}
         else {self.patient = Patient(context: moc)}
         
+        if let diagnosticList = episodeToEdit?.currentDiagnoses as? Set<Diagnosis> {
+            self.dxResult.results = Array(diagnosticList).sorted()
+        }
         self.parentList = parentList
     }
     
@@ -38,7 +41,7 @@ struct EpisodeOfCareForm2: View {
                     PatientIdentificationSection(patient: self.patient)
                     consultingMDForm(episode: episode)
                     DatePicker(selection: self.$episode.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
-                    DiagnosisSection2(episode: self.episode)
+                    DiagnosisSection2(diagnosticList: dxResult)
                 }
             }
         .navigationBarTitle("Cue Card")
@@ -47,11 +50,15 @@ struct EpisodeOfCareForm2: View {
                     self.presentationMode.wrappedValue.dismiss()
                 },
                 trailing:Button("Done"){
-                    try? self.moc.save()
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.saveAndExit()
                 }.disabled(self.patient.wrappedName.isEmpty))
         }
         .onAppear {self.episode.patient = self.patient}
+    }
+    func saveAndExit(){
+        self.episode.currentDiagnoses = NSSet(array: dxResult.results)
+        try? self.moc.save()
+        self.presentationMode.wrappedValue.dismiss()
     }
 }
 

@@ -10,15 +10,12 @@ import SwiftUI
 
 struct DiagnosisSection2: View {
     
-    @ObservedObject var episode: EpisodeOfCare
+    @ObservedObject var diagnosticList: ICDresult
     @Environment(\.managedObjectContext) var moc
     @State private var showICDSearch = false
     
-    init(episode: EpisodeOfCare){
-        self.episode = episode
-        if episode.currentDiagnoses == nil {
-            self.episode.currentDiagnoses = []
-        }
+    init(diagnosticList: ICDresult){
+        self.diagnosticList = diagnosticList
     }
     
     var body: some View {
@@ -29,17 +26,21 @@ struct DiagnosisSection2: View {
         //                Text("Add dx")
         //            }
         HStack{
-            Button(action:{}){AddIcon()}
-            if self.episode.currentDiagnoses!.count == 0 {
+            Button(action:{self.showICDSearch.toggle()}){AddIcon()}
+            if self.diagnosticList.results.isEmpty {
                 Text("No diagnoses").foregroundColor(.secondary)
             } else {
                 ScrollView(.horizontal){
-                    ForEach(0..<self.episode.currentDiagnoses!.count, id: \.self){ index in
+                    ForEach(self.diagnosticList.results, id:\.self){ dx in
                         //                DiagnosisRowView(diagnosis: dx)
                         Text("test")
                     }.onDelete(perform: deleteDiagnosis)
                 }
             }
+        }
+        .sheet(isPresented: $showICDSearch) {DiagnosisSearch { (dx) in
+            self.diagnosticList.results.append(dx)
+        }.environment(\.managedObjectContext, self.moc)
         }
         //        .sheet(isPresented: $showICDSearch){WHOICDSearch2(results: self.$episode.currentDiagnoses).environment(\.managedObjectContext, self.moc)}
     }
@@ -50,6 +51,6 @@ struct DiagnosisSection2: View {
 
 struct DiagnosisSection2_Previews: PreviewProvider {
     static var previews: some View {
-        DiagnosisSection2(episode: DummyData.dummyEpisodeOfCare)
+        DiagnosisSection2(diagnosticList: ICDresult())
     }
 }
