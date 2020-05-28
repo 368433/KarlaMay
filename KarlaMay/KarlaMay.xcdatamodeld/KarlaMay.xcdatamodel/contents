@@ -33,6 +33,7 @@
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isInpatient" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isOutpatient" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isTransferred" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="status" optional="YES" attributeType="String"/>
@@ -72,7 +73,7 @@
         <element name="ClinicalVisit" positionX="-18" positionY="108" width="128" height="178"/>
         <element name="ClinicalWork" positionX="-63" positionY="9" width="128" height="148"/>
         <element name="Diagnosis" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="223"/>
+        <element name="EpisodeOfCare" positionX="-36" positionY="81" width="128" height="238"/>
         <element name="Patient" positionX="-54" positionY="36" width="128" height="208"/>
         <element name="Physician" positionX="-45" positionY="117" width="128" height="88"/>
         <element name="Tag" positionX="-45" positionY="117" width="128" height="118"/>

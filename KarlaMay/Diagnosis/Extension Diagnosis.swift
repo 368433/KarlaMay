@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Diagnosis: Dated {
+extension Diagnosis {
     var titleLabel: String {
         guard let title = self.title else { return "Missing title"}
         return title
@@ -18,5 +18,12 @@ extension Diagnosis: Dated {
         guard let icdCode = self.icdCode else {return "missing ICD Code"}
         return icdCode
     }
-    
+}
+
+extension Diagnosis: Comparable {
+    public static func < (lhs: Diagnosis, rhs: Diagnosis) -> Bool {
+        guard let title1 = lhs.title else {return false}
+        guard let title2 = rhs.title else {return false}
+        return title1 < title2
+    }
 }

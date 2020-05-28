@@ -15,6 +15,7 @@ struct EpisodeOfCareListView: View {
     @State private var showEpocForm = false
     @State private var showEditEpocForm = false
     var parentList: ClinicalWork?
+    
     private var filterPredicate: NSPredicate {
         guard let parent = parentList else { return epocStatus.predicate}
         let list = NSExpression(forKeyPath: \EpisodeOfCare.clinicalWork )
@@ -35,21 +36,23 @@ struct EpisodeOfCareListView: View {
                 }
             }.pickerStyle(SegmentedPickerStyle())
             List{
-//                if parentList != nil {
-                    DynamicFilteredList(sorting: [], predicate: filterPredicate) { (epoc: EpisodeOfCare) in
-                        EpisodeOfCareRowView(episodeOfCare: epoc)}
-//                } else {
-//                    DynamicFilteredList(sorting: [], predicate: epocStatus.predicate) { (epoc: EpisodeOfCare) in
-//                        EpisodeOfCareRowView(episodeOfCare: epoc)
-//                    }
-//                }
+                DynamicFilteredList(sorting: [], predicate: filterPredicate) { (epoc: EpisodeOfCare) in
+                    EpisodeOfCareRowView(episodeOfCare: epoc)
+                    .contextMenu {
+                        VStack{
+                            ForEach(EpocStatus.allCases, id: \.self){ status in
+                                Button(status.label){
+                                    epoc.setStatus(to: status)
+                                }
+                            }
+                        }
+                    }
+                }
             }.id(UUID()).listStyle(PlainListStyle())
         }
         .navigationBarTitle("Work cards")
         .navigationBarItems(trailing: Button(action: {self.showEpocForm.toggle()}){Image(systemName: "plus").padding()})
         .sheet(isPresented: $showEpocForm) {
-//            let newEpoc = EpisodeOfCare(context: self.moc)
-//            EpisodeOfCareForm(epoc: EpisodeOfCare(context: self.moc), parentList: self.parentList).environment(\.managedObjectContext, self.moc)
             EpisodeOfCareForm2(episodeToEdit: nil, parentList: self.parentList).environment(\.managedObjectContext, self.moc)
         }
     }

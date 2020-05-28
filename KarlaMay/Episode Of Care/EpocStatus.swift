@@ -9,7 +9,7 @@
 import Foundation
 
 enum EpocStatus: String, CaseIterable, RawRepresentable, Hashable {
-    case inpatient, outpatient, archived, transferred
+    case inpatient, outpatient, transferred, archived
     
     var label: String{
         switch self {
@@ -22,7 +22,6 @@ enum EpocStatus: String, CaseIterable, RawRepresentable, Hashable {
         case .archived:
             return "Archived"
         }
-        
     }
     
     var descriptor: [NSSortDescriptor] {
@@ -44,14 +43,9 @@ enum EpocStatus: String, CaseIterable, RawRepresentable, Hashable {
             let yes = NSExpression(forConstantValue: true)
             return NSComparisonPredicate(leftExpression: inPatient, rightExpression: yes, modifier: .direct, type: .equalTo, options: [])
         case .outpatient:
-            let inPatient = NSExpression(forKeyPath: \EpisodeOfCare.isInpatient)
-            let isArchived = NSExpression(forKeyPath: \EpisodeOfCare.isArchived)
-            let transferred = NSExpression(forKeyPath: \EpisodeOfCare.isTransferred)
-            let no = NSExpression(forConstantValue: false)
-            let notInpatient = NSComparisonPredicate(leftExpression: inPatient, rightExpression: no, modifier: .direct, type: .equalTo, options: [])
-            let notArchived = NSComparisonPredicate(leftExpression: isArchived, rightExpression: no, modifier: .direct, type: .equalTo, options: [])
-            let notTransferred = NSComparisonPredicate(leftExpression: transferred, rightExpression: no, modifier: .direct, type: .equalTo, options: [])
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [notArchived, notInpatient, notTransferred])
+            let outPatient = NSExpression(forKeyPath: \EpisodeOfCare.isOutpatient)
+            let yes = NSExpression(forConstantValue: true)
+            return NSComparisonPredicate(leftExpression: outPatient, rightExpression: yes, modifier: .direct, type: .equalTo, options: [])
         case .archived:
             let isArchived = NSExpression(forKeyPath: \EpisodeOfCare.isArchived)
             let yes = NSExpression(forConstantValue: true)

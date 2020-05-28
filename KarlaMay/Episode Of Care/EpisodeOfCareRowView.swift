@@ -17,38 +17,12 @@ struct EpisodeOfCareRowView: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            Group{
-                Text("Room").foregroundColor(.secondary).font(.caption)
-                HStack {
-                    Text(episodeOfCare.patient?.name ?? "No patient Name").font(.headline)
-                    Spacer()
-                    Text("Age").foregroundColor(.secondary).font(.caption)
-                }
-                Text(episodeOfCare.episodeLabel).foregroundColor(.secondary)
-            }.lineLimit(1)
-            if episodeOfCare.clinicalVisits?.count != 0 {
-                ScrollView(.horizontal){
-                    HStack{
-                        ForEach(episodeOfCare.sortedVisits, id: \.self){ visit in
-                            ClinicalVisitDotView(visit: visit)
-                        }
-                    }
-                }
-            }
-        }
-        .contextMenu {
-            VStack{
-                ForEach(EpocStatus.allCases, id: \.self){ status in
-                    Button(status.label){
-                        self.episodeOfCare.setStatus(to: status)
-                    }
-                }
-            }
+            Text(episodeOfCare.patient?.name ?? "No patient Name").font(.headline)
+                .lineLimit(1)
         }
         .onTapGesture {self.showEditEpoc.toggle()}
         .sheet(isPresented: $showEditEpoc) {
             EpisodeOfCareForm2(episodeToEdit: self.episodeOfCare, parentList: nil).environment(\.managedObjectContext, self.moc)
-//            EpisodeOfCareForm(epoc: self.episodeOfCare).environment(\.managedObjectContext, self.moc)
         }
     }
 }

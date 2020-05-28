@@ -14,7 +14,7 @@ struct PatientIdentificationSection: View {
     
     var body: some View {
         Section(header: HStack {
-            Text("Patient identification")
+            Text("Patient").font(.largeTitle).foregroundColor(.primary)
             Spacer()
             Button(action: {}){Image(systemName: "magnifyingglass").font(.headline)}.padding(.trailing)
             Button(action: {}){Image(systemName: "doc.text.viewfinder").font(.title) }

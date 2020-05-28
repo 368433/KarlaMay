@@ -14,25 +14,26 @@ struct EpisodeOfCareForm2: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var episode: EpisodeOfCare
     @ObservedObject var patient: Patient
-//    @ObservedObject var dxResult = ICDresult()
+    @State var status: EpocStatus = .inpatient
+    var initialStatus: EpocStatus
     var parentList: ClinicalWork?
-    
-    var viewTitle: String = ""
     
     init(episodeToEdit: EpisodeOfCare? = nil, parentList: ClinicalWork? = nil){
         let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        if let episode = episodeToEdit { self.episode = episode }
-        else { self.episode = EpisodeOfCare(context: moc)}
+        if let episode = episodeToEdit {
+            self.episode = episode
+            self.initialStatus = EpocStatus.forEpoc(episode)
+        }
+        else {
+            self.episode = EpisodeOfCare(context: moc)
+            self.initialStatus = .inpatient
+        }
         
         if let patient = episodeToEdit?.patient {self.patient = patient}
         else {self.patient = Patient(context: moc)}
         
-//        if let diagnosticList = episodeToEdit?.currentDiagnoses as? Set<Diagnosis> {
-//            self.dxResult.results = Array(diagnosticList).sorted()
-//        }
         self.parentList = parentList
-        self.viewTitle = episodeToEdit == nil ? "New episode":"Editing episode"
     }
     
     var body: some View {
@@ -40,47 +41,27 @@ struct EpisodeOfCareForm2: View {
             VStack(alignment: .leading){
                 Form{
                     PatientIdentificationSection(patient: self.patient)
-                    
-                    Section(header: ScrollView(.horizontal){
-                        HStack{
-                            ForEach(EpocStatus.allCases, id: \.self) { status in
-                                Text(status.label)
-                                .padding(6)
-                                    .foregroundColor(EpocStatus.forEpoc(self.episode) == status ? Color.white:Color.black)
-                                    .background(EpocStatus.forEpoc(self.episode) == status ? Color.red:Color(UIColor.systemGray5))
-                                .clipShape(Capsule())
-                                    .onTapGesture {
-                                        self.episode.setStatus(to: status)
-                                }
-                            }
-                        }.padding(5)
-                    }){
+                    Section(header: EpisodeStatusTagPicker(status: self.$status)){
                         consultingMDForm(episode: episode)
                         DatePicker(selection: self.$episode.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
                     }
-                    //DiagnosisSection2(diagnosticList: dxResult)
                     DiagnosisSection3(episode: self.episode)
-//                    Section(header: Text("Visits")){
-                        VisitSection(episode: self.episode)
-//                    }
+                    VisitSection(episode: self.episode)
                 }
             }
-            .navigationBarTitle(self.viewTitle)
+        .navigationBarTitle("Card")
             .navigationBarItems(
-                leading: Button("Cancel"){
-                    self.presentationMode.wrappedValue.dismiss()
-                },
-                trailing:Button("Done"){
-                    self.saveAndExit()
-                }.disabled(self.patient.wrappedName.isEmpty))
+                leading: Button("Cancel"){self.presentationMode.wrappedValue.dismiss()},
+                trailing:Button("Done"){self.saveAndExit()}.disabled(self.patient.wrappedName.isEmpty))
         }
-        .onAppear(perform: self.setup)
+        .onAppear{
+            self.episode.patient = self.patient
+            self.status = self.initialStatus
+        }
     }
-    private func setup(){
-        self.episode.patient = self.patient
-    }
-
+    
     func saveAndExit(){
+        self.episode.setStatus(to: self.status)
         try? self.moc.save()
         self.presentationMode.wrappedValue.dismiss()
     }
