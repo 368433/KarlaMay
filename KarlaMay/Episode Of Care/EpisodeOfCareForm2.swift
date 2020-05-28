@@ -44,7 +44,6 @@ struct EpisodeOfCareForm2: View {
         .navigationBarTitle("Cue Card")
             .navigationBarItems(
                 leading: Button("Cancel"){
-                    print(self.episode.currentDiagnoses?.count)
                     self.presentationMode.wrappedValue.dismiss()
                 },
                 trailing:Button("Done"){

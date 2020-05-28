@@ -29,18 +29,16 @@ struct consultingMDForm: View {
     }
     
     var body: some View {
-        Section(header: Text("Consulting Physician")){
-            NavigationLink(destination: PhysicianList(completion: { (md) in
-                self.episode.consultingPhysician = md
-            })){
-                HStack{
-                    Text("Doctor:")
-                    Spacer()
-                    VStack(alignment:.trailing) {
-                        nameLabel
-                        if self.episode.consultingPhysician != nil {
-                            Text(physicianLicense).foregroundColor(.secondary)
-                        }
+        NavigationLink(destination: PhysicianList(completion: { (md) in
+            self.episode.consultingPhysician = md
+        })){
+            HStack{
+                Text("Doctor:")
+                Spacer()
+                VStack(alignment:.trailing) {
+                    nameLabel
+                    if self.episode.consultingPhysician != nil {
+                        Text(physicianLicense).foregroundColor(.secondary)
                     }
                 }
             }

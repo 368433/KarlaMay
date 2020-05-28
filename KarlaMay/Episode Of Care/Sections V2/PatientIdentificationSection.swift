@@ -20,13 +20,37 @@ struct PatientIdentificationSection: View {
             Button(action: {}){Image(systemName: "doc.text.viewfinder").font(.title) }
         }){
             VStack(alignment: .leading, spacing: 0){
-                if self.patient.wrappedName.isEmpty {
-                    Text("required".capitalized).font(.footnote).foregroundColor(.red)
-                }else{
+                if !self.patient.wrappedName.isEmpty {
                     Text("Name".capitalized).font(.footnote).foregroundColor(.blue)
                 }
-                TextField("Name", text: self.$patient.wrappedName)
+                HStack{
+                    TextField("Name", text: self.$patient.wrappedName)
+                    Spacer()
+                    if self.patient.wrappedName.isEmpty {
+                        Text("required".capitalized).font(.footnote).foregroundColor(.red)
+                    }
+                }
             }
+//            if self.patient.wrappedName.isEmpty {
+//                HStack{
+//                    TextField("Name", text: self.$patient.wrappedName)
+//                    Spacer()
+//                    Text("required".capitalized).font(.footnote).foregroundColor(.red)
+//                }
+//            } else {
+//                VStack(alignment: .leading, spacing: 0) {
+//                    Text("Name".capitalized).font(.footnote).foregroundColor(.blue)
+//                    TextField("Name", text: self.$patient.wrappedName)
+//                }
+//            }
+//            VStack(alignment: .leading, spacing: 0){
+//                if self.patient.wrappedName.isEmpty {
+//                    Text("required".capitalized).font(.footnote).foregroundColor(.red)
+//                }else{
+//                    Text("Name".capitalized).font(.footnote).foregroundColor(.blue)
+//                }
+//                TextField("Name", text: self.$patient.wrappedName)
+//            }
             TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
             TextField("Postal Code", text: self.$patient.postalCode ?? "")
         }
