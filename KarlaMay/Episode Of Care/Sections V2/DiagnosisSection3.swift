@@ -1,37 +1,40 @@
 //
-//  DiagnosisSection2.swift
+//  DiagnosisSection3.swift
 //  KarlaMay
 //
-//  Created by quarticAIMBP2018 on 2020-05-26.
+//  Created by quarticAIMBP2018 on 2020-05-27.
 //  Copyright © 2020 quarticAIMBP2018. All rights reserved.
 //
 
 import SwiftUI
 
-struct DiagnosisSection2: View {
+struct DiagnosisSection3: View {
     
-    @ObservedObject var diagnosticList: ICDresult
+    @ObservedObject var episode: EpisodeOfCare
     @Environment(\.managedObjectContext) var moc
     @State private var showICDSearch = false
+    var diagnosticList: [Diagnosis]
     
-    init(diagnosticList: ICDresult){
-        self.diagnosticList = diagnosticList
-        print("dx section init called")
+    init(episode: EpisodeOfCare){
+        self.episode = episode
+        if let diagnosticList = episode.currentDiagnoses as? Set<Diagnosis> {
+            self.diagnosticList = Array(diagnosticList).sorted()
+        } else { self.diagnosticList = []}
     }
     
     var body: some View {
         VStack (alignment: .leading){
-            if !self.diagnosticList.results.isEmpty{
+            if self.episode.currentDiagnoses?.count != 0 {
                 Text("Current diagnostic list").foregroundColor(Color.blue).font(.footnote)
             }
             HStack{
                 Button(action:{self.showICDSearch.toggle()}){AddIcon()}
-                if self.diagnosticList.results.isEmpty {
+                if self.episode.currentDiagnoses?.count == 0 {
                     Text("No diagnoses").foregroundColor(.secondary)
                 } else {
                     ScrollView(.horizontal){
                         HStack(alignment: .top){
-                            ForEach(self.diagnosticList.results, id:\.self){ dx in
+                            ForEach(self.diagnosticList, id:\.self){ dx in
                                 DiagnosisCompactView(diagnosis: dx)
                             }.onDelete(perform: deleteDiagnosis)
                         }.padding(2)
@@ -39,7 +42,7 @@ struct DiagnosisSection2: View {
                 }
             }
             .sheet(isPresented: $showICDSearch) {DiagnosisSearch { (dx) in
-                self.diagnosticList.results.append(dx)
+                self.episode.addToCurrentDiagnoses(dx)
             }.environment(\.managedObjectContext, self.moc)
             }
         }
@@ -47,10 +50,11 @@ struct DiagnosisSection2: View {
     
     private func deleteDiagnosis(at indexSet: IndexSet){
     }
+
 }
 
-struct DiagnosisSection2_Previews: PreviewProvider {
+struct DiagnosisSection3_Previews: PreviewProvider {
     static var previews: some View {
-        DiagnosisSection2(diagnosticList: ICDresult())
+        DiagnosisSection3(episode: DummyData.dummyEpisodeOfCare)
     }
 }

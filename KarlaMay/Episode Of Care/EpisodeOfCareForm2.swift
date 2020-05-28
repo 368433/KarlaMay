@@ -14,10 +14,10 @@ struct EpisodeOfCareForm2: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var episode: EpisodeOfCare
     @ObservedObject var patient: Patient
-    @ObservedObject var dxResult = ICDresult()
-    var diagnoses: [Diagnosis] = []
-    var visits: [ClinicalVisit] = []
+//    @ObservedObject var dxResult = ICDresult()
     var parentList: ClinicalWork?
+    
+    var viewTitle: String = ""
     
     init(episodeToEdit: EpisodeOfCare? = nil, parentList: ClinicalWork? = nil){
         let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -28,10 +28,11 @@ struct EpisodeOfCareForm2: View {
         if let patient = episodeToEdit?.patient {self.patient = patient}
         else {self.patient = Patient(context: moc)}
         
-        if let diagnosticList = episodeToEdit?.currentDiagnoses as? Set<Diagnosis> {
-            self.dxResult.results = Array(diagnosticList).sorted()
-        }
+//        if let diagnosticList = episodeToEdit?.currentDiagnoses as? Set<Diagnosis> {
+//            self.dxResult.results = Array(diagnosticList).sorted()
+//        }
         self.parentList = parentList
+        self.viewTitle = episodeToEdit == nil ? "New episode":"Editing episode"
     }
     
     var body: some View {
@@ -41,10 +42,15 @@ struct EpisodeOfCareForm2: View {
                     PatientIdentificationSection(patient: self.patient)
                     consultingMDForm(episode: episode)
                     DatePicker(selection: self.$episode.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
-                    DiagnosisSection2(diagnosticList: dxResult)
+                    //DiagnosisSection2(diagnosticList: dxResult)
+                    DiagnosisSection3(episode: self.episode)
+                    
+                    Section(header: Text("Visits")){
+                        VisitSection(episode: self.episode)
+                    }
                 }
             }
-        .navigationBarTitle("Cue Card")
+            .navigationBarTitle(self.viewTitle)
             .navigationBarItems(
                 leading: Button("Cancel"){
                     self.presentationMode.wrappedValue.dismiss()
@@ -53,10 +59,13 @@ struct EpisodeOfCareForm2: View {
                     self.saveAndExit()
                 }.disabled(self.patient.wrappedName.isEmpty))
         }
-        .onAppear {self.episode.patient = self.patient}
+        .onAppear(perform: self.setup)
     }
+    private func setup(){
+        self.episode.patient = self.patient
+    }
+
     func saveAndExit(){
-        self.episode.currentDiagnoses = NSSet(array: dxResult.results)
         try? self.moc.save()
         self.presentationMode.wrappedValue.dismiss()
     }

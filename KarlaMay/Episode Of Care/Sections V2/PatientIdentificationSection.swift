@@ -30,7 +30,7 @@ struct PatientIdentificationSection: View {
                         Text("required".capitalized).font(.footnote).foregroundColor(.red)
                     }
                 }
-            }
+            }.animation(.easeInOut(duration: 0.3))
             TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
             TextField("Postal Code", text: self.$patient.postalCode ?? "")
         }

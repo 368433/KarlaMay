@@ -33,7 +33,7 @@ struct consultingMDForm: View {
             self.episode.consultingPhysician = md
         })){
             HStack{
-                Text("Doctor:")
+                Text("Consulted by")
                 Spacer()
                 VStack(alignment:.trailing) {
                     nameLabel
