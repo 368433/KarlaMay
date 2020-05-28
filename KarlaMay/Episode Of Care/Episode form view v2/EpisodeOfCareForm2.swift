@@ -40,14 +40,29 @@ struct EpisodeOfCareForm2: View {
             VStack(alignment: .leading){
                 Form{
                     PatientIdentificationSection(patient: self.patient)
-                    consultingMDForm(episode: episode)
-                    DatePicker(selection: self.$episode.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
+                    
+                    Section(header: ScrollView(.horizontal){
+                        HStack{
+                            ForEach(EpocStatus.allCases, id: \.self) { status in
+                                Text(status.label)
+                                .padding(6)
+                                    .foregroundColor(EpocStatus.forEpoc(self.episode) == status ? Color.white:Color.black)
+                                    .background(EpocStatus.forEpoc(self.episode) == status ? Color.red:Color(UIColor.systemGray5))
+                                .clipShape(Capsule())
+                                    .onTapGesture {
+                                        self.episode.setStatus(to: status)
+                                }
+                            }
+                        }.padding(5)
+                    }){
+                        consultingMDForm(episode: episode)
+                        DatePicker(selection: self.$episode.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
+                    }
                     //DiagnosisSection2(diagnosticList: dxResult)
                     DiagnosisSection3(episode: self.episode)
-                    
-                    Section(header: Text("Visits")){
+//                    Section(header: Text("Visits")){
                         VisitSection(episode: self.episode)
-                    }
+//                    }
                 }
             }
             .navigationBarTitle(self.viewTitle)

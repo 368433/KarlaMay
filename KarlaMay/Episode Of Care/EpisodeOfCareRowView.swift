@@ -47,7 +47,8 @@ struct EpisodeOfCareRowView: View {
         }
         .onTapGesture {self.showEditEpoc.toggle()}
         .sheet(isPresented: $showEditEpoc) {
-            EpisodeOfCareForm(epoc: self.episodeOfCare).environment(\.managedObjectContext, self.moc)
+            EpisodeOfCareForm2(episodeToEdit: self.episodeOfCare, parentList: nil).environment(\.managedObjectContext, self.moc)
+//            EpisodeOfCareForm(epoc: self.episodeOfCare).environment(\.managedObjectContext, self.moc)
         }
     }
 }

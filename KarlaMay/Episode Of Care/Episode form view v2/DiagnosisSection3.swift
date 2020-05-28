@@ -23,12 +23,12 @@ struct DiagnosisSection3: View {
     }
     
     var body: some View {
-        VStack (alignment: .leading){
-            if self.episode.currentDiagnoses?.count != 0 {
-                Text("Current diagnostic list").foregroundColor(Color.blue).font(.footnote)
-            }
+        Section(header: HStack{
+            Text("Diagnostic list")
+            Spacer()
+            Button(action:{self.showICDSearch.toggle()}){AddIcon()}
+        }) {
             HStack{
-                Button(action:{self.showICDSearch.toggle()}){AddIcon()}
                 if self.episode.currentDiagnoses?.count == 0 {
                     Text("No diagnoses").foregroundColor(.secondary)
                 } else {
@@ -50,7 +50,7 @@ struct DiagnosisSection3: View {
     
     private func deleteDiagnosis(at indexSet: IndexSet){
     }
-
+    
 }
 
 struct DiagnosisSection3_Previews: PreviewProvider {
