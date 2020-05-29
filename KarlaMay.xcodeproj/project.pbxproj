@@ -89,6 +89,7 @@
 		6AD7A24C2468954B004BCAE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A24B2468954B004BCAE8 /* Assets.xcassets */; };
 		6AD7A24F2468954B004BCAE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A24E2468954B004BCAE8 /* Preview Assets.xcassets */; };
 		6AD7A2522468954B004BCAE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7A2502468954B004BCAE8 /* LaunchScreen.storyboard */; };
+		6ADF4E172480A8CE007AA548 /* LinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADF4E162480A8CE007AA548 /* LinedTextField.swift */; };
 		6AE1F50C247150D50069EC21 /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE1F50B247150D50069EC21 /* GrantType.swift */; };
 		6AE1F50E24716C4A0069EC21 /* ClinicalVisitForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE1F50D24716C4A0069EC21 /* ClinicalVisitForm.swift */; };
 		6AE1F510247170DF0069EC21 /* BillingCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE1F50F247170DF0069EC21 /* BillingCodes.swift */; };
@@ -183,6 +184,7 @@
 		6AD7A24E2468954B004BCAE8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6AD7A2512468954B004BCAE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AD7A2532468954B004BCAE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6ADF4E162480A8CE007AA548 /* LinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinedTextField.swift; sourceTree = "<group>"; };
 		6AE1F50B247150D50069EC21 /* GrantType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantType.swift; sourceTree = "<group>"; };
 		6AE1F50D24716C4A0069EC21 /* ClinicalVisitForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalVisitForm.swift; sourceTree = "<group>"; };
 		6AE1F50F247170DF0069EC21 /* BillingCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillingCodes.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				6A000ADE247B44A900717D0F /* EpisodeOfCareForm2.swift */,
 				6AB4D8EE248086A1001A10BB /* ModifiedDatePicker.swift */,
 				6ACC8EA2247DD2F200BD626A /* PatientIdentificationSection.swift */,
+				6ADF4E162480A8CE007AA548 /* LinedTextField.swift */,
 				6A4BC2C3247C189700347772 /* consultingMDForm.swift */,
 				6A737015247DF26E00D90B12 /* DiagnosisSection2.swift */,
 				6A4C4DEF247F59FB004A01EE /* DiagnosisSection3.swift */,
@@ -592,6 +595,7 @@
 				6AB1248E2471B85A0047BF66 /* PhysicianForm.swift in Sources */,
 				6ACAB3B924724A8900A5CAE3 /* AddIcon.swift in Sources */,
 				6A258DFD246986BC00F689BF /* PatientFormView.swift in Sources */,
+				6ADF4E172480A8CE007AA548 /* LinedTextField.swift in Sources */,
 				6AB4D8ED24806181001A10BB /* EpisodeStatusTagPicker.swift in Sources */,
 				6AE1F50C247150D50069EC21 /* GrantType.swift in Sources */,
 				6A0CC82924732C8F00CD8C1C /* OptionalBinding.swift in Sources */,

@@ -12,20 +12,21 @@ struct DiagnosisCompactView: View {
     var diagnosis: Diagnosis
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0){
+        HStack(alignment: .center){
             Text(diagnosis.title ?? "Title n/a")
                 .font(.caption)
-                .lineLimit(2)
-                .frame(width: 120)
-                
+                .lineLimit(1)
+//                .frame(maxWidth: 120)
+            
             Text(diagnosis.icdCode ?? "Code n/a")
-                .foregroundColor(.secondary)
-                .font(.system(size: 10))
-        }.padding(4)
+            .foregroundColor(.secondary)
+            .font(.system(size: 10))
+            }.padding(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.gray, lineWidth: 1)
             )
+        .padding(3)
     }
 }
 

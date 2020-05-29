@@ -14,18 +14,17 @@ struct ModifiedDatePicker: View {
     
     var body: some View {
         VStack {
-            HStack{
+            VStack{
                 Text("Start Date").foregroundColor(.white).fontWeight(.bold)
-                Spacer()
-                Text((self.date).toString)
+                Text((self.date).toString).font(.footnote).fontWeight(.semibold)
             }
-            if showDatePicker {
-                DatePicker(selection: $date, in:...Date(), displayedComponents: .date){Text("Episode start date")}.labelsHidden()
-            }
-        }.padding()//.animation(.easeInOut(duration: 0.5))
-            .background(Color(UIColor.systemGray6)).cornerRadius(5)
-        .onTapGesture {
-            self.showDatePicker.toggle()
+            }.padding(5)
+            .background(Color(UIColor.systemBlue)).cornerRadius(5).shadow(radius: 1)
+            .onTapGesture {
+                self.showDatePicker.toggle()
+        }
+        .sheet(isPresented: $showDatePicker) {
+            DatePicker(selection: self.$date, in:...Date(), displayedComponents: .date){Text("Episode start date")}.labelsHidden()
         }
     }
 }

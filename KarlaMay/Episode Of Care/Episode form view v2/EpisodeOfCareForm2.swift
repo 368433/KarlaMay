@@ -15,8 +15,9 @@ struct EpisodeOfCareForm2: View {
     @ObservedObject var episode: EpisodeOfCare
     @ObservedObject var patient: Patient
     @State var status: EpocStatus = .inpatient
-    var initialStatus: EpocStatus
+    var initialStatus: EpocStatus = .inpatient
     var parentList: ClinicalWork?
+    @State var diagnosticList = [Diagnosis]()
     
     init(episodeToEdit: EpisodeOfCare? = nil, parentList: ClinicalWork? = nil){
         let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -25,10 +26,7 @@ struct EpisodeOfCareForm2: View {
             self.episode = episode
             self.initialStatus = EpocStatus.forEpoc(episode)
         }
-        else {
-            self.episode = EpisodeOfCare(context: moc)
-            self.initialStatus = .inpatient
-        }
+        else {self.episode = EpisodeOfCare(context: moc)}
         
         if let patient = episodeToEdit?.patient {self.patient = patient}
         else {self.patient = Patient(context: moc)}
@@ -38,31 +36,56 @@ struct EpisodeOfCareForm2: View {
     
     var body: some View {
         ZStack{
-            Color.white
+            Color.lightSmoke
             ScrollView(.vertical){
-                VStack(alignment: .center){
+                VStack(alignment: .leading){
                     HStack{
                         Button("Cancel"){self.presentationMode.wrappedValue.dismiss()}
                         Spacer()
                         Button("Done"){self.saveAndExit()}.disabled(self.patient.wrappedName.isEmpty)
                     }
-                    EpisodeStatusTagPicker(status: self.$status)
+                    EpisodeStatusTagPicker(status: self.$status).padding()
+                    
                     PatientIdentificationSection(patient: self.patient)
-                    consultingMDForm(episode: self.episode)
-                    ModifiedDatePicker(date: self.$episode.startDate ?? Date())
-                    DiagnosisSection3(episode: self.episode)
+                    
+                    HStack{
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 5).fill(Color.blue)
+                            //RoundedRectangle(cornerRadius: 5).stroke()
+                            VStack(alignment: .leading){
+                                Text("Consulted by").fontWeight(.heavy)
+                                Text("physician name")
+                            }.padding()
+                        }
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 5).fill(Color(UIColor.systemGray6))
+                            VStack{
+                                Text("Start date").fontWeight(.heavy).foregroundColor(.gray)
+                                Text("physician name")
+                            }.padding()
+                        }
+                        //consultingMDForm(episode: self.episode)
+                        //ModifiedDatePicker(date: self.$episode.startDate ?? Date())
+                    }.padding().foregroundColor(.white)
+                    
+                    DiagnosisSection3(diagnosticList: $diagnosticList).padding()
                     VisitSection(episode: self.episode)
                 }.padding()
-                
+//                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+//                .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
             }
         }
         .onAppear{
             self.episode.patient = self.patient
             self.status = self.initialStatus
+            if let dxList = self.episode.currentDiagnoses as? Set<Diagnosis> {
+                self.diagnosticList = Array(dxList).sorted()
+            }
         }
     }
     
     func saveAndExit(){
+        self.episode.currentDiagnoses?.addingObjects(from: diagnosticList)
         self.episode.setStatus(to: self.status)
         try? self.moc.save()
         self.presentationMode.wrappedValue.dismiss()

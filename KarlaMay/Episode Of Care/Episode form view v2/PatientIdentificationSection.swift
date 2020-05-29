@@ -14,29 +14,25 @@ struct PatientIdentificationSection: View {
     
     var body: some View {
         ZStack{
-            VStack(alignment: .leading){
+            Color.white
+            VStack(alignment: .leading, spacing: 0){
                 HStack {
-                    Text("Patient").font(.headline)
+                    Text("Patient").fontWeight(.heavy)
                     Spacer()
-                    Button(action: {}){Image(systemName: "magnifyingglass").font(.headline)}.padding(.trailing)
-                    Button(action: {}){Image(systemName: "doc.text.viewfinder").font(.title) }
+                    Button("View"){}.font(.footnote)
                 }
-                VStack(alignment: .leading, spacing: 0){
-                    if !self.patient.wrappedName.isEmpty {
-                        Text("Name".capitalized).font(.footnote).foregroundColor(.blue)
+                HStack(alignment:.top){
+                    HStack(alignment:.center){
+                        LinedTextField(text: self.$patient
+                            .wrappedName, title: "Name", isRequired: true)
+                        LinedTextField(text: self.$patient.ramqNumber ?? "", title: "#Chart", isRequired: false)
                     }
-                    HStack{
-                        TextField("Name", text: self.$patient.wrappedName)
-                        Spacer()
-                        if self.patient.wrappedName.isEmpty {
-                            Text("required".capitalized).font(.footnote).foregroundColor(.red)
-                        }
-                    }
-                }.animation(.easeOut(duration: 0.3))
-                TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
-                TextField("Postal Code", text: self.$patient.postalCode ?? "")
+                    Spacer()
+                    Text("34 yo").font(.largeTitle)
+                }
             }.padding()
-        }.cornerRadius(5).border(Color.gray)
+        }.clipped().cornerRadius(10)
+            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
     }
 }
 

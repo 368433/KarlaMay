@@ -13,19 +13,22 @@ struct EpisodeStatusTagPicker: View {
     @Binding var status: EpocStatus
     
     var body: some View {
-        ScrollView(.horizontal){
-            HStack{
-                ForEach(EpocStatus.allCases, id: \.self) { status in
-                    Text(status.label).font(.caption)
-                        .padding(6)
-                        .foregroundColor(self.status == status ? Color.white:Color.black)
-                        .background(self.status == status ? Color.red:Color(UIColor.systemGray5))
-                        .clipShape(Capsule())
-                        .onTapGesture {
-                            self.status = status
+        VStack(alignment: .leading){
+            Text("Status").fontWeight(.heavy)
+            ScrollView(.horizontal){
+                HStack{
+                    ForEach(EpocStatus.allCases, id: \.self) { status in
+                        Text(status.label).font(.caption)
+                            .padding(6)
+                            .foregroundColor(self.status == status ? Color.white:Color.black)
+                            .background(self.status == status ? Color.red:Color(UIColor.systemGray5))
+                            .clipShape(Capsule())
+                            .onTapGesture {
+                                self.status = status
+                        }
                     }
                 }
-            }.padding(5)
+            }
         }
     }
 }

@@ -10,48 +10,45 @@ import SwiftUI
 
 struct DiagnosisSection3: View {
     
-    @ObservedObject var episode: EpisodeOfCare
+    @Binding var diagnosticList: [Diagnosis]
+    //    @ObservedObject var episode: EpisodeOfCare
     @Environment(\.managedObjectContext) var moc
     @State private var showICDSearch = false
-    var diagnosticList: [Diagnosis]
+    //    var diagnosticList: [Diagnosis]
     
-    init(episode: EpisodeOfCare){
-        self.episode = episode
-        if let diagnosticList = episode.currentDiagnoses as? Set<Diagnosis> {
-            self.diagnosticList = Array(diagnosticList).sorted()
-        } else { self.diagnosticList = []}
-    }
+    //    init(episode: EpisodeOfCare){
+    //        self.episode = episode
+    //        if let diagnosticList = episode.currentDiagnoses as? Set<Diagnosis> {
+    //            self.diagnosticList = Array(diagnosticList).sorted()
+    //        } else { self.diagnosticList = []}
+    //    }
     
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading, spacing: 0){
             HStack{
-                Text("Diagnostic list")
-                Spacer()
-                Button(action:{self.showICDSearch.toggle()}){AddIcon()}
+                Text("Diagnosis").fontWeight(.heavy)
+                Button(action:{self.showICDSearch.toggle()}){Image(systemName: "plus").renderingMode(.original)}.padding()
             }
-            HStack{
-                if self.episode.currentDiagnoses?.count == 0 {
-                    Text("No diagnoses").foregroundColor(.secondary)
-                } else {
-                    ScrollView(.horizontal){
-                        HStack(alignment: .top){
-                            ForEach(self.diagnosticList, id:\.self){ dx in
-                                DiagnosisCompactView(diagnosis: dx)
-                            }
-                        }.padding(2)
+            if self.diagnosticList.isEmpty {
+                Text("No diagnoses").foregroundColor(.secondary)
+            } else {
+                VStack(alignment: .leading){
+                    ForEach(self.diagnosticList, id:\.self){ dx in
+                        DiagnosisCompactView(diagnosis: dx)
                     }
                 }
+                .sheet(isPresented: $showICDSearch) {DiagnosisSearch { (dx) in
+                    self.diagnosticList.append(dx)
+                    //                    self.episode.addToCurrentDiagnoses(dx)
+                }.environment(\.managedObjectContext, self.moc)
+                }
             }
-            .sheet(isPresented: $showICDSearch) {DiagnosisSearch { (dx) in
-                self.episode.addToCurrentDiagnoses(dx)
-            }.environment(\.managedObjectContext, self.moc)
-            }
-        }.padding().background(Color(UIColor.systemGray6)).cornerRadius(5)
+        }
     }
 }
 
 struct DiagnosisSection3_Previews: PreviewProvider {
     static var previews: some View {
-        DiagnosisSection3(episode: DummyData.dummyEpisodeOfCare)
+        DiagnosisSection3(diagnosticList: .constant([]))
     }
 }

@@ -37,7 +37,7 @@ struct VisitSection: View {
             if self.episode.clinicalVisits?.count == 0 {
                 Text("No clinical visits").foregroundColor(.secondary)
             } else {
-                VStack{
+                VStack(alignment: .leading){
                     ForEach(visitList, id: \.self){ visit in
                         ClinicalVisitRowView(clinicalVisit: visit)
                     }
