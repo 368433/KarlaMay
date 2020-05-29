@@ -13,7 +13,7 @@ struct ClinicalVisitRowView: View {
     var clinicalVisit: ClinicalVisit
     
     var body: some View {
-        VStack(alignment:.leading){
+        HStack(alignment:.center){
             Text(clinicalVisit.actLabel).foregroundColor(.primary)
             Text(clinicalVisit.dateLabel).foregroundColor(.secondary)
         }

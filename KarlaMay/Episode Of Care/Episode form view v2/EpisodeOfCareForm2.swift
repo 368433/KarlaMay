@@ -37,22 +37,24 @@ struct EpisodeOfCareForm2: View {
     }
     
     var body: some View {
-        NavigationView{
-            VStack(alignment: .leading){
-                Form{
-                    PatientIdentificationSection(patient: self.patient)
-                    Section(header: EpisodeStatusTagPicker(status: self.$status)){
-                        consultingMDForm(episode: episode)
-                        DatePicker(selection: self.$episode.startDate ?? Date(), in:...Date(), displayedComponents: .date){Text("Start Date")}
+        ZStack{
+            Color.white
+            ScrollView(.vertical){
+                VStack(alignment: .center){
+                    HStack{
+                        Button("Cancel"){self.presentationMode.wrappedValue.dismiss()}
+                        Spacer()
+                        Button("Done"){self.saveAndExit()}.disabled(self.patient.wrappedName.isEmpty)
                     }
+                    EpisodeStatusTagPicker(status: self.$status)
+                    PatientIdentificationSection(patient: self.patient)
+                    consultingMDForm(episode: self.episode)
+                    ModifiedDatePicker(date: self.$episode.startDate ?? Date())
                     DiagnosisSection3(episode: self.episode)
                     VisitSection(episode: self.episode)
-                }
+                }.padding()
+                
             }
-        .navigationBarTitle("Card")
-            .navigationBarItems(
-                leading: Button("Cancel"){self.presentationMode.wrappedValue.dismiss()},
-                trailing:Button("Done"){self.saveAndExit()}.disabled(self.patient.wrappedName.isEmpty))
         }
         .onAppear{
             self.episode.patient = self.patient

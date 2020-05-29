@@ -13,27 +13,30 @@ struct PatientIdentificationSection: View {
     @ObservedObject var patient: Patient
     
     var body: some View {
-        Section(header: HStack {
-            Text("Patient").font(.largeTitle).foregroundColor(.primary)
-            Spacer()
-            Button(action: {}){Image(systemName: "magnifyingglass").font(.headline)}.padding(.trailing)
-            Button(action: {}){Image(systemName: "doc.text.viewfinder").font(.title) }
-        }){
-            VStack(alignment: .leading, spacing: 0){
-                if !self.patient.wrappedName.isEmpty {
-                    Text("Name".capitalized).font(.footnote).foregroundColor(.blue)
-                }
-                HStack{
-                    TextField("Name", text: self.$patient.wrappedName)
+        ZStack{
+            VStack(alignment: .leading){
+                HStack {
+                    Text("Patient").font(.headline)
                     Spacer()
-                    if self.patient.wrappedName.isEmpty {
-                        Text("required".capitalized).font(.footnote).foregroundColor(.red)
-                    }
+                    Button(action: {}){Image(systemName: "magnifyingglass").font(.headline)}.padding(.trailing)
+                    Button(action: {}){Image(systemName: "doc.text.viewfinder").font(.title) }
                 }
-            }.animation(.easeInOut(duration: 0.3))
-            TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
-            TextField("Postal Code", text: self.$patient.postalCode ?? "")
-        }
+                VStack(alignment: .leading, spacing: 0){
+                    if !self.patient.wrappedName.isEmpty {
+                        Text("Name".capitalized).font(.footnote).foregroundColor(.blue)
+                    }
+                    HStack{
+                        TextField("Name", text: self.$patient.wrappedName)
+                        Spacer()
+                        if self.patient.wrappedName.isEmpty {
+                            Text("required".capitalized).font(.footnote).foregroundColor(.red)
+                        }
+                    }
+                }.animation(.easeOut(duration: 0.3))
+                TextField("RAMQ", text: self.$patient.ramqNumber ?? "")
+                TextField("Postal Code", text: self.$patient.postalCode ?? "")
+            }.padding()
+        }.cornerRadius(5).border(Color.gray)
     }
 }
 

@@ -12,7 +12,8 @@ import Foundation
 extension Date {
     var toString: String {
         let formater = DateFormatter()
-        formater.dateStyle = .full
+        formater.dateFormat = "E d MMM yy"
+//        formater.dateStyle = .full
         return formater.string(from: self)
     }
 }

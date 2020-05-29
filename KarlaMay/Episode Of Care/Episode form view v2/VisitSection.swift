@@ -23,28 +23,27 @@ struct VisitSection: View {
     }
     
     var body: some View {
-        Section(header: HStack{
-            Text("Clinical Visits")
-            Spacer()
-            Button(action:{self.showAddVisit.toggle()}){AddIcon()}
-            .sheet(isPresented: $showAddVisit) {
-                ClinicalVisitForm(){ (visit) in
-                    DispatchQueue.main.async {
-                        self.episode.addToClinicalVisits(visit)
-                    }
-                }.environment(\.managedObjectContext, self.moc)
+        VStack(alignment: .leading){
+            HStack{
+                Text("Clinical Visits").fontWeight(.bold)
+                Spacer()
+                Button(action:{self.showAddVisit.toggle()}){AddIcon()}
+                    .sheet(isPresented: $showAddVisit) {
+                        ClinicalVisitForm(){ (visit) in
+                            DispatchQueue.main.async {self.episode.addToClinicalVisits(visit)}
+                        }.environment(\.managedObjectContext, self.moc)
+                }
             }
-        }){
-            List{
-                if self.episode.clinicalVisits?.count == 0 {
-                    Text("No clinical visits").foregroundColor(.secondary)
-                } else {
+            if self.episode.clinicalVisits?.count == 0 {
+                Text("No clinical visits").foregroundColor(.secondary)
+            } else {
+                VStack{
                     ForEach(visitList, id: \.self){ visit in
                         ClinicalVisitRowView(clinicalVisit: visit)
                     }
                 }
             }
-        }
+            }.padding().background(Color(UIColor.systemGray6)).cornerRadius(5)
     }
 }
 

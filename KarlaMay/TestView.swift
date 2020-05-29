@@ -10,8 +10,16 @@ import SwiftUI
 
 struct TestView: View {
     
+    @State var date: Date = Date()
+    
     var body: some View {
-        Text("some text")
+        ScrollView(.vertical){
+            VStack{
+                Form{
+                    DatePicker(selection: $date, label: {Text("test")})
+                }
+            }
+        }
     }
 }
 

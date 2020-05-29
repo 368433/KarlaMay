@@ -23,11 +23,12 @@ struct DiagnosisSection3: View {
     }
     
     var body: some View {
-        Section(header: HStack{
-            Text("Diagnostic list")
-            Spacer()
-            Button(action:{self.showICDSearch.toggle()}){AddIcon()}
-        }) {
+        VStack(alignment: .leading){
+            HStack{
+                Text("Diagnostic list")
+                Spacer()
+                Button(action:{self.showICDSearch.toggle()}){AddIcon()}
+            }
             HStack{
                 if self.episode.currentDiagnoses?.count == 0 {
                     Text("No diagnoses").foregroundColor(.secondary)
@@ -36,7 +37,7 @@ struct DiagnosisSection3: View {
                         HStack(alignment: .top){
                             ForEach(self.diagnosticList, id:\.self){ dx in
                                 DiagnosisCompactView(diagnosis: dx)
-                            }.onDelete(perform: deleteDiagnosis)
+                            }
                         }.padding(2)
                     }
                 }
@@ -45,12 +46,8 @@ struct DiagnosisSection3: View {
                 self.episode.addToCurrentDiagnoses(dx)
             }.environment(\.managedObjectContext, self.moc)
             }
-        }
+        }.padding().background(Color(UIColor.systemGray6)).cornerRadius(5)
     }
-    
-    private func deleteDiagnosis(at indexSet: IndexSet){
-    }
-    
 }
 
 struct DiagnosisSection3_Previews: PreviewProvider {

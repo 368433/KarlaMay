@@ -10,16 +10,18 @@ import SwiftUI
 
 struct consultingMDForm: View {
     
+    @Environment(\.managedObjectContext) var moc
     @ObservedObject var episode : EpisodeOfCare
+    @State var showMdList = false
     
     init(episode: EpisodeOfCare){
         self.episode = episode
     }
     
-    var physicianLicense: String {
-        guard let md = self.episode.consultingPhysician else { return ""}
-        guard let license = md.license else { return "Missing license"}
-        return license
+    var physicianLicense: some View {
+        guard let md = self.episode.consultingPhysician else { return Text("n/a").foregroundColor(.secondary)}
+        guard let license = md.license else { return Text("license n/a").foregroundColor(.secondary)}
+        return Text(license).foregroundColor(.secondary)
     }
     var nameLabel: some View {
         guard let md = self.episode.consultingPhysician else {
@@ -29,19 +31,22 @@ struct consultingMDForm: View {
     }
     
     var body: some View {
-        NavigationLink(destination: PhysicianList(completion: { (md) in
-            self.episode.consultingPhysician = md
-        })){
-            HStack{
-                Text("Consulted by")
-                Spacer()
-                VStack(alignment:.trailing) {
-                    nameLabel
-                    if self.episode.consultingPhysician != nil {
-                        Text(physicianLicense).foregroundColor(.secondary)
-                    }
+        VStack{
+            if self.episode.consultingPhysician != nil{
+                Text("Consulted by").fontWeight(.bold)
+                nameLabel
+                physicianLicense
+            }else{
+                HStack{
+                    Text("Select consulting physician").fontWeight(.bold)
+                    Spacer()
                 }
+                
             }
+        }.padding().foregroundColor(.white).background(Color.blue).cornerRadius(5)
+            .onTapGesture {self.showMdList.toggle()}
+        .sheet(isPresented: $showMdList) {
+            PhysicianList { (md) in self.episode.consultingPhysician = md }.environment(\.managedObjectContext, self.moc)
         }
     }
 }

@@ -16,8 +16,8 @@ struct EpisodeStatusTagPicker: View {
         ScrollView(.horizontal){
             HStack{
                 ForEach(EpocStatus.allCases, id: \.self) { status in
-                    Text(status.label)
-                    .padding(6)
+                    Text(status.label).font(.caption)
+                        .padding(6)
                         .foregroundColor(self.status == status ? Color.white:Color.black)
                         .background(self.status == status ? Color.red:Color(UIColor.systemGray5))
                         .clipShape(Capsule())
